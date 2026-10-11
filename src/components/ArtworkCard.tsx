@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGallery } from '../context/GalleryContext';
 import type { Artwork } from '../types';
-import { Heart, ShoppingBag, Eye, Maximize2 } from 'lucide-react';
+import { getWhatsAppLink } from '../config/artistConfig';
+import { Heart, Eye, MessageCircle, Maximize2, ImageOff } from 'lucide-react';
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -13,35 +14,45 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
     navigateToArtwork,
     toggleWishlist,
     isInWishlist,
-    addToCart,
-    openRoomView,
-    formatPrice
+    openRoomView
   } = useGallery();
 
+  const [imageError, setImageError] = useState(false);
   const isFavorited = isInWishlist(artwork.id);
+
+  const whatsappInquiryUrl = getWhatsAppLink(
+    `Hi Renuka! I am interested in your original painting "${artwork.title}" (${artwork.category}). Could you please share more details and price quote?`
+  );
 
   return (
     <div className="group bg-white rounded-3xl border-2 border-[#F0E6D8] hover:border-[#FF6161] shadow-xs hover-pop p-3.5 sm:p-4 flex flex-col justify-between transition-all duration-300">
-      {/* Artwork Image Frame */}
-      <div className="relative overflow-hidden rounded-2xl bg-[#FAF5ED] aspect-4/5 mb-3.5 flex items-center justify-center">
-        <img
-          src={artwork.imageUrl}
-          alt={artwork.title}
-          loading="lazy"
-          onClick={() => navigateToArtwork(artwork.id)}
-          className="w-full h-full object-cover cursor-pointer group-hover:scale-106 transition-transform duration-500"
-        />
+      {/* Artwork Image Frame - Preserves Aspect Ratio */}
+      <div className="relative overflow-hidden rounded-2xl bg-[#FAF5ED] aspect-4/5 mb-3.5 flex items-center justify-center p-2">
+        {imageError ? (
+          <div className="flex flex-col items-center justify-center text-center p-4 text-[#8C8075]">
+            <ImageOff className="w-8 h-8 mb-2 opacity-50" />
+            <span className="text-xs font-semibold">Image Preview Unavailable</span>
+            <span className="text-[10px] text-[#A8987E] mt-1">{artwork.imageFileName}</span>
+          </div>
+        ) : (
+          <img
+            src={artwork.imageUrl}
+            alt={artwork.title}
+            loading="lazy"
+            onError={() => setImageError(true)}
+            onClick={() => navigateToArtwork(artwork.id)}
+            className="w-full h-full object-contain cursor-pointer group-hover:scale-104 transition-transform duration-500 drop-shadow-sm"
+          />
+        )}
 
-        {/* Labels: Original / Limited Edition */}
+        {/* Category & Canvas Badge */}
         <div className="absolute top-3 left-3 flex flex-col gap-1 pointer-events-none z-10">
-          {artwork.isOriginal && (
-            <span className="px-3 py-1 rounded-full bg-white/95 text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs border border-[#F0E6D8]">
-              Original Canvas ✨
-            </span>
-          )}
-          {artwork.isLimitedEdition && (
-            <span className="px-3 py-1 rounded-full bg-[#FFD13B] text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs">
-              Hand-painted 🌸
+          <span className="px-2.5 py-0.5 rounded-full bg-white/95 text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs border border-[#F0E6D8]">
+            {artwork.category}
+          </span>
+          {artwork.isOfficialTitle && (
+            <span className="px-2.5 py-0.5 rounded-full bg-[#FFD13B] text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs">
+              Signature Work ✨
             </span>
           )}
         </div>
@@ -70,10 +81,10 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
               e.stopPropagation();
               navigateToArtwork(artwork.id);
             }}
-            className="flex-1 py-2 px-3 bg-[#2B2623] hover:bg-[#FF6161] text-white text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5 shadow-md"
+            className="flex-1 py-2 px-3 bg-[#2B2623] hover:bg-[#FF6161] text-white text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5 shadow-md cursor-pointer"
           >
             <Eye className="w-3.5 h-3.5" />
-            <span>View</span>
+            <span>View Artwork</span>
           </button>
 
           <button
@@ -81,7 +92,7 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
               e.stopPropagation();
               openRoomView(artwork);
             }}
-            className="p-2 bg-white text-[#2B2623] hover:bg-[#FFF4D2] rounded-xl border border-[#F0E6D8] transition-colors shadow-md"
+            className="p-2 bg-white text-[#2B2623] hover:bg-[#FFF4D2] rounded-xl border border-[#F0E6D8] transition-colors shadow-md cursor-pointer"
             title="Room visualizer"
           >
             <Maximize2 className="w-3.5 h-3.5" />
@@ -100,31 +111,38 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
             {artwork.title}
           </h4>
 
-          <div className="flex items-center justify-between text-xs text-[#7A6F66] mb-2 font-medium">
+          <div className="flex items-center justify-between text-xs text-[#7A6F66] mb-1.5 font-medium">
             <span>By Renuka</span>
-            <span>{artwork.dimensions}</span>
+            <span>{artwork.medium || 'Original Painting'}</span>
           </div>
 
           {layout === 'standard' && (
-            <p className="text-xs text-[#8C8075] line-clamp-1 italic mb-3">
-              {artwork.medium}
+            <p className="text-xs text-[#8C8075] line-clamp-2 mb-3 leading-relaxed">
+              {artwork.description}
             </p>
           )}
         </div>
 
-        {/* Price & Add to Bag */}
-        <div className="pt-2 border-t border-[#F4EBE0] flex items-center justify-between">
-          <span className="font-heading text-lg font-black text-[#FF6161]">
-            {formatPrice(artwork.price)}
-          </span>
+        {/* Price & Inquire Action */}
+        <div className="pt-2.5 border-t border-[#F4EBE0] flex items-center justify-between gap-2">
+          <div>
+            <span className="font-heading text-sm sm:text-base font-extrabold text-[#FF6161] block">
+              {artwork.priceDisplay}
+            </span>
+            <span className="text-[10px] text-[#8C8075] font-medium block">
+              Bespoke quote available
+            </span>
+          </div>
 
-          <button
-            onClick={() => addToCart(artwork)}
-            className="px-3.5 py-1.5 rounded-full bg-[#FFD13B] hover:bg-[#FFC400] text-[#2B2623] text-xs font-bold transition-all flex items-center gap-1 active:scale-95 shadow-xs"
+          <a
+            href={whatsappInquiryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3.5 py-1.5 rounded-full bg-[#FFF4D2] hover:bg-[#FFD13B] text-[#2B2623] text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95 shadow-xs border border-[#FFE082]"
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
-            <span>Add</span>
-          </button>
+            <MessageCircle className="w-3.5 h-3.5 text-[#1E7E34]" />
+            <span>Inquire</span>
+          </a>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { useGallery } from '../context/GalleryContext';
 import { collections } from '../data/collections';
 import { artworks } from '../data/artworks';
 import { ArtworkCard } from '../components/ArtworkCard';
-import { ArrowLeft, Sparkles, Compass } from 'lucide-react';
+import { ArrowLeft, Sparkles, ArrowRight } from 'lucide-react';
 
 export const CollectionDetailPage: React.FC = () => {
   const { selectedCollectionId, setPage, navigateToCollection, navigateToExplore } = useGallery();
@@ -12,7 +12,10 @@ export const CollectionDetailPage: React.FC = () => {
     collections.find((c) => c.id === selectedCollectionId) || collections[0];
 
   const collectionArtworks = artworks.filter(
-    (a) => a.collectionId === activeCollection.id
+    (a) =>
+      a.categorySlug === activeCollection.id ||
+      (a.secondaryCategories &&
+        a.secondaryCategories.some((sc) => sc.toLowerCase() === activeCollection.title.toLowerCase()))
   );
 
   const otherCollections = collections.filter(
@@ -25,7 +28,7 @@ export const CollectionDetailPage: React.FC = () => {
       <div className="mb-6">
         <button
           onClick={() => setPage('home')}
-          className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#6E685F] hover:text-[#191817] transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-bold text-[#5C5248] hover:text-[#FF6161] transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Home</span>
@@ -33,88 +36,92 @@ export const CollectionDetailPage: React.FC = () => {
       </div>
 
       {/* Collection Hero Banner */}
-      <div className="relative overflow-hidden bg-[#191817] text-white p-8 sm:p-14 mb-16 border border-[#3E3A34] shadow-xl">
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#2B2623] via-[#3D3531] to-[#2B2623] text-white p-8 sm:p-14 mb-16 rounded-3xl border-2 border-[#F0E6D8] shadow-lg">
         {/* Background Image with Deep Overlay */}
         <div className="absolute inset-0 z-0">
           <img
             src={activeCollection.imageUrl}
             alt={activeCollection.title}
-            className="w-full h-full object-cover opacity-35 scale-105"
+            className="w-full h-full object-cover opacity-20 scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#191817] via-[#191817]/85 to-transparent" />
         </div>
 
-        <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-xs text-[#E8DCC4] text-[11px] uppercase tracking-[0.2em] font-mono mb-4 border border-white/15">
-            <Sparkles className="w-3 h-3 text-[#C5A059]" />
-            <span>Curated Collection</span>
+        <div className="relative z-10 max-w-2xl space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-xs text-[#FFD13B] text-xs font-bold rounded-full border border-white/15">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Studio Collection</span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-6xl text-white font-normal tracking-tight mb-3">
+          <h1 className="font-heading text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             {activeCollection.title}
           </h1>
 
-          <p className="text-sm uppercase tracking-widest text-[#C5A059] mb-5 font-sans">
+          <p className="text-xs uppercase tracking-wider text-[#FFD13B] font-bold">
             {activeCollection.subtitle}
           </p>
 
-          <p className="text-sm sm:text-base text-[#D5CEBF] leading-relaxed mb-6 font-sans">
+          <p className="text-sm sm:text-base text-[#E2D9D2] leading-relaxed">
             {activeCollection.description}
           </p>
 
           {/* Curator Note Box */}
-          <div className="p-4 bg-white/5 backdrop-blur-xs border-l-2 border-[#C5A059] text-xs text-[#E8E2D5] italic font-serif leading-relaxed">
-            {activeCollection.curatorNote}
+          <div className="p-4 bg-white/10 backdrop-blur-xs rounded-2xl border-l-4 border-[#FFD13B] text-xs text-[#FFFDF9] italic leading-relaxed">
+            “{activeCollection.curatorNote}”
           </div>
         </div>
       </div>
 
       {/* Collection Artworks Header */}
-      <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#E8E2D5]">
+      <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#F0E6D8]">
         <div>
-          <h2 className="font-serif text-2xl sm:text-3xl text-[#191817]">
-            Artworks in {activeCollection.title}
+          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#2B2623]">
+            Paintings in {activeCollection.title}
           </h2>
-          <p className="text-xs text-[#736E65] mt-1">
-            Displaying {collectionArtworks.length} certified original canvases
+          <p className="text-xs text-[#7A6F66] mt-1">
+            Displaying {collectionArtworks.length} original hand-painted {collectionArtworks.length === 1 ? 'canvas' : 'canvases'}
           </p>
         </div>
 
         <button
           onClick={() => navigateToExplore()}
-          className="text-xs uppercase tracking-wider text-[#191817] hover:text-[#C5A059] font-medium flex items-center gap-1 transition-colors"
+          className="text-xs font-bold text-[#FF6161] hover:underline flex items-center gap-1 cursor-pointer"
         >
-          <span>View All Artworks</span>
-          <span>→</span>
+          <span>View All Paintings</span>
+          <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
 
       {/* Artworks Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 mb-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20">
         {collectionArtworks.map((art) => (
           <ArtworkCard key={art.id} artwork={art} />
         ))}
       </div>
 
       {/* Explore Other Collections Bar */}
-      <div className="pt-12 border-t border-[#E8E2D5]">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#C5A059] font-medium mb-6">
-          <Compass className="w-4 h-4" />
-          <span>Explore Other Aesthetic Collections</span>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div className="pt-12 border-t border-[#F0E6D8]">
+        <h3 className="font-heading text-xl font-bold text-[#2B2623] mb-6">
+          Explore Other Collections
+        </h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {otherCollections.map((col) => (
-            <button
+            <div
               key={col.id}
               onClick={() => navigateToCollection(col.id)}
-              className="group p-4 bg-white border border-[#E2D9C8] hover:border-[#C5A059] text-left transition-all hover:shadow-md cursor-pointer"
+              className="p-4 bg-white rounded-2xl border-2 border-[#F0E6D8] hover:border-[#FF6161] cursor-pointer hover-pop transition-all text-center flex flex-col items-center"
             >
-              <h4 className="font-serif text-base text-[#191817] group-hover:text-[#C5A059] transition-colors truncate">
+              <img
+                src={col.imageUrl}
+                alt={col.title}
+                className="w-16 h-16 rounded-xl object-contain bg-[#FAF5ED] mb-2 p-1 border border-[#F0E6D8]"
+              />
+              <h4 className="font-heading font-bold text-xs text-[#2B2623] hover:text-[#FF6161]">
                 {col.title}
               </h4>
-              <p className="text-[11px] text-[#8C8578] truncate mt-0.5">{col.subtitle}</p>
-            </button>
+              <span className="text-[10px] text-[#7A6F66] mt-0.5">
+                {col.artworkCount} Works
+              </span>
+            </div>
           ))}
         </div>
       </div>

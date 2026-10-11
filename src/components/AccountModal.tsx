@@ -1,67 +1,67 @@
 import React, { useState } from 'react';
 import { useGallery } from '../context/GalleryContext';
-import { X, User, Heart, ShieldCheck, Mail, MapPin } from 'lucide-react';
+import { ARTIST_CONFIG, getArtworkUrl, getWhatsAppLink } from '../config/artistConfig';
+import { X, Heart, MessageCircle } from 'lucide-react';
 
 export const AccountModal: React.FC = () => {
   const { isAccountOpen, setIsAccountOpen, wishlist, setPage } = useGallery();
-  const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'advisory'>('profile');
-  const [isCollectorRegistered, setIsCollectorRegistered] = useState(true);
-  const [collectorName, setCollectorName] = useState('Priya Sengupta');
-  const [collectorEmail, setCollectorEmail] = useState('priya.collector@example.com');
+  const [activeTab, setActiveTab] = useState<'profile' | 'inquiries' | 'custom'>('profile');
+  const [userName, setUserName] = useState('Art Lover');
+  const [userEmail, setUserEmail] = useState('artlover@example.com');
 
   if (!isAccountOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
       <div
-        className="bg-[#FAF8F5] border border-[#E2D9C8] w-full max-w-lg rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-fade-in"
+        className="bg-[#FFFDF9] border-2 border-[#F0E6D8] w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E2D5] bg-[#FAF8F5]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#F0E6D8] bg-[#FFFDF9]">
           <div className="flex items-center gap-2">
-            <User className="w-5 h-5 text-[#C5A059]" />
-            <h3 className="font-serif text-xl text-[#191817]">Collector Sanctuary</h3>
+            <span className="text-xl">🎨</span>
+            <h3 className="font-heading font-extrabold text-xl text-[#2B2623]">My Art Studio Hub</h3>
           </div>
           <button
             onClick={() => setIsAccountOpen(false)}
-            className="p-1 text-[#6E685F] hover:text-[#191817] transition-colors"
+            className="p-1.5 text-[#7A6F66] hover:text-[#2B2623] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-[#E8E2D5] bg-[#F5F1E8]">
+        <div className="flex border-b border-[#F0E6D8] bg-[#FFF4D2]/40">
           <button
             onClick={() => setActiveTab('profile')}
-            className={`flex-1 py-3 text-xs tracking-wider uppercase font-medium border-b-2 transition-colors ${
+            className={`flex-1 py-3 text-xs font-bold border-b-2 transition-colors cursor-pointer ${
               activeTab === 'profile'
-                ? 'border-[#191817] text-[#191817] bg-[#FAF8F5]'
-                : 'border-transparent text-[#736E65] hover:text-[#191817]'
+                ? 'border-[#FF6161] text-[#FF6161] bg-[#FFFDF9]'
+                : 'border-transparent text-[#7A6F66] hover:text-[#2B2623]'
             }`}
           >
-            My Profile
+            Profile & Wishlist
           </button>
           <button
-            onClick={() => setActiveTab('orders')}
-            className={`flex-1 py-3 text-xs tracking-wider uppercase font-medium border-b-2 transition-colors ${
-              activeTab === 'orders'
-                ? 'border-[#191817] text-[#191817] bg-[#FAF8F5]'
-                : 'border-transparent text-[#736E65] hover:text-[#191817]'
+            onClick={() => setActiveTab('inquiries')}
+            className={`flex-1 py-3 text-xs font-bold border-b-2 transition-colors cursor-pointer ${
+              activeTab === 'inquiries'
+                ? 'border-[#FF6161] text-[#FF6161] bg-[#FFFDF9]'
+                : 'border-transparent text-[#7A6F66] hover:text-[#2B2623]'
             }`}
           >
-            Acquisitions (1)
+            Studio Inquiries
           </button>
           <button
-            onClick={() => setActiveTab('advisory')}
-            className={`flex-1 py-3 text-xs tracking-wider uppercase font-medium border-b-2 transition-colors ${
-              activeTab === 'advisory'
-                ? 'border-[#191817] text-[#191817] bg-[#FAF8F5]'
-                : 'border-transparent text-[#736E65] hover:text-[#191817]'
+            onClick={() => setActiveTab('custom')}
+            className={`flex-1 py-3 text-xs font-bold border-b-2 transition-colors cursor-pointer ${
+              activeTab === 'custom'
+                ? 'border-[#FF6161] text-[#FF6161] bg-[#FFFDF9]'
+                : 'border-transparent text-[#7A6F66] hover:text-[#2B2623]'
             }`}
           >
-            Art Advisor
+            Custom Quotes
           </button>
         </div>
 
@@ -69,104 +69,107 @@ export const AccountModal: React.FC = () => {
         <div className="p-6 overflow-y-auto space-y-5">
           {activeTab === 'profile' && (
             <div className="space-y-4">
-              <div className="flex items-center gap-4 p-4 bg-[#F5F1E8] border border-[#E8E2D5]">
-                <div className="w-12 h-12 rounded-full bg-[#191817] text-[#C5A059] flex items-center justify-center font-serif text-xl font-bold">
-                  {collectorName.charAt(0)}
+              <div className="flex items-center gap-4 p-4 bg-[#FFF9E6] border border-[#FFE082] rounded-2xl">
+                <div className="w-12 h-12 rounded-full bg-[#FFD13B] text-[#2B2623] flex items-center justify-center font-heading font-extrabold text-xl">
+                  {userName.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-serif text-lg text-[#191817]">{collectorName}</h4>
-                  <p className="text-xs text-[#736E65] flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" /> Verified Patron of the Arts
+                  <h4 className="font-heading font-bold text-base text-[#2B2623]">{userName}</h4>
+                  <p className="text-xs text-[#7A6F66]">
+                    Patron of renus_palette
                   </p>
                 </div>
               </div>
 
-              <div className="space-y-3 text-sm">
+              <div className="space-y-3 text-xs">
                 <div>
-                  <label className="text-xs uppercase text-[#8C8578] font-medium block mb-1">Full Name</label>
+                  <label className="text-[#5C5248] font-bold block mb-1">Your Name</label>
                   <input
                     type="text"
-                    value={collectorName}
-                    onChange={(e) => setCollectorName(e.target.value)}
-                    className="w-full p-2.5 bg-white border border-[#DDD5C5] text-sm text-[#191817] focus:outline-none focus:border-[#C5A059]"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    className="w-full p-2.5 bg-white border border-[#EAE0D4] rounded-xl text-sm text-[#2B2623] focus:outline-none focus:border-[#FF6161]"
                   />
                 </div>
                 <div>
-                  <label className="text-xs uppercase text-[#8C8578] font-medium block mb-1">Email Address</label>
+                  <label className="text-[#5C5248] font-bold block mb-1">Email Address</label>
                   <input
                     type="email"
-                    value={collectorEmail}
-                    onChange={(e) => setCollectorEmail(e.target.value)}
-                    className="w-full p-2.5 bg-white border border-[#DDD5C5] text-sm text-[#191817] focus:outline-none focus:border-[#C5A059]"
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    className="w-full p-2.5 bg-white border border-[#EAE0D4] rounded-xl text-sm text-[#2B2623] focus:outline-none focus:border-[#FF6161]"
                   />
-                </div>
-                <div>
-                  <label className="text-xs uppercase text-[#8C8578] font-medium block mb-1">Delivery Sanctuary</label>
-                  <div className="flex items-start gap-2 p-2.5 bg-white border border-[#DDD5C5] text-xs text-[#6E685F]">
-                    <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-                    <span>Altamount Road, Cumballa Hill, Mumbai, Maharashtra 400026</span>
-                  </div>
                 </div>
               </div>
 
-              <div className="pt-2 flex items-center justify-between border-t border-[#E8E2D5]">
+              <div className="pt-2 flex items-center justify-between border-t border-[#F0E6D8]">
                 <button
                   onClick={() => {
                     setIsAccountOpen(false);
                     setPage('wishlist');
                   }}
-                  className="text-xs font-medium text-[#191817] hover:text-[#C5A059] flex items-center gap-1.5 transition-colors"
+                  className="text-xs font-bold text-[#FF6161] hover:underline flex items-center gap-1.5 cursor-pointer"
                 >
-                  <Heart className="w-3.5 h-3.5 text-[#C08081]" /> Saved Artworks ({wishlist.length})
-                </button>
-                <button
-                  onClick={() => setIsCollectorRegistered(!isCollectorRegistered)}
-                  className="text-xs text-[#8C8578] underline hover:text-[#191817]"
-                >
-                  Sign Out
+                  <Heart className="w-4 h-4 fill-current" />
+                  <span>View Wishlist ({wishlist.length})</span>
                 </button>
               </div>
             </div>
           )}
 
-          {activeTab === 'orders' && (
+          {activeTab === 'inquiries' && (
             <div className="space-y-4">
-              <div className="p-4 bg-white border border-[#E2D9C8] space-y-2">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-mono text-[#736E65]">#RP-82914-IN</span>
-                  <span className="px-2 py-0.5 bg-[#E8DCC4] text-[#191817] text-[11px] font-medium uppercase tracking-wider">
-                    White-Glove Delivered
+              <div className="p-4 bg-white border-2 border-[#F0E6D8] rounded-2xl space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="text-[#7A6F66]">Renuka's Studio Collection</span>
+                  <span className="px-2.5 py-0.5 bg-[#E8F8F0] text-[#1E7E34] text-[11px] rounded-full">
+                    Active Portfolio
                   </span>
                 </div>
                 <div className="flex items-center gap-3 pt-1">
                   <img
-                    src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=300&q=80"
-                    alt="Acquired painting"
-                    className="w-12 h-12 object-cover border border-[#DDD5C5]"
+                    src={getArtworkUrl('artworks/lotus-pond.jpg')}
+                    alt="Lotus Pond"
+                    className="w-14 h-14 object-contain bg-[#FAF5ED] rounded-xl border border-[#F0E6D8] p-1"
                   />
                   <div>
-                    <h5 className="font-serif text-sm text-[#191817] font-medium">Symphony in Ochre & Deep Cobalt</h5>
-                    <p className="text-xs text-[#736E65]">By Ananya Deshmukh • Belgian Linen</p>
+                    <h5 className="font-heading font-bold text-sm text-[#2B2623]">Lotus Pond</h5>
+                    <p className="text-xs text-[#7A6F66]">Original Acrylic on Canvas</p>
                   </div>
                 </div>
-                <div className="text-xs text-[#8C8578] pt-2 border-t border-[#F0EBE0] flex justify-between">
-                  <span>Delivered to Mumbai</span>
-                  <span className="font-medium text-[#191817]">₹68,000</span>
+                <div className="text-xs text-[#8C8075] pt-2 border-t border-[#F4EBE0] flex justify-between items-center">
+                  <span>Price on request</span>
+                  <a
+                    href={getWhatsAppLink('Hi Renuka! I am interested in inquiring about Lotus Pond.')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#1E7E34] font-bold hover:underline flex items-center gap-1"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>Inquire on WhatsApp</span>
+                  </a>
                 </div>
               </div>
             </div>
           )}
 
-          {activeTab === 'advisory' && (
+          {activeTab === 'custom' && (
             <div className="space-y-3">
-              <div className="p-4 bg-[#F5F1E8] border border-[#E2D9C8]">
-                <h4 className="font-serif text-base text-[#191817] mb-1">Complimentary Art Advisory</h4>
-                <p className="text-xs text-[#736E65] leading-relaxed">
-                  Looking for bespoke curation for a private residence, luxury apartment, or boardroom? Our senior curators assist with space staging, scale matching, and lighting consultations.
+              <div className="p-5 bg-[#FFF9E6] border border-[#FFE082] rounded-2xl space-y-2">
+                <h4 className="font-heading font-bold text-base text-[#2B2623]">Custom Painting Commissions</h4>
+                <p className="text-xs text-[#5C5248] leading-relaxed">
+                  Want a customized portrait, family artwork, or dreamy landscape for your space? Renuka personally discusses your concept, canvas dimensions, and provides tailored quotes.
                 </p>
-                <div className="mt-3 flex items-center gap-2 text-xs font-medium text-[#191817]">
-                  <Mail className="w-3.5 h-3.5 text-[#C5A059]" />
-                  <span>curator@renuspalette.com</span>
+                <div className="pt-2">
+                  <a
+                    href={getWhatsAppLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-coral px-4 py-2.5 rounded-full text-xs font-bold inline-flex items-center gap-2"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Message Renuka ({ARTIST_CONFIG.phone})</span>
+                  </a>
                 </div>
               </div>
             </div>

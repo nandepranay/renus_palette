@@ -1,25 +1,34 @@
 import React from 'react';
-import { Play, Sparkles } from 'lucide-react';
+import { ARTIST_CONFIG } from '../config/artistConfig';
+import { getArtworkUrl } from '../config/artistConfig';
+import { Play, Sparkles, ArrowRight } from 'lucide-react';
+import { InstagramIcon, YoutubeIcon } from './SocialIcons';
 
 export const StudioVlogSection: React.FC = () => {
   const vlogs = [
     {
-      title: 'Satisfying Acrylic Texture Palette Knife Painting 🎨',
-      views: 'Process Video',
-      img: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80',
-      duration: 'Studio Reel'
+      id: 'vlog-1',
+      title: 'Painting Lotus Pond • Acrylic Layering Process',
+      duration: 'Studio Process',
+      views: 'YouTube Vlog',
+      img: getArtworkUrl('artworks/lotus-pond.jpg'),
+      tag: 'Acrylics 🎨'
     },
     {
-      title: 'Painting Dreamy Watercolor Nature Landscapes 🌿',
-      views: 'Tutorial & Vlog',
-      img: 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=600&q=80',
-      duration: 'Full Process'
+      id: 'vlog-2',
+      title: 'Golden Ocean Sunset • Horizon Light & Blending',
+      duration: 'Painting Tutorial',
+      views: 'Studio Reel',
+      img: getArtworkUrl('artworks/ocean-sunset.jpg'),
+      tag: 'Landscape 🌿'
     },
     {
-      title: 'Custom Anniversary Portrait Commission from Scratch 👩‍🎨',
-      views: 'Commission Vlog',
-      img: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=600&q=80',
-      duration: 'Studio Vlog'
+      id: 'vlog-3',
+      title: 'Behind the Scenes • Custom Portrait Commission',
+      duration: 'Studio Vlog',
+      views: 'Behind The Scenes',
+      img: getArtworkUrl('artworks/child-portrait-oval.jpg'),
+      tag: 'Portraits 👩‍🎨'
     }
   ];
 
@@ -28,74 +37,85 @@ export const StudioVlogSection: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFEAE8] text-[#FF6161] text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFEAE8] text-[#FF6161] text-xs font-bold mb-3 shadow-xs">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Behind The Scenes</span>
+            <span>Behind the Easel</span>
           </div>
           <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-[#2B2623] tracking-tight">
-            Inside Renuka's Studio 🎥
+            Studio Vlogs & Process Videos 📺
           </h2>
           <p className="text-sm text-[#7A6F66] mt-2 max-w-xl">
-            Subscribe for a front-row seat in my studio, featuring satisfying process videos, painting tutorials, and behind-the-scenes vlogs.
+            Watch satisfying painting process videos, layering tutorials, and studio vlogs on my YouTube & Instagram channels.
           </p>
         </div>
 
+        {/* Social Buttons */}
         <div className="flex items-center gap-3 mt-6 md:mt-0">
           <a
-            href="https://www.youtube.com/@renus_palette"
+            href={ARTIST_CONFIG.youtube}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-full bg-[#FF0000] text-white text-xs font-bold hover:bg-[#CC0000] transition-colors flex items-center gap-2 shadow-xs"
+            className="px-4 py-2.5 rounded-full bg-[#FF0000] text-white text-xs font-bold hover:bg-[#CC0000] transition-colors shadow-xs flex items-center gap-2"
           >
+            <YoutubeIcon className="w-4 h-4" />
             <span>Subscribe on YouTube</span>
           </a>
 
           <a
-            href="https://www.instagram.com/renus_palette?mdxt=Z2o0YWZvZjlvNGhj"
+            href={ARTIST_CONFIG.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-full bg-[#E1306C] text-white text-xs font-bold hover:bg-[#C1275B] transition-colors flex items-center gap-2 shadow-xs"
+            className="px-4 py-2.5 rounded-full bg-white border border-[#F0E6D8] text-[#2B2623] hover:border-[#E1306C] hover:text-[#E1306C] text-xs font-bold transition-all shadow-xs flex items-center gap-2"
           >
-            <span>Instagram Reels</span>
+            <InstagramIcon className="w-4 h-4 text-[#E1306C]" />
+            <span>{ARTIST_CONFIG.instagramHandle}</span>
           </a>
         </div>
       </div>
 
-      {/* Video Cards Grid */}
+      {/* Vlog Video Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {vlogs.map((vlog, idx) => (
+        {vlogs.map((vlog) => (
           <a
-            key={idx}
-            href="https://www.youtube.com/@renus_palette"
+            key={vlog.id}
+            href={ARTIST_CONFIG.youtube}
             target="_blank"
             rel="noopener noreferrer"
-            className="group block bg-white rounded-3xl border-2 border-[#F0E6D8] hover:border-[#FF6161] overflow-hidden p-3 shadow-xs hover-pop transition-all"
+            className="group bg-white rounded-3xl border-2 border-[#F0E6D8] hover:border-[#FF6161] shadow-xs hover-pop p-3.5 sm:p-4 flex flex-col justify-between transition-all"
           >
-            <div className="relative aspect-video rounded-2xl overflow-hidden bg-[#FAF5ED] mb-3">
+            {/* Thumbnail */}
+            <div className="relative aspect-16/10 rounded-2xl overflow-hidden bg-[#FAF5ED] mb-3.5 flex items-center justify-center p-1">
               <img
                 src={vlog.img}
                 alt={vlog.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-contain group-hover:scale-106 transition-transform duration-500"
               />
-              {/* Play Button Overlay */}
-              <div className="absolute inset-0 bg-black/25 flex items-center justify-center group-hover:bg-black/15 transition-colors">
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors flex items-center justify-center">
                 <div className="w-12 h-12 rounded-full bg-[#FF0000] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                   <Play className="w-5 h-5 fill-current ml-0.5" />
                 </div>
               </div>
 
-              <span className="absolute bottom-2 right-2 px-2.5 py-0.5 rounded-full bg-black/70 text-white text-[10px] font-bold">
+              <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/95 text-[10px] font-bold text-[#2B2623] shadow-xs">
+                {vlog.tag}
+              </span>
+
+              <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded-md bg-black/80 text-[10px] font-mono font-bold text-white">
                 {vlog.duration}
               </span>
             </div>
 
-            <div className="px-1 pb-1">
-              <span className="text-[11px] font-bold text-[#FF6161] block mb-0.5">
-                {vlog.views}
-              </span>
-              <h3 className="font-heading font-bold text-sm text-[#2B2623] group-hover:text-[#FF6161] transition-colors line-clamp-2 leading-snug">
+            {/* Info */}
+            <div>
+              <h3 className="font-heading font-bold text-sm text-[#2B2623] group-hover:text-[#FF6161] transition-colors line-clamp-2 mb-1">
                 {vlog.title}
               </h3>
+              <div className="flex items-center justify-between text-[11px] text-[#7A6F66] font-medium">
+                <span>{vlog.views}</span>
+                <span className="text-[#FF6161] font-bold flex items-center gap-1">
+                  Watch Video <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
             </div>
           </a>
         ))}

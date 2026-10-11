@@ -2,55 +2,36 @@ import React, { useState } from 'react';
 import { useGallery } from '../context/GalleryContext';
 import { artworks } from '../data/artworks';
 import { ArtworkCard } from '../components/ArtworkCard';
-import type { CartItem } from '../types';
+import { ARTIST_CONFIG, getWhatsAppLink } from '../config/artistConfig';
 import {
   Heart,
   Maximize2,
-  ShieldCheck,
-  Truck,
-  RotateCcw,
-  Check,
   Share2,
-  Mail,
+  MessageCircle,
   Sparkles,
-  ChevronRight
+  ChevronRight,
+  ArrowRight
 } from 'lucide-react';
 
 export const ArtworkDetailPage: React.FC = () => {
   const {
     selectedArtworkId,
     setPage,
-    navigateToArtist,
     navigateToCollection,
     navigateToExplore,
-    addToCart,
     toggleWishlist,
     isInWishlist,
     openRoomView,
-    formatPrice,
     addToast
   } = useGallery();
 
   const artwork = artworks.find((a) => a.id === selectedArtworkId) || artworks[0];
   const isFavorited = isInWishlist(artwork.id);
+  const [imageError, setImageError] = useState(false);
 
-  const [activeImage, setActiveImage] = useState<string>(artwork.imageUrl);
-  const [framingOption, setFramingOption] = useState<CartItem['framingOption']>('unframed');
-  const [showInquiryModal, setShowInquiryModal] = useState(false);
-  const [inquirySent, setInquirySent] = useState(false);
-
-  const framingPrices: Record<CartItem['framingOption'], number> = {
-    unframed: 0,
-    'classic-oak': 6500,
-    'matte-black': 6500,
-    'champagne-gold': 6500
-  };
-
-  const currentPrice = artwork.price + framingPrices[framingOption];
-
-  // Related artworks
+  // Related artworks from the same category
   const relatedArtworks = artworks
-    .filter((a) => a.id !== artwork.id && (a.collectionId === artwork.collectionId || a.artistId === artwork.artistId))
+    .filter((a) => a.id !== artwork.id && (a.categorySlug === artwork.categorySlug || a.category === artwork.category))
     .slice(0, 4);
 
   const handleCopyLink = () => {
@@ -62,62 +43,79 @@ export const ArtworkDetailPage: React.FC = () => {
     });
   };
 
+  const whatsappInquiryUrl = getWhatsAppLink(
+    `Hi Renuka! I am interested in your original painting "${artwork.title}" (${artwork.category}). Could you please share more details and price quote?`
+  );
+
+  const scrollToPricing = () => {
+    setPage('home');
+    setTimeout(() => {
+      document.getElementById('canvas-pricing')?.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+  };
+
   return (
     <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Breadcrumb Navigation */}
-      <nav className="flex items-center space-x-2 text-xs text-[#736E65] mb-8 font-sans">
-        <button onClick={() => setPage('home')} className="hover:text-[#191817]">
+      <nav className="flex items-center space-x-2 text-xs text-[#7A6F66] mb-8 font-medium">
+        <button onClick={() => setPage('home')} className="hover:text-[#FF6161] cursor-pointer">
           Home
         </button>
         <ChevronRight className="w-3.5 h-3.5" />
-        <button onClick={() => navigateToExplore()} className="hover:text-[#191817]">
-          Artworks
+        <button onClick={() => navigateToExplore()} className="hover:text-[#FF6161] cursor-pointer">
+          Shop Paintings
         </button>
         <ChevronRight className="w-3.5 h-3.5" />
         <button
-          onClick={() => navigateToCollection(artwork.collectionId)}
-          className="hover:text-[#191817]"
+          onClick={() => navigateToCollection(artwork.categorySlug)}
+          className="hover:text-[#FF6161] cursor-pointer"
         >
-          {artwork.collectionName}
+          {artwork.category}
         </button>
         <ChevronRight className="w-3.5 h-3.5" />
-        <span className="text-[#191817] font-medium truncate max-w-[200px]">{artwork.title}</span>
+        <span className="text-[#2B2623] font-bold truncate max-w-[200px]">{artwork.title}</span>
       </nav>
 
       {/* Main Two-Column Presentation */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-20">
-        {/* Left Column: Artwork Image Presentation */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start mb-20">
+        {/* Left Column: Artwork Image Frame - Preserves Aspect Ratio */}
         <div className="lg:col-span-7 space-y-4">
-          {/* Main Museum Framed Display */}
-          <div className="relative bg-white border border-[#E2D9C8] p-4 sm:p-8 shadow-sm flex items-center justify-center min-h-[420px] sm:min-h-[580px]">
-            {/* Museum Matting */}
-            <div className="relative w-full h-full flex items-center justify-center bg-[#F9F7F2] p-4 border border-[#ECE5D8] shadow-inner">
-              <img
-                src={activeImage}
-                alt={artwork.title}
-                className="max-h-[500px] w-auto object-contain transition-all duration-300 shadow-md"
-              />
+          <div className="relative bg-white border-2 border-[#F0E6D8] rounded-3xl p-4 sm:p-8 shadow-sm flex items-center justify-center min-h-[380px] sm:min-h-[520px]">
+            {/* Matting Container */}
+            <div className="relative w-full h-full flex items-center justify-center bg-[#FAF5ED] rounded-2xl p-4 sm:p-6 border border-[#F0E6D8]">
+              {imageError ? (
+                <div className="text-center p-8 text-[#8C8075]">
+                  <span className="text-3xl block mb-2">🎨</span>
+                  <p className="text-xs font-semibold">Image Preview Unavailable</p>
+                  <p className="text-[10px] text-[#A8987E]">{artwork.imageFileName}</p>
+                </div>
+              ) : (
+                <img
+                  src={artwork.imageUrl}
+                  alt={artwork.title}
+                  onError={() => setImageError(true)}
+                  className="max-h-[460px] w-auto max-w-full object-contain rounded-lg drop-shadow-md transition-all duration-300"
+                />
+              )}
             </div>
 
             {/* Badges on artwork */}
-            <div className="absolute top-8 left-8 flex flex-col gap-1.5 z-10 pointer-events-none">
-              {artwork.isOriginal && (
-                <span className="px-3 py-1 bg-[#191817]/95 text-white text-[10px] uppercase tracking-widest font-mono">
-                  100% Original Canvas
-                </span>
-              )}
-              {artwork.isLimitedEdition && (
-                <span className="px-3 py-1 bg-[#C5A059] text-[#191817] text-[10px] uppercase tracking-widest font-mono font-bold">
-                  {artwork.editionDetails || 'Limited Edition'}
+            <div className="absolute top-7 left-7 flex flex-col gap-1.5 z-10 pointer-events-none">
+              <span className="px-3 py-1 bg-[#2B2623]/95 text-white text-[10px] uppercase tracking-wider font-bold rounded-full shadow-xs">
+                100% Hand-Painted Original
+              </span>
+              {artwork.isOfficialTitle && (
+                <span className="px-3 py-1 bg-[#FFD13B] text-[#2B2623] text-[10px] uppercase tracking-wider font-extrabold rounded-full shadow-xs">
+                  Official Title from Artist
                 </span>
               )}
             </div>
 
             {/* Top Right Actions */}
-            <div className="absolute top-8 right-8 flex items-center gap-2 z-10">
+            <div className="absolute top-7 right-7 flex items-center gap-2 z-10">
               <button
                 onClick={handleCopyLink}
-                className="w-9 h-9 rounded-full bg-white/95 border border-[#DDD5C5] text-[#4A4742] hover:text-[#191817] flex items-center justify-center transition-transform hover:scale-110 shadow-sm"
+                className="w-9 h-9 rounded-full bg-white/95 border border-[#F0E6D8] text-[#5C5248] hover:text-[#2B2623] flex items-center justify-center transition-transform hover:scale-110 shadow-xs cursor-pointer"
                 title="Share artwork"
               >
                 <Share2 className="w-4 h-4" />
@@ -125,283 +123,150 @@ export const ArtworkDetailPage: React.FC = () => {
 
               <button
                 onClick={() => toggleWishlist(artwork.id)}
-                className="w-9 h-9 rounded-full bg-white/95 border border-[#DDD5C5] flex items-center justify-center transition-transform hover:scale-110 shadow-sm"
+                className="w-9 h-9 rounded-full bg-white/95 border border-[#F0E6D8] flex items-center justify-center transition-transform hover:scale-110 shadow-xs cursor-pointer"
                 title={isFavorited ? 'Remove from wishlist' : 'Save to wishlist'}
               >
                 <Heart
                   className={`w-4 h-4 ${
-                    isFavorited ? 'text-[#C08081] fill-[#C08081]' : 'text-[#6E685F]'
+                    isFavorited ? 'text-[#FF6161] fill-[#FF6161]' : 'text-[#7A6F66]'
                   }`}
                 />
               </button>
             </div>
 
-            {/* Virtual Room View Floating Button */}
+            {/* Virtual Room View Button */}
             <button
               onClick={() => openRoomView(artwork)}
-              className="absolute bottom-8 right-8 px-4 py-2 bg-[#191817]/90 hover:bg-[#191817] text-white text-xs uppercase tracking-wider font-medium backdrop-blur-xs flex items-center gap-2 shadow-lg transition-transform hover:scale-105 cursor-pointer z-10"
+              className="absolute bottom-7 right-7 px-4 py-2 bg-[#2B2623]/90 hover:bg-[#2B2623] text-white text-xs font-bold rounded-full backdrop-blur-xs flex items-center gap-2 shadow-md transition-transform hover:scale-105 cursor-pointer z-10"
             >
-              <Maximize2 className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>View in a Room</span>
+              <Maximize2 className="w-3.5 h-3.5 text-[#FFD13B]" />
+              <span>Preview on Wall</span>
             </button>
           </div>
-
-          {/* Alternate Angle Thumbnails */}
-          {artwork.secondaryImageUrl && (
-            <div className="flex gap-3">
-              <button
-                onClick={() => setActiveImage(artwork.imageUrl)}
-                className={`w-20 h-20 border-2 overflow-hidden transition-all ${
-                  activeImage === artwork.imageUrl ? 'border-[#191817]' : 'border-transparent opacity-70'
-                }`}
-              >
-                <img src={artwork.imageUrl} alt="Primary angle" className="w-full h-full object-cover" />
-              </button>
-              <button
-                onClick={() => setActiveImage(artwork.secondaryImageUrl!)}
-                className={`w-20 h-20 border-2 overflow-hidden transition-all ${
-                  activeImage === artwork.secondaryImageUrl ? 'border-[#191817]' : 'border-transparent opacity-70'
-                }`}
-              >
-                <img src={artwork.secondaryImageUrl} alt="Detail brushwork" className="w-full h-full object-cover" />
-              </button>
-            </div>
-          )}
         </div>
 
-        {/* Right Column: Title, Artist, Pricing, Framing, Acquisition */}
+        {/* Right Column: Title, Artist, Pricing, Custom Quote Request */}
         <div className="lg:col-span-5 space-y-6">
           <div>
-            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#A38038] font-medium mb-2">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF6161] mb-2">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>{artwork.collectionName}</span>
+              <span>{artwork.category}</span>
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#191817] font-normal tracking-tight leading-tight mb-2">
+            <h1 className="font-heading text-3xl sm:text-5xl text-[#2B2623] font-extrabold tracking-tight leading-tight mb-2">
               {artwork.title}
             </h1>
 
-            <div className="flex items-center gap-2 text-sm text-[#6E685F]">
+            <div className="flex items-center gap-2 text-sm text-[#7A6F66] font-medium">
               <span>By</span>
               <button
-                onClick={() => navigateToArtist(artwork.artistId)}
-                className="font-medium text-[#191817] hover:text-[#C5A059] underline underline-offset-4"
+                onClick={() => setPage('about')}
+                className="font-bold text-[#2B2623] hover:text-[#FF6161] underline underline-offset-4 cursor-pointer"
               >
-                {artwork.artistName}
+                {artwork.artistName} ({ARTIST_CONFIG.brandName})
               </button>
               <span>•</span>
-              <span>{artwork.artistLocation} ({artwork.year})</span>
+              <span>{artwork.medium}</span>
             </div>
           </div>
 
-          {/* Price Block */}
-          <div className="p-5 bg-white border border-[#E2D9C8] space-y-2">
+          {/* Price on Request Callout Block */}
+          <div className="p-6 bg-white border-2 border-[#F0E6D8] rounded-3xl space-y-3 shadow-xs">
             <div className="flex items-baseline justify-between">
               <div>
-                <span className="font-serif text-3xl sm:text-4xl font-bold text-[#191817]">
-                  {formatPrice(currentPrice)}
+                <span className="font-heading text-2xl sm:text-3xl font-black text-[#FF6161]">
+                  {artwork.priceDisplay}
                 </span>
-                {artwork.originalPrice && (
-                  <span className="text-sm text-[#8C8578] line-through ml-3">
-                    {formatPrice(artwork.originalPrice)}
-                  </span>
-                )}
+                <span className="text-xs text-[#8C8075] block mt-0.5 font-medium">
+                  Direct inquiry with Renuka
+                </span>
               </div>
 
-              <span className="px-2.5 py-1 bg-[#EBF2EE] text-[#4A6B5D] text-xs font-medium uppercase tracking-wider">
-                Available In Stock
+              <span className="px-3 py-1 bg-[#E8F8F0] text-[#1E7E34] text-xs font-bold rounded-full">
+                {artwork.availability || 'Available'}
               </span>
             </div>
-            <p className="text-[11px] text-[#736E65]">
-              Price inclusive of all taxes (GST 12%) & bespoke museum wooden crate delivery.
+
+            <p className="text-xs text-[#5C5248] leading-relaxed">
+              Every original artwork is uniquely valued. You can also commission this concept in your preferred custom canvas dimensions.
             </p>
-          </div>
 
-          {/* Framing Selector */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between text-xs">
-              <span className="uppercase tracking-wider font-semibold text-[#191817]">
-                Custom Art Framing
-              </span>
-              <span className="text-[#8C8578]">Archival conservation framing</span>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              {(
-                [
-                  { id: 'unframed', name: 'Unframed Stretched', price: 'Included' },
-                  { id: 'classic-oak', name: 'Solid Natural Oak', price: '+₹6,500' },
-                  { id: 'matte-black', name: 'Museum Matte Black', price: '+₹6,500' },
-                  { id: 'champagne-gold', name: 'Champagne Gold Leaf', price: '+₹6,500' },
-                ] as const
-              ).map((f) => (
-                <button
-                  key={f.id}
-                  onClick={() => setFramingOption(f.id)}
-                  className={`p-3 border text-left flex flex-col justify-between transition-all ${
-                    framingOption === f.id
-                      ? 'border-[#191817] bg-[#F5F1E8] font-medium'
-                      : 'border-[#DDD5C5] bg-white text-[#555] hover:border-[#999]'
-                  }`}
-                >
-                  <span className="text-xs text-[#191817]">{f.name}</span>
-                  <span className="text-[11px] text-[#A38038] font-mono mt-1">{f.price}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Acquisition Call To Action Buttons */}
-          <div className="space-y-3 pt-2">
-            <button
-              onClick={() => addToCart(artwork, framingOption)}
-              className="btn-coral w-full py-4 text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-lg"
-            >
-              <span>Add to Bag — {formatPrice(currentPrice)} 🛍️</span>
-            </button>
-
-            <div className="grid grid-cols-2 gap-3">
+            {/* Direct WhatsApp Quote Button */}
+            <div className="pt-2 flex flex-col gap-2.5">
               <a
-                href={`https://wa.me/919096932011?text=Hi%20Renuka,%20I%20am%20interested%20in%20your%20painting%20"${encodeURIComponent(artwork.title)}"%20(${formatPrice(currentPrice)}).%20Is%20it%20available?`}
+                href={whatsappInquiryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-3 px-4 rounded-full bg-[#E8F8F0] text-[#1E7E34] hover:bg-[#D4EDDA] text-xs font-bold transition-colors flex items-center justify-center gap-1.5 text-center"
+                className="w-full py-4 px-6 rounded-full btn-coral text-sm font-bold flex items-center justify-center gap-2 shadow-md"
               >
-                <span>Ask on WhatsApp 💬</span>
+                <MessageCircle className="w-5 h-5 fill-current" />
+                <span>Request a Custom Quote on WhatsApp</span>
               </a>
 
               <button
-                onClick={() => setShowInquiryModal(true)}
-                className="py-3 px-4 rounded-full bg-white border border-[#EAE0D4] text-[#2B2623] hover:bg-[#FFF4D2] text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
+                onClick={scrollToPricing}
+                className="w-full py-3 px-6 rounded-full bg-[#FFF4D2] hover:bg-[#FFE082] text-[#8C6D00] text-xs font-bold transition-all border border-[#FFE082] flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                <Mail className="w-3.5 h-3.5 text-[#FF6161]" />
-                <span>Message Renuka</span>
+                <span>Check Canvas Sizes & Pricing Guide</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
 
-          {/* Collector Assurances */}
-          <div className="p-4 bg-[#F5F1E8] border border-[#E8E2D5] divide-y divide-[#E5DEC9] text-xs space-y-2.5">
-            <div className="flex items-center gap-3 pt-2 first:pt-0">
-              <ShieldCheck className="w-4 h-4 text-[#C5A059] shrink-0" />
-              <div>
-                <span className="font-semibold text-[#191817]">Physical Certificate of Authenticity</span>
-                <p className="text-[11px] text-[#736E65]">Signed & sealed by the artist and renus_palette curator.</p>
-              </div>
+          {/* Description & Artwork Notes */}
+          <div className="space-y-3 text-sm text-[#5C5248]">
+            <h3 className="font-heading font-bold text-base text-[#2B2623]">About This Painting</h3>
+            <p className="leading-relaxed bg-[#FFFDF9] p-4 rounded-2xl border border-[#F0E6D8]">
+              {artwork.description}
+            </p>
+          </div>
+
+          {/* Confirmed Details */}
+          <div className="grid grid-cols-2 gap-3 text-xs">
+            <div className="p-3.5 bg-white rounded-2xl border border-[#F0E6D8]">
+              <span className="text-[#8C8075] font-semibold block mb-0.5">Medium</span>
+              <span className="font-bold text-[#2B2623]">{artwork.medium}</span>
             </div>
 
-            <div className="flex items-center gap-3 pt-2">
-              <Truck className="w-4 h-4 text-[#4A6B5D] shrink-0" />
-              <div>
-                <span className="font-semibold text-[#191817]">Complimentary Insured Art Crate Transit</span>
-                <p className="text-[11px] text-[#736E65]">Dispatched within 48-72 business hours across India.</p>
-              </div>
+            <div className="p-3.5 bg-white rounded-2xl border border-[#F0E6D8]">
+              <span className="text-[#8C8075] font-semibold block mb-0.5">Dimensions</span>
+              <span className="font-bold text-[#2B2623]">
+                {artwork.dimensions || 'Custom sizes on request'}
+              </span>
             </div>
 
-            <div className="flex items-center gap-3 pt-2">
-              <RotateCcw className="w-4 h-4 text-[#A8987E] shrink-0" />
-              <div>
-                <span className="font-semibold text-[#191817]">7-Day Curatorial Home-Trial Guarantee</span>
-                <p className="text-[11px] text-[#736E65]">Return without hassle if the canvas doesn't complement your sanctuary.</p>
-              </div>
+            <div className="p-3.5 bg-white rounded-2xl border border-[#F0E6D8]">
+              <span className="text-[#8C8075] font-semibold block mb-0.5">Surface</span>
+              <span className="font-bold text-[#2B2623]">Stretched Cotton Canvas</span>
+            </div>
+
+            <div className="p-3.5 bg-white rounded-2xl border border-[#F0E6D8]">
+              <span className="text-[#8C8075] font-semibold block mb-0.5">Shipping</span>
+              <span className="font-bold text-[#2B2623]">Pan-India Protected Transit</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Artwork Detailed Specifications & Story */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-12 border-t border-[#E8E2D5] mb-20">
-        {/* Editorial Description & Curator Note */}
-        <div className="lg:col-span-7 space-y-6">
-          <h3 className="font-serif text-2xl sm:text-3xl text-[#191817]">About the Artwork</h3>
-          <p className="text-sm sm:text-base text-[#6E685F] leading-relaxed font-sans">
-            {artwork.description}
-          </p>
-
-          {artwork.curatorNote && (
-            <div className="p-6 bg-[#F5F1E8] border-l-3 border-[#C5A059] space-y-2">
-              <span className="text-[10px] uppercase tracking-widest text-[#A38038] font-mono font-bold block">
-                Curator's Note — Renu Sengupta
-              </span>
-              <p className="font-serif text-sm italic text-[#2D2B29] leading-relaxed">
-                “{artwork.curatorNote}”
+      {/* Related Artworks from Renuka's Collection */}
+      {relatedArtworks.length > 0 && (
+        <div className="border-t border-[#F0E6D8] pt-14">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#2B2623]">
+                More from {artwork.category}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#7A6F66] mt-1">
+                Explore more original paintings by Renuka in this collection
               </p>
             </div>
-          )}
 
-          {/* Tags */}
-          <div className="pt-2">
-            <span className="text-xs uppercase tracking-wider text-[#8C8578] font-medium block mb-2">
-              Thematic Tags:
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {artwork.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 bg-white border border-[#DDD5C5] text-xs text-[#555]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Specifications Table */}
-        <div className="lg:col-span-5 bg-white border border-[#E2D9C8] p-6 space-y-4">
-          <h4 className="font-serif text-xl text-[#191817] border-b border-[#EFEBE1] pb-3">
-            Artwork Dossier
-          </h4>
-
-          <dl className="divide-y divide-[#F0EBE0] text-xs">
-            <div className="py-2.5 flex justify-between">
-              <dt className="text-[#736E65]">Medium</dt>
-              <dd className="font-medium text-[#191817] text-right">{artwork.medium}</dd>
-            </div>
-            <div className="py-2.5 flex justify-between">
-              <dt className="text-[#736E65]">Surface Support</dt>
-              <dd className="font-medium text-[#191817] text-right">{artwork.surface}</dd>
-            </div>
-            <div className="py-2.5 flex justify-between">
-              <dt className="text-[#736E65]">Dimensions (Inches)</dt>
-              <dd className="font-mono font-medium text-[#191817]">{artwork.dimensions}</dd>
-            </div>
-            <div className="py-2.5 flex justify-between">
-              <dt className="text-[#736E65]">Dimensions (Metric)</dt>
-              <dd className="font-mono font-medium text-[#191817]">{artwork.dimensionsCm}</dd>
-            </div>
-            <div className="py-2.5 flex justify-between">
-              <dt className="text-[#736E65]">Orientation</dt>
-              <dd className="font-medium text-[#191817] capitalize">{artwork.orientation}</dd>
-            </div>
-            <div className="py-2.5 flex justify-between">
-              <dt className="text-[#736E65]">Year of Creation</dt>
-              <dd className="font-mono font-medium text-[#191817]">{artwork.year}</dd>
-            </div>
-            <div className="py-2.5 flex justify-between">
-              <dt className="text-[#736E65]">Signature</dt>
-              <dd className="font-medium text-[#191817]">Signed by Artist on Verso & recto</dd>
-            </div>
-            <div className="py-2.5 flex justify-between">
-              <dt className="text-[#736E65]">Authenticity Certificate</dt>
-              <dd className="font-medium text-[#A38038]">Physical Embossed Certificate Included</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-
-      {/* Related Artworks Recommendation */}
-      {relatedArtworks.length > 0 && (
-        <div className="pt-16 border-t border-[#E8E2D5]">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="font-serif text-2xl sm:text-3xl text-[#191817]">
-              Related Artworks You May Admire
-            </h3>
             <button
-              onClick={() => navigateToExplore()}
-              className="text-xs uppercase tracking-wider text-[#191817] hover:text-[#C5A059] font-medium transition-colors"
+              onClick={() => navigateToCollection(artwork.categorySlug)}
+              className="text-xs sm:text-sm font-bold text-[#FF6161] hover:underline flex items-center gap-1 cursor-pointer"
             >
-              Explore Collection →
+              <span>View All</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
@@ -409,82 +274,6 @@ export const ArtworkDetailPage: React.FC = () => {
             {relatedArtworks.map((item) => (
               <ArtworkCard key={item.id} artwork={item} />
             ))}
-          </div>
-        </div>
-      )}
-
-      {/* Inquire with Curator Modal */}
-      {showInquiryModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="bg-[#FAF8F5] border border-[#E2D9C8] w-full max-w-lg p-6 space-y-4">
-            <div className="flex justify-between items-center border-b border-[#E8E2D5] pb-3">
-              <h4 className="font-serif text-xl text-[#191817]">Curatorial Inquiry</h4>
-              <button
-                onClick={() => setShowInquiryModal(false)}
-                className="text-xs text-[#736E65] hover:text-[#191817]"
-              >
-                Close
-              </button>
-            </div>
-
-            {inquirySent ? (
-              <div className="text-center py-6 space-y-3">
-                <Check className="w-10 h-10 text-[#4A6B5D] mx-auto" />
-                <p className="font-serif text-lg text-[#191817]">Inquiry Dispatched</p>
-                <p className="text-xs text-[#736E65]">
-                  Our head curator will respond regarding "{artwork.title}" within 4 business hours.
-                </p>
-              </div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setInquirySent(true);
-                  addToast({
-                    type: 'success',
-                    title: 'Inquiry Received',
-                    description: 'Our senior curator has received your inquiry.'
-                  });
-                }}
-                className="space-y-3 text-xs"
-              >
-                <p className="text-[#6E685F]">
-                  Requesting detailed provenance, high-resolution condition reports, or staging advice for <strong className="text-[#191817]">"{artwork.title}"</strong>.
-                </p>
-                <div>
-                  <label className="block text-[#736E65] mb-1 uppercase tracking-wider">Your Name</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Collector or Designer Name"
-                    className="w-full p-2.5 bg-white border border-[#DDD5C5]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[#736E65] mb-1 uppercase tracking-wider">Your Email</label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="name@example.com"
-                    className="w-full p-2.5 bg-white border border-[#DDD5C5]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[#736E65] mb-1 uppercase tracking-wider">Inquiry Notes</label>
-                  <textarea
-                    rows={3}
-                    defaultValue={`I am interested in acquiring "${artwork.title}" by ${artwork.artistName}. Please share additional condition images and transit timelines.`}
-                    className="w-full p-2.5 bg-white border border-[#DDD5C5]"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-[#191817] text-white text-xs uppercase tracking-widest font-medium hover:bg-[#C5A059] transition-colors"
-                >
-                  Send Inquiry to Gallery
-                </button>
-              </form>
-            )}
           </div>
         </div>
       )}

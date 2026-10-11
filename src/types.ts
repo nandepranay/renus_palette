@@ -2,40 +2,31 @@ export type PageType =
   | 'home'
   | 'explore'
   | 'paintings'
-  | 'artists'
   | 'about'
   | 'contact'
   | 'wishlist'
   | 'artwork-detail'
-  | 'collection-detail'
-  | 'artist-detail';
+  | 'collection-detail';
 
 export interface Artwork {
   id: string;
   title: string;
-  artistId: string;
+  isOfficialTitle?: boolean; // true for "Lotus Pond", false for descriptive titles
   artistName: string;
-  artistLocation: string;
-  price: number; // in INR
-  originalPrice?: number;
-  collectionId: string;
-  collectionName: string;
-  medium: string;
-  surface: string;
-  dimensions: string; // e.g. "36 x 48 in"
-  dimensionsCm: string; // e.g. "91.4 x 121.9 cm"
-  orientation: 'landscape' | 'portrait' | 'square';
-  year: number;
-  imageUrl: string;
-  secondaryImageUrl?: string;
+  artistBrand: string;
+  category: 'Nature & Landscapes' | 'Spiritual Art' | 'Portraits' | 'Floral & Botanical Art' | 'Custom Art';
+  categorySlug: 'nature-landscapes' | 'spiritual-art' | 'portraits' | 'floral-botanical' | 'custom-art';
+  secondaryCategories?: string[];
   description: string;
-  curatorNote?: string;
-  isOriginal: boolean;
-  isLimitedEdition?: boolean;
-  editionDetails?: string;
-  isFramed: boolean;
-  inStock: boolean;
-  rating?: number;
+  imageUrl: string;
+  imageFileName: string;
+  dimensions?: string; // only if confirmed from artist
+  medium?: string; // confirmed medium if available (e.g. 'Acrylic on Canvas')
+  priceDisplay: string; // 'Price on request'
+  isPriceConfirmed?: boolean;
+  price?: number; // fallback numeric representation if needed
+  availability?: string; // e.g. 'Available • Custom Inquiries Open'
+  orientation: 'landscape' | 'portrait' | 'square';
   featured?: boolean;
   tags: string[];
 }
@@ -61,7 +52,6 @@ export interface Artist {
   statement: string;
   profileImage: string;
   coverImage: string;
-  exhibitions: string[];
   mediums: string[];
   artworksCount: number;
   featured: boolean;

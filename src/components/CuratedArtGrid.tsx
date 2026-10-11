@@ -10,42 +10,52 @@ export const CuratedArtGrid: React.FC = () => {
 
   const tabs = [
     { id: 'all', label: 'All Paintings 🎨' },
+    { id: 'nature-landscapes', label: 'Nature & Landscapes 🌿' },
+    { id: 'spiritual-art', label: 'Spiritual Art ✨' },
     { id: 'portraits', label: 'Portraits 👩‍🎨' },
-    { id: 'nature-landscapes', label: 'Landscapes 🌿' },
-    { id: 'abstract-art', label: 'Acrylics 🌸' },
-    { id: 'minimalist-art', label: 'Watercolors 🌊' },
-    { id: 'modern-indian-art', label: 'Heritage 🏛️' },
+    { id: 'floral-botanical', label: 'Floral & Botanical 🌸' },
+    { id: 'custom-art', label: 'Custom Art 💌' },
   ];
 
   const filteredArtworks =
     activeTab === 'all'
-      ? artworks.slice(0, 8)
-      : artworks.filter((a) => a.collectionId === activeTab).slice(0, 8);
+      ? artworks
+      : artworks.filter(
+          (a) =>
+            a.categorySlug === activeTab ||
+            (a.secondaryCategories &&
+              a.secondaryCategories.some(
+                (c) =>
+                  (activeTab === 'custom-art' && c === 'Custom Art') ||
+                  (activeTab === 'nature-landscapes' && c === 'Nature & Landscapes') ||
+                  (activeTab === 'portraits' && c === 'Portraits')
+              ))
+        );
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#F0E6D8]">
+    <section id="studio-gallery" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#F0E6D8] scroll-mt-24">
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFEAE8] text-[#FF6161] text-xs font-bold mb-3">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Hand-painted with Love</span>
+            <span>Hand-painted Originals</span>
           </div>
           <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-[#2B2623] tracking-tight">
             Fresh from the Studio 🎨
           </h2>
-          <p className="text-sm text-[#7A6F66] mt-2">
-            Original acrylics, dreamy watercolors & vibrant canvas works ready to brighten your walls.
+          <p className="text-sm text-[#7A6F66] mt-2 max-w-xl">
+            Renuka's authentic acrylics, watercolor landscapes, and custom portraits. All paintings shown are original works from her portfolio.
           </p>
         </div>
 
-        {/* Filter Pills (Ru&Chai rounded style) */}
+        {/* Filter Pills */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 mt-6 md:mt-0 no-scrollbar">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 text-xs font-bold rounded-full whitespace-nowrap transition-all duration-200 ${
+              className={`px-4 py-2 text-xs font-bold rounded-full whitespace-nowrap transition-all duration-200 cursor-pointer ${
                 activeTab === tab.id
                   ? 'bg-[#FF6161] text-white shadow-xs'
                   : 'bg-[#FFF4D2] text-[#6E5500] hover:bg-[#FFE082]'
@@ -58,7 +68,7 @@ export const CuratedArtGrid: React.FC = () => {
       </div>
 
       {/* Artwork Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredArtworks.map((artwork) => (
           <ArtworkCard key={artwork.id} artwork={artwork} />
         ))}
@@ -68,9 +78,9 @@ export const CuratedArtGrid: React.FC = () => {
       <div className="mt-12 text-center">
         <button
           onClick={() => navigateToExplore()}
-          className="btn-sunshine px-8 py-4 text-sm font-bold inline-flex items-center gap-2 cursor-pointer"
+          className="btn-sunshine px-8 py-4 text-sm font-bold inline-flex items-center gap-2 cursor-pointer shadow-md"
         >
-          <span>Explore All 18+ Paintings</span>
+          <span>Explore All 12 Original Paintings</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>

@@ -2,9 +2,10 @@ import React from 'react';
 import { Hero } from '../components/Hero';
 import { FeaturedCollections } from '../components/FeaturedCollections';
 import { CuratedArtGrid } from '../components/CuratedArtGrid';
+import { CanvasPricingSection } from '../components/CanvasPricingSection';
 import { CustomCommissionSection } from '../components/CustomCommissionSection';
-import { StudioVlogSection } from '../components/StudioVlogSection';
 import { AboutSection } from '../components/AboutSection';
+import { StudioVlogSection } from '../components/StudioVlogSection';
 import { Newsletter } from '../components/Newsletter';
 
 export const HomePage: React.FC = () => {
@@ -13,9 +14,10 @@ export const HomePage: React.FC = () => {
       <Hero />
       <FeaturedCollections />
       <CuratedArtGrid />
+      <CanvasPricingSection />
       <CustomCommissionSection />
-      <StudioVlogSection />
       <AboutSection />
+      <StudioVlogSection />
       <Newsletter />
     </main>
   );

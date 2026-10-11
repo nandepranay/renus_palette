@@ -13,8 +13,6 @@ import { HomePage } from './pages/HomePage';
 import { ExploreArtPage } from './pages/ExploreArtPage';
 import { CollectionDetailPage } from './pages/CollectionDetailPage';
 import { ArtworkDetailPage } from './pages/ArtworkDetailPage';
-import { ArtistProfilePage } from './pages/ArtistProfilePage';
-import { ArtistsPage } from './pages/ArtistsPage';
 import { AboutUsPage } from './pages/AboutUsPage';
 import { ContactUsPage } from './pages/ContactUsPage';
 import { WishlistPage } from './pages/WishlistPage';
@@ -33,10 +31,6 @@ const AppContent: React.FC = () => {
         return <CollectionDetailPage />;
       case 'artwork-detail':
         return <ArtworkDetailPage />;
-      case 'artists':
-        return <ArtistsPage />;
-      case 'artist-detail':
-        return <ArtistProfilePage />;
       case 'about':
         return <AboutUsPage />;
       case 'contact':
@@ -49,7 +43,7 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#232220]">
+    <div className="min-h-screen flex flex-col bg-[#FFFDF9] text-[#2B2623]">
       <Header />
       <div className="flex-1">
         {renderCurrentPage()}

@@ -28,7 +28,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
   const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'wire'>('upi');
   const [orderId, setOrderId] = useState('');
 
-  const cartTotal = cart.reduce((sum, item) => sum + item.artwork.price * item.quantity, 0);
+  const cartTotal = cart.reduce((sum, item) => sum + (item.artwork.price || 0) * item.quantity, 0);
 
   const handleSubmitShipping = (e: React.FormEvent) => {
     e.preventDefault();

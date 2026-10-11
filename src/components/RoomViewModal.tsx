@@ -3,7 +3,7 @@ import { useGallery } from '../context/GalleryContext';
 import { X, Sparkles, Check } from 'lucide-react';
 
 export const RoomViewModal: React.FC = () => {
-  const { isRoomViewOpen, setIsRoomViewOpen, roomViewArtwork, formatPrice } = useGallery();
+  const { isRoomViewOpen, setIsRoomViewOpen, roomViewArtwork } = useGallery();
   const [wallColor, setWallColor] = useState<'ivory' | 'charcoal' | 'terracotta' | 'sage'>('ivory');
   const [frameStyle, setFrameStyle] = useState<'none' | 'oak' | 'black' | 'gold'>('oak');
 
@@ -11,9 +11,9 @@ export const RoomViewModal: React.FC = () => {
 
   const wallColors = {
     ivory: { bg: '#F2EDE4', name: 'Warm Ivory' },
-    charcoal: { bg: '#2B2B2C', name: 'Museum Charcoal' },
+    charcoal: { bg: '#2B2B2C', name: 'Charcoal' },
     terracotta: { bg: '#8B4F39', name: 'Terracotta Earth' },
-    sage: { bg: '#48564D', name: 'Heritage Sage' },
+    sage: { bg: '#48564D', name: 'Sage Green' },
   };
 
   const frameStyles = {
@@ -26,22 +26,22 @@ export const RoomViewModal: React.FC = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md">
       <div
-        className="bg-[#FAF8F5] border border-[#E2D9C8] w-full max-w-5xl rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[95vh] animate-fade-in"
+        className="bg-[#FFFDF9] border-2 border-[#F0E6D8] w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh] animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Control Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E2D5] bg-[#FAF8F5]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#F0E6D8] bg-[#FFFDF9]">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#C5A059]" />
-            <span className="font-serif text-lg text-[#191817]">Virtual Wall Preview</span>
-            <span className="text-xs text-[#8C8578] ml-2 hidden sm:inline">
-              • Scaled to {roomViewArtwork.dimensions}
+            <Sparkles className="w-4 h-4 text-[#FF6161]" />
+            <span className="font-heading font-extrabold text-lg text-[#2B2623]">Wall Preview</span>
+            <span className="text-xs text-[#7A6F66] ml-2 hidden sm:inline font-medium">
+              • {roomViewArtwork.dimensions || 'Hand-painted canvas'}
             </span>
           </div>
 
           <button
             onClick={() => setIsRoomViewOpen(false)}
-            className="p-1.5 text-[#6E685F] hover:text-[#191817] transition-colors"
+            className="p-1.5 text-[#7A6F66] hover:text-[#2B2623] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -57,15 +57,15 @@ export const RoomViewModal: React.FC = () => {
 
           {/* Wall floor boundary */}
           <div className="absolute bottom-0 inset-x-0 h-16 sm:h-20 bg-gradient-to-t from-[#C5B79F] to-[#D8CBBA] border-t border-[#A8987E] flex items-center justify-center">
-            <span className="text-[11px] font-mono tracking-widest text-[#7B6E57] uppercase">
-              Solid White Oak Parquet Floor
+            <span className="text-[11px] font-mono tracking-widest text-[#7B6E57] uppercase font-bold">
+              Living Room Hardwood Floor
             </span>
           </div>
 
-          {/* Luxury Sofa/Bench Silhouette */}
-          <div className="absolute bottom-8 w-72 sm:w-96 h-14 bg-[#1B1A19]/80 rounded-t-lg backdrop-blur-sm shadow-xl flex items-center justify-center border-t border-[#3B3A39]">
-            <span className="text-[10px] tracking-widest uppercase text-[#9E978B]">
-              Standard 8ft Collector Credenza
+          {/* Credenza Silhouette */}
+          <div className="absolute bottom-8 w-72 sm:w-96 h-14 bg-[#1B1A19]/80 rounded-t-xl backdrop-blur-sm shadow-xl flex items-center justify-center border-t border-[#3B3A39]">
+            <span className="text-[10px] tracking-widest uppercase text-[#9E978B] font-bold">
+              Studio Credenza
             </span>
           </div>
 
@@ -78,34 +78,34 @@ export const RoomViewModal: React.FC = () => {
               <img
                 src={roomViewArtwork.imageUrl}
                 alt={roomViewArtwork.title}
-                className={`max-h-[220px] sm:max-h-[280px] max-w-[280px] sm:max-w-[420px] object-cover transition-all duration-300 ${
+                className={`max-h-[220px] sm:max-h-[280px] max-w-[280px] sm:max-w-[420px] object-contain transition-all duration-300 ${
                   frameStyle === 'none' ? 'border border-[#222]/20' : ''
                 }`}
               />
             </div>
 
-            {/* Museum Gallery Placard */}
-            <div className="mt-4 px-3 py-1 bg-white/90 backdrop-blur-sm border border-[#DDD5C5] shadow-sm text-center">
-              <p className="text-[11px] font-serif font-bold text-[#191817]">{roomViewArtwork.title}</p>
-              <p className="text-[10px] text-[#736E65]">
-                {roomViewArtwork.artistName} • {roomViewArtwork.dimensions}
+            {/* Gallery Placard */}
+            <div className="mt-4 px-3.5 py-1.5 bg-white/95 backdrop-blur-sm border border-[#DDD5C5] rounded-xl shadow-sm text-center">
+              <p className="text-xs font-heading font-bold text-[#2B2623]">{roomViewArtwork.title}</p>
+              <p className="text-[10px] text-[#7A6F66]">
+                By Renuka • {roomViewArtwork.dimensions || 'Custom scale on request'}
               </p>
             </div>
           </div>
         </div>
 
         {/* Bottom Customization Controls */}
-        <div className="px-6 py-4 bg-[#F5F1E8] border-t border-[#E8E2D5] flex flex-wrap items-center justify-between gap-4">
+        <div className="px-6 py-4 bg-[#FFF9E6] border-t border-[#FFE082] flex flex-wrap items-center justify-between gap-4">
           {/* Wall Colors */}
           <div className="flex items-center gap-3">
-            <span className="text-xs uppercase tracking-wider text-[#736E65] font-medium">Wall Tone:</span>
+            <span className="text-xs font-bold text-[#5C5248]">Wall Tone:</span>
             <div className="flex items-center gap-2">
               {(Object.keys(wallColors) as Array<keyof typeof wallColors>).map((key) => (
                 <button
                   key={key}
                   onClick={() => setWallColor(key)}
-                  className={`w-7 h-7 rounded-full border-2 transition-all flex items-center justify-center ${
-                    wallColor === key ? 'border-[#191817] scale-110' : 'border-transparent opacity-80 hover:opacity-100'
+                  className={`w-7 h-7 rounded-full border-2 transition-all flex items-center justify-center cursor-pointer ${
+                    wallColor === key ? 'border-[#FF6161] scale-110 shadow-xs' : 'border-transparent opacity-80 hover:opacity-100'
                   }`}
                   style={{ backgroundColor: wallColors[key].bg }}
                   title={wallColors[key].name}
@@ -113,7 +113,7 @@ export const RoomViewModal: React.FC = () => {
                   {wallColor === key && (
                     <Check
                       className={`w-3.5 h-3.5 ${
-                        key === 'ivory' ? 'text-[#191817]' : 'text-white'
+                        key === 'ivory' ? 'text-[#2B2623]' : 'text-white'
                       }`}
                     />
                   )}
@@ -124,7 +124,7 @@ export const RoomViewModal: React.FC = () => {
 
           {/* Framing Options */}
           <div className="flex items-center gap-3">
-            <span className="text-xs uppercase tracking-wider text-[#736E65] font-medium">Frame:</span>
+            <span className="text-xs font-bold text-[#5C5248]">Frame:</span>
             <div className="flex items-center gap-1.5">
               {(
                 [
@@ -137,10 +137,10 @@ export const RoomViewModal: React.FC = () => {
                 <button
                   key={f.id}
                   onClick={() => setFrameStyle(f.id)}
-                  className={`px-2.5 py-1 text-xs border transition-colors ${
+                  className={`px-3 py-1 text-xs rounded-full font-bold transition-colors cursor-pointer ${
                     frameStyle === f.id
-                      ? 'bg-[#191817] text-white border-[#191817]'
-                      : 'bg-white text-[#555] border-[#DDD5C5] hover:border-[#999]'
+                      ? 'bg-[#FF6161] text-white shadow-xs'
+                      : 'bg-white text-[#5C5248] border border-[#EAE0D4] hover:bg-[#FFFDF9]'
                   }`}
                 >
                   {f.label}
@@ -151,8 +151,8 @@ export const RoomViewModal: React.FC = () => {
 
           {/* Artwork Info & Price */}
           <div className="text-right ml-auto hidden sm:block">
-            <span className="text-sm font-serif font-bold text-[#191817]">
-              {formatPrice(roomViewArtwork.price)}
+            <span className="text-sm font-heading font-extrabold text-[#FF6161]">
+              {roomViewArtwork.priceDisplay}
             </span>
           </div>
         </div>

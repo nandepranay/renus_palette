@@ -1,96 +1,103 @@
 import React from 'react';
 import { useGallery } from '../context/GalleryContext';
-import { ArrowRight, Award, HeartHandshake, Eye } from 'lucide-react';
+import { ARTIST_CONFIG, getArtworkUrl, getWhatsAppLink } from '../config/artistConfig';
+import { Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
   const { setPage } = useGallery();
 
   return (
-    <section className="py-20 sm:py-28 bg-[#F5F1E8] border-y border-[#E8E2D5]">
+    <section id="about-renuka" className="py-16 sm:py-24 bg-[#FFF9F0] border-y border-[#F0E6D8] scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left: Large Editorial Artwork Image with Framed Overlap */}
+          {/* Left: Large Real Artwork Image with Framed Overlap */}
           <div className="lg:col-span-6 relative">
-            <div className="relative p-3 sm:p-5 bg-white border border-[#DDD5C5] shadow-2xl">
-              <div className="aspect-4/5 sm:aspect-5/6 overflow-hidden bg-[#E2D9C8]">
+            <div className="relative p-3.5 sm:p-5 bg-white border-2 border-[#F0E6D8] rounded-3xl shadow-lg">
+              <div className="aspect-4/3 sm:aspect-16/11 overflow-hidden bg-[#FAF5ED] rounded-2xl flex items-center justify-center p-2">
                 <img
-                  src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80"
-                  alt="Fine art studio curation"
-                  className="w-full h-full object-cover"
+                  src={getArtworkUrl('artworks/lotus-pond.jpg')}
+                  alt="Lotus Pond by Renuka"
+                  className="w-full h-full object-contain"
                 />
               </div>
 
-              {/* Floating Curatorial Card */}
-              <div className="absolute -bottom-6 -right-4 sm:-right-8 bg-[#191817] text-[#FAF8F5] p-5 sm:p-6 max-w-xs shadow-2xl border border-[#3E3A34] hidden sm:block">
-                <span className="text-[10px] uppercase tracking-widest text-[#C5A059] font-mono block mb-1">
-                  Renuka's Studio
+              {/* Floating Artist Signature Badge */}
+              <div className="absolute -bottom-5 -right-3 sm:-right-6 bg-[#2B2623] text-[#FFFDF9] p-4 sm:p-5 rounded-2xl shadow-xl border-2 border-[#FFD13B] max-w-xs hidden sm:block">
+                <span className="text-[10px] uppercase font-bold text-[#FFD13B] tracking-wider block mb-1">
+                  Art Studio • Renuka
                 </span>
-                <p className="font-serif text-sm italic leading-snug">
-                  “Welcome to my colorful world! I love creating vibrant acrylics and dreamy watercolor pieces.”
+                <p className="font-heading text-xs italic leading-relaxed text-[#F4EBE0]">
+                  “{ARTIST_CONFIG.about.philosophy}”
                 </p>
-                <p className="text-[10px] text-[#A8987E] mt-2 font-mono uppercase">— Renuka, Artist & Creator</p>
+                <p className="text-[10px] text-[#FF6161] font-bold mt-2">— {ARTIST_CONFIG.brandName}</p>
               </div>
             </div>
           </div>
 
-          {/* Right: Editorial Narrative Content */}
+          {/* Right: Authentic Narrative from PDF */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#C5A059] font-medium">
-              <span>Meet the Artist</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF4D2] text-[#8C6D00] text-xs font-bold shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#FF6161]" />
+              <span>About the Artist</span>
             </div>
 
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#191817] font-normal tracking-tight leading-tight">
-              Welcome to My Colorful World
+            <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-[#2B2623] tracking-tight leading-tight">
+              Art Intended to Connect Personally 🌸
             </h2>
 
-            <div className="space-y-4 text-sm sm:text-base text-[#6E685F] leading-relaxed font-sans">
+            {/* Core Ideas from PDF */}
+            <div className="space-y-4 text-sm sm:text-base text-[#5C5248] leading-relaxed">
               <p>
-                Welcome to my colorful world! I am <strong className="text-[#191817] font-medium">Renuka</strong>, a painter specializing in vibrant acrylics and dreamy watercolor art focused on beautiful portraits and nature landscapes.
+                Welcome to my colorful world! I am <strong className="text-[#2B2623] font-bold">Renuka</strong>, a painter specializing in vibrant acrylics and dreamy watercolor art focused on beautiful portraits and nature landscapes.
               </p>
               <p>
-                Subscribe for a front-row seat in my studio, featuring satisfying process videos, painting tutorials, and behind-the-scenes vlogs on YouTube and Instagram.
+                My paintings are created to <strong className="text-[#2B2623]">connect personally with people</strong> and to add lasting <strong className="text-[#2B2623]">warmth and meaning to spaces</strong>. Every piece begins with an intention to transform everyday walls into mindful, joyful sanctuaries.
               </p>
-              <div className="p-4 bg-white border border-[#E2D9C8] text-sm text-[#191817]">
-                <strong className="text-[#A38038]">🎨 Want custom art?</strong> I love creating unique, personalized portrait and nature pieces tailored just for you! Message me directly to book a custom commission.
+              <p>
+                At the easel, the creative process brings together <strong className="text-[#FF6161]">thought and color, chaos and calm, and the artwork and its viewer</strong>.
+              </p>
+            </div>
+
+            {/* 3 Core Values */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#F0E6D8]">
+              <div className="space-y-1 bg-white p-3.5 rounded-2xl border border-[#F0E6D8]">
+                <div className="text-xl">💛</div>
+                <h4 className="font-heading text-sm font-bold text-[#2B2623]">Personal Connection</h4>
+                <p className="text-xs text-[#7A6F66]">Artworks created to resonate deeply with people and everyday moments.</p>
+              </div>
+
+              <div className="space-y-1 bg-white p-3.5 rounded-2xl border border-[#F0E6D8]">
+                <div className="text-xl">🏡</div>
+                <h4 className="font-heading text-sm font-bold text-[#2B2623]">Warmth in Spaces</h4>
+                <p className="text-xs text-[#7A6F66]">Infusing living rooms and bedrooms with peaceful, meaningful colors.</p>
+              </div>
+
+              <div className="space-y-1 bg-white p-3.5 rounded-2xl border border-[#F0E6D8]">
+                <div className="text-xl">🎨</div>
+                <h4 className="font-heading text-sm font-bold text-[#2B2623]">Thought & Color</h4>
+                <p className="text-xs text-[#7A6F66]">Uniting chaos and calm to create harmony between canvas and viewer.</p>
               </div>
             </div>
 
-            {/* Three Pillars */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#E2D9C8]">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[#C5A059]">
-                  <Award className="w-4 h-4" />
-                  <h4 className="font-serif text-sm font-semibold text-[#191817]">100% Original</h4>
-                </div>
-                <p className="text-xs text-[#736E65]">Physically signed certificate of provenance with every canvas.</p>
-              </div>
-
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[#C5A059]">
-                  <Eye className="w-4 h-4" />
-                  <h4 className="font-serif text-sm font-semibold text-[#191817]">Direct Studio Access</h4>
-                </div>
-                <p className="text-xs text-[#736E65]">Fair compensation directly empowering master studio artists.</p>
-              </div>
-
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[#C5A059]">
-                  <HeartHandshake className="w-4 h-4" />
-                  <h4 className="font-serif text-sm font-semibold text-[#191817]">White-Glove Care</h4>
-                </div>
-                <p className="text-xs text-[#736E65]">Custom timber crating and insured transit to your residence.</p>
-              </div>
-            </div>
-
-            {/* Our Story Button */}
-            <div className="pt-4">
+            {/* Actions */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 onClick={() => setPage('about')}
-                className="px-8 py-4 bg-[#191817] text-[#FAF8F5] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#C5A059] transition-all duration-300 flex items-center gap-3 group"
+                className="btn-sunshine px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-2 cursor-pointer shadow-xs"
               >
-                <span>Read Our Story</span>
-                <ArrowRight className="w-4 h-4 text-[#DFBA73] group-hover:translate-x-1 transition-transform" />
+                <span>Read Full Story</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
+
+              <a
+                href={getWhatsAppLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-coral px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xs"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Message Renuka</span>
+              </a>
             </div>
           </div>
         </div>

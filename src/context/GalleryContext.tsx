@@ -47,7 +47,7 @@ interface GalleryContextType {
   filters: FilterState;
   setFilters: React.Dispatch<React.SetStateAction<FilterState>>;
   resetFilters: () => void;
-  formatPrice: (price: number) => string;
+  formatPrice: (price?: number) => string;
 }
 
 const GalleryContext = createContext<GalleryContextType | undefined>(undefined);
@@ -81,9 +81,14 @@ export const GalleryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [wishlist, setWishlist] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem('renus_palette_wishlist');
-      return saved ? JSON.parse(saved) : ['art-01', 'art-02'];
+      if (saved) {
+        const parsed: string[] = JSON.parse(saved);
+        // Only keep existing valid artwork IDs
+        return parsed.filter((id) => artworks.some((a) => a.id === id));
+      }
+      return ['lotus-pond'];
     } catch {
-      return ['art-01', 'art-02'];
+      return ['lotus-pond'];
     }
   });
 
@@ -91,7 +96,11 @@ export const GalleryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem('renus_palette_cart');
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        const parsed: CartItem[] = JSON.parse(saved);
+        return parsed.filter((item) => artworks.some((a) => a.id === item.artwork.id));
+      }
+      return [];
     } catch {
       return [];
     }
@@ -142,9 +151,9 @@ export const GalleryProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setPage('collection-detail');
   };
 
-  const navigateToArtist = (id: string) => {
-    setSelectedArtistId(id);
-    setPage('artist-detail');
+  const navigateToArtist = (_id: string) => {
+    setSelectedArtistId('renuka');
+    setPage('about');
   };
 
   const navigateToExplore = (category?: string) => {
@@ -167,8 +176,8 @@ export const GalleryProvider: React.FC<{ children: React.ReactNode }> = ({ child
       } else {
         addToast({
           type: 'favorite',
-          title: 'Added to Wishlist',
-          description: art ? `"${art.title}" saved to your private collection.` : undefined
+          title: 'Added to Wishlist 🌸',
+          description: art ? `"${art.title}" saved to your favorites.` : undefined
         });
         return [...prev, artworkId];
       }
@@ -178,23 +187,19 @@ export const GalleryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const isInWishlist = (artworkId: string) => wishlist.includes(artworkId);
 
   const addToCart = (artwork: Artwork, framingOption: CartItem['framingOption'] = 'unframed') => {
-    const framingPrice = framingOption === 'unframed' ? 0 : 6500;
+    const framingPrice = 0;
     setCart((prev) => {
-      const existing = prev.find((item) => item.artwork.id === artwork.id && item.framingOption === framingOption);
+      const existing = prev.find((item) => item.artwork.id === artwork.id);
       if (existing) {
-        return prev.map((item) =>
-          item.artwork.id === artwork.id && item.framingOption === framingOption
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+        return prev;
       }
       return [...prev, { artwork, quantity: 1, framingOption, framingPrice }];
     });
 
     addToast({
       type: 'success',
-      title: 'Added to Art Bag',
-      description: `"${artwork.title}" is ready for secure checkout.`
+      title: 'Added to Art Bag 🛍️',
+      description: `"${artwork.title}" ready for custom quote inquiry.`
     });
     setIsCartOpen(true);
   };
@@ -218,7 +223,7 @@ export const GalleryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const cartTotal = cart.reduce((sum, item) => {
-    const unitPrice = item.artwork.price + item.framingPrice;
+    const unitPrice = (item.artwork.price || 0) + item.framingPrice;
     return sum + unitPrice * item.quantity;
   }, 0);
 
@@ -231,7 +236,10 @@ export const GalleryProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setFilters(INITIAL_FILTERS);
   };
 
-  const formatPrice = (price: number) => {
+  const formatPrice = (price?: number) => {
+    if (!price || price <= 0) {
+      return 'Price on request';
+    }
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
