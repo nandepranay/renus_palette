@@ -23,12 +23,12 @@ export const AboutSection: React.FC = () => {
               {/* Floating Curatorial Card */}
               <div className="absolute -bottom-6 -right-4 sm:-right-8 bg-[#191817] text-[#FAF8F5] p-5 sm:p-6 max-w-xs shadow-2xl border border-[#3E3A34] hidden sm:block">
                 <span className="text-[10px] uppercase tracking-widest text-[#C5A059] font-mono block mb-1">
-                  Our Philosophy
+                  Renuka's Studio
                 </span>
                 <p className="font-serif text-sm italic leading-snug">
-                  “Art belongs in living sanctuaries, breathing life into spaces where human stories unfold.”
+                  “Welcome to my colorful world! I love creating vibrant acrylics and dreamy watercolor pieces.”
                 </p>
-                <p className="text-[10px] text-[#A8987E] mt-2 font-mono uppercase">— Renu Sengupta, Founder</p>
+                <p className="text-[10px] text-[#A8987E] mt-2 font-mono uppercase">— Renuka, Artist & Creator</p>
               </div>
             </div>
           </div>
@@ -36,20 +36,23 @@ export const AboutSection: React.FC = () => {
           {/* Right: Editorial Narrative Content */}
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#C5A059] font-medium">
-              <span>The Origin of renus_palette</span>
+              <span>Meet the Artist</span>
             </div>
 
             <h2 className="font-serif text-3xl sm:text-5xl text-[#191817] font-normal tracking-tight leading-tight">
-              Where Emotion Meets Canvas
+              Welcome to My Colorful World
             </h2>
 
             <div className="space-y-4 text-sm sm:text-base text-[#6E685F] leading-relaxed font-sans">
               <p>
-                At <strong className="text-[#191817] font-medium">renus_palette</strong>, we believe that choosing a piece of original art is not an interior decoration transaction—it is an intimate dialogue between the artist's soul and your sanctuary.
+                Welcome to my colorful world! I am <strong className="text-[#191817] font-medium">Renuka</strong>, a painter specializing in vibrant acrylics and dreamy watercolor art focused on beautiful portraits and nature landscapes.
               </p>
               <p>
-                Founded as an independent curatorial bridge for exceptional subcontinental and international painters, our gallery champions authenticity, textural depth, and uncompromising studio integrity. We curate works that command presence, spark conversations, and grow richer with every passing year.
+                Subscribe for a front-row seat in my studio, featuring satisfying process videos, painting tutorials, and behind-the-scenes vlogs on YouTube and Instagram.
               </p>
+              <div className="p-4 bg-white border border-[#E2D9C8] text-sm text-[#191817]">
+                <strong className="text-[#A38038]">🎨 Want custom art?</strong> I love creating unique, personalized portrait and nature pieces tailored just for you! Message me directly to book a custom commission.
+              </div>
             </div>
 
             {/* Three Pillars */}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGallery } from '../context/GalleryContext';
-import { Mail, Phone, MapPin, Clock, CheckCircle2, ChevronDown, ChevronUp, Sparkles, Send } from 'lucide-react';
+import { Mail, Phone, CheckCircle2, ChevronDown, ChevronUp, Sparkles, Send } from 'lucide-react';
 
 export const ContactUsPage: React.FC = () => {
   const { addToast } = useGallery();
@@ -181,45 +181,66 @@ export const ContactUsPage: React.FC = () => {
         {/* Gallery Studios & Concierge Info */}
         <div className="lg:col-span-5 space-y-8">
           <div className="bg-[#F5F1E8] border border-[#E2D9C8] p-6 sm:p-8 space-y-6">
-            <h3 className="font-serif text-2xl text-[#191817]">Gallery Studios</h3>
+            <h3 className="font-serif text-2xl text-[#191817]">Renuka's Art Studio</h3>
 
-            {/* Mumbai Studio */}
-            <div className="space-y-1 text-xs">
-              <h4 className="font-serif text-base text-[#191817] font-semibold flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#C5A059]" />
-                Mumbai Flagship Studio
-              </h4>
-              <p className="text-[#6E685F] pl-6">
-                4th Floor, Heritage Court, Rampart Row, Kala Ghoda, Colaba, Mumbai 400001
+            <div className="text-xs text-[#6E685F] leading-relaxed space-y-2">
+              <p>
+                Welcome to my studio! I create vibrant acrylics and dreamy watercolor art, specializing in personalized portraits and nature landscapes.
               </p>
-              <p className="text-[#8C8578] pl-6">By private appointment only.</p>
-            </div>
-
-            {/* Delhi Studio */}
-            <div className="space-y-1 text-xs">
-              <h4 className="font-serif text-base text-[#191817] font-semibold flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#C5A059]" />
-                New Delhi Viewing Salon
-              </h4>
-              <p className="text-[#6E685F] pl-6">
-                12A, Hauz Khas Village Art Enclave, New Delhi 110016
+              <p className="text-[#A38038] font-medium">
+                🎨 Message me directly to discuss or book custom art commissions tailored just for you.
               </p>
-              <p className="text-[#8C8578] pl-6">Tue–Sun, 11:00 AM – 7:00 PM</p>
             </div>
 
             {/* Direct Lines */}
-            <div className="pt-4 border-t border-[#DDD5C5] space-y-2 text-xs text-[#6E685F]">
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#C5A059]" />
-                <span>curator@renuspalette.com</span>
-              </div>
-              <div className="flex items-center gap-2">
+            <div className="pt-4 border-t border-[#DDD5C5] space-y-3 text-xs text-[#6E685F]">
+              <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#C5A059]" />
-                <span>+91 (022) 2284-5900 / +91 98200 45678</span>
+                <div>
+                  <a href="tel:+919096932011" className="font-medium text-[#191817] hover:underline block">
+                    +91 9096932011
+                  </a>
+                  <span className="text-[11px] text-[#8C8578]">Call / WhatsApp</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[#C5A059]" />
-                <span>Advisory Hours: 10:00 AM – 7:30 PM IST</span>
+
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#C5A059]" />
+                <div>
+                  <a href="mailto:dhirajtonge1@gmail.com" className="font-medium text-[#191817] hover:underline block">
+                    dhirajtonge1@gmail.com
+                  </a>
+                  <span className="text-[11px] text-[#8C8578]">Direct Email</span>
+                </div>
+              </div>
+
+              <div className="pt-2 flex flex-col gap-2">
+                <a
+                  href="https://wa.me/919096932011?text=Hi%20Renuka,%20I%20love%20your%20art%20and%20would%20like%20to%20book%20a%20custom%20commission!"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 bg-[#25D366] text-white font-medium text-xs rounded-sm hover:opacity-90 transition-opacity text-center"
+                >
+                  Message on WhatsApp
+                </a>
+
+                <a
+                  href="https://www.instagram.com/renus_palette?mdxt=Z2o0YWZvZjlvNGhj"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 bg-[#E1306C] text-white font-medium text-xs rounded-sm hover:opacity-90 transition-opacity text-center"
+                >
+                  Follow on Instagram (@renus_palette)
+                </a>
+
+                <a
+                  href="https://www.youtube.com/@renus_palette"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 bg-[#FF0000] text-white font-medium text-xs rounded-sm hover:opacity-90 transition-opacity text-center"
+                >
+                  Subscribe on YouTube
+                </a>
               </div>
             </div>
           </div>
