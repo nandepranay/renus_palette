@@ -29,6 +29,11 @@ export interface Artwork {
   orientation: 'landscape' | 'portrait' | 'square';
   featured?: boolean;
   tags: string[];
+  views?: {
+    front: string;
+    angled?: string;
+    detail?: string;
+  };
 }
 
 export interface Collection {

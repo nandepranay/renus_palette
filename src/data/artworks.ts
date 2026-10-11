@@ -7,7 +7,8 @@ import { getArtworkUrl } from '../config/artistConfig';
  * 
  * Rules:
  * - Only paintings with verified physical files in public/artworks/ are included.
- * - Titles are descriptive placeholders unless explicitly stated in the PDF (Lotus Pond).
+ * - Primary front view uses the original physical painting photo straight-on.
+ * - Each painting supports 3 views: Front View (original photo), Angled View (canvas wall mockup), Close-up View (brushwork detail crop).
  * - All artworks show "Price on request" unless an exact individual price is confirmed.
  * - Dimensions and medium are only stated where confirmed from the artist.
  */
@@ -32,7 +33,12 @@ export const artworks: Artwork[] = [
     availability: 'Available • Custom Sizing on Request',
     orientation: 'landscape',
     featured: true,
-    tags: ['Lotus Pond', 'Acrylic', 'Floral', 'Botanical', 'Water Lilies', 'Original Canvas']
+    tags: ['Lotus Pond', 'Acrylic', 'Floral', 'Botanical', 'Water Lilies', 'Original Canvas'],
+    views: {
+      front: getArtworkUrl('artworks/lotus-pond.jpg'),
+      angled: getArtworkUrl('artworks/views/lotus-pond-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/lotus-pond-detail.jpg')
+    }
   },
   {
     id: 'buddha-portrait',
@@ -54,7 +60,12 @@ export const artworks: Artwork[] = [
     availability: 'Available • Custom Inquiries Open',
     orientation: 'portrait',
     featured: true,
-    tags: ['Buddha', 'Spiritual', 'Acrylic', 'Meditative', 'Calm', 'Serenity']
+    tags: ['Buddha', 'Spiritual', 'Acrylic', 'Meditative', 'Calm', 'Serenity'],
+    views: {
+      front: getArtworkUrl('artworks/buddha-portrait.jpg'),
+      angled: getArtworkUrl('artworks/views/buddha-portrait-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/buddha-portrait-detail.jpg')
+    }
   },
   {
     id: 'radha-krishna',
@@ -76,7 +87,12 @@ export const artworks: Artwork[] = [
     availability: 'Available • Custom Inquiries Open',
     orientation: 'portrait',
     featured: true,
-    tags: ['Radha Krishna', 'Spiritual', 'Devotional', 'Acrylic', 'Indian Heritage']
+    tags: ['Radha Krishna', 'Spiritual', 'Devotional', 'Acrylic', 'Indian Heritage'],
+    views: {
+      front: getArtworkUrl('artworks/radha-krishna.jpg'),
+      angled: getArtworkUrl('artworks/views/radha-krishna-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/radha-krishna-detail.jpg')
+    }
   },
   {
     id: 'ocean-sunset',
@@ -97,7 +113,12 @@ export const artworks: Artwork[] = [
     availability: 'Available • Custom Inquiries Open',
     orientation: 'landscape',
     featured: true,
-    tags: ['Ocean', 'Sunset', 'Seascape', 'Landscape', 'Warm Colors', 'Acrylic']
+    tags: ['Ocean', 'Sunset', 'Seascape', 'Landscape', 'Warm Colors', 'Acrylic'],
+    views: {
+      front: getArtworkUrl('artworks/ocean-sunset.jpg'),
+      angled: getArtworkUrl('artworks/views/ocean-sunset-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/ocean-sunset-detail.jpg')
+    }
   },
   {
     id: 'forest-landscape',
@@ -118,7 +139,12 @@ export const artworks: Artwork[] = [
     availability: 'Available • Custom Inquiries Open',
     orientation: 'landscape',
     featured: true,
-    tags: ['Forest', 'Woodland', 'Nature', 'Landscape', 'Greenery', 'Acrylic']
+    tags: ['Forest', 'Woodland', 'Nature', 'Landscape', 'Greenery', 'Acrylic'],
+    views: {
+      front: getArtworkUrl('artworks/forest-landscape.jpg'),
+      angled: getArtworkUrl('artworks/views/forest-landscape-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/forest-landscape-detail.jpg')
+    }
   },
   {
     id: 'green-watercolor-landscape',
@@ -139,7 +165,12 @@ export const artworks: Artwork[] = [
     availability: 'Available • Custom Inquiries Open',
     orientation: 'landscape',
     featured: false,
-    tags: ['Watercolor', 'Landscape', 'Misty Hills', 'Dreamy', 'Nature', 'Greenery']
+    tags: ['Watercolor', 'Landscape', 'Misty Hills', 'Dreamy', 'Nature', 'Greenery'],
+    views: {
+      front: getArtworkUrl('artworks/green-watercolor-landscape.jpg'),
+      angled: getArtworkUrl('artworks/views/green-watercolor-landscape-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/green-watercolor-landscape-detail.jpg')
+    }
   },
   {
     id: 'child-portrait-oval',
@@ -161,7 +192,12 @@ export const artworks: Artwork[] = [
     availability: 'Custom Commission Showcase',
     orientation: 'portrait',
     featured: true,
-    tags: ['Portrait', 'Child Portrait', 'Oval Canvas', 'Custom Art', 'Commission Showcase']
+    tags: ['Portrait', 'Child Portrait', 'Oval Canvas', 'Custom Art', 'Commission Showcase'],
+    views: {
+      front: getArtworkUrl('artworks/child-portrait-oval.jpg'),
+      angled: getArtworkUrl('artworks/views/child-portrait-oval-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/child-portrait-oval-detail.jpg')
+    }
   },
   {
     id: 'child-portrait-round',
@@ -183,7 +219,12 @@ export const artworks: Artwork[] = [
     availability: 'Custom Commission Showcase',
     orientation: 'square',
     featured: false,
-    tags: ['Portrait', 'Child Portrait', 'Circular Canvas', 'Custom Art', 'Commission Showcase']
+    tags: ['Portrait', 'Child Portrait', 'Circular Canvas', 'Custom Art', 'Commission Showcase'],
+    views: {
+      front: getArtworkUrl('artworks/child-portrait-round.jpg'),
+      angled: getArtworkUrl('artworks/views/child-portrait-round-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/child-portrait-round-detail.jpg')
+    }
   },
   {
     id: 'family-portrait',
@@ -205,7 +246,12 @@ export const artworks: Artwork[] = [
     availability: 'Custom Commission Showcase',
     orientation: 'landscape',
     featured: true,
-    tags: ['Family Portrait', 'Portraits', 'Custom Art', 'Commission Showcase', 'Heartfelt Keepsake']
+    tags: ['Family Portrait', 'Portraits', 'Custom Art', 'Commission Showcase', 'Heartfelt Keepsake'],
+    views: {
+      front: getArtworkUrl('artworks/family-portrait.jpg'),
+      angled: getArtworkUrl('artworks/views/family-portrait-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/family-portrait-detail.jpg')
+    }
   },
   {
     id: 'cottage-landscape',
@@ -226,7 +272,12 @@ export const artworks: Artwork[] = [
     availability: 'Available • Custom Inquiries Open',
     orientation: 'landscape',
     featured: false,
-    tags: ['Cottage', 'Countryside', 'Garden', 'Landscape', 'Warm & Cozy']
+    tags: ['Cottage', 'Countryside', 'Garden', 'Landscape', 'Warm & Cozy'],
+    views: {
+      front: getArtworkUrl('artworks/cottage-landscape.jpg'),
+      angled: getArtworkUrl('artworks/views/cottage-landscape-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/cottage-landscape-detail.jpg')
+    }
   },
   {
     id: 'water-droplet-leaf',
@@ -248,7 +299,12 @@ export const artworks: Artwork[] = [
     availability: 'Available • Custom Inquiries Open',
     orientation: 'square',
     featured: true,
-    tags: ['Leaf', 'Dewdrop', 'Botanical', 'Floral', 'Green Nature', 'Macro Study']
+    tags: ['Leaf', 'Dewdrop', 'Botanical', 'Floral', 'Green Nature', 'Macro Study'],
+    views: {
+      front: getArtworkUrl('artworks/water-droplet-leaf.jpg'),
+      angled: getArtworkUrl('artworks/views/water-droplet-leaf-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/water-droplet-leaf-detail.jpg')
+    }
   },
   {
     id: 'dog-portrait',
@@ -270,6 +326,11 @@ export const artworks: Artwork[] = [
     availability: 'Custom Commission Showcase',
     orientation: 'portrait',
     featured: false,
-    tags: ['Pet Portrait', 'Dog Portrait', 'Custom Art', 'Animal Art', 'Commission Showcase']
+    tags: ['Pet Portrait', 'Dog Portrait', 'Custom Art', 'Animal Art', 'Commission Showcase'],
+    views: {
+      front: getArtworkUrl('artworks/dog-portrait.jpg'),
+      angled: getArtworkUrl('artworks/views/dog-portrait-angled.jpg'),
+      detail: getArtworkUrl('artworks/views/dog-portrait-detail.jpg')
+    }
   }
 ];
