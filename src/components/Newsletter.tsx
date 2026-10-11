@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGallery } from '../context/GalleryContext';
-import { Mail, CheckCircle2, ArrowRight } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const Newsletter: React.FC = () => {
   const { addToast } = useGallery();
@@ -20,39 +20,39 @@ export const Newsletter: React.FC = () => {
     setIsSubmitted(true);
     addToast({
       type: 'success',
-      title: 'Welcome to the Sanctuary',
-      description: 'You are now subscribed to curatorial drops and salon invitations.'
+      title: 'Welcome to the Art Family! 🎨',
+      description: 'You are now subscribed to studio drops and new paintings.'
     });
   };
 
   return (
-    <section className="py-20 sm:py-24 bg-[#FAF8F5] border-t border-[#E8E2D5]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex p-3 rounded-full bg-[#F3EFE6] text-[#C5A059] mb-5 border border-[#DDD5C5]">
-          <Mail className="w-5 h-5 stroke-[1.5]" />
+    <section className="py-16 sm:py-24 bg-[#FFF4D2]/60 border-t border-[#F0E6D8]">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="w-14 h-14 rounded-3xl bg-[#FFD13B] text-2xl flex items-center justify-center mx-auto mb-5 shadow-xs">
+          💌
         </div>
 
-        <h2 className="font-serif text-3xl sm:text-5xl text-[#191817] font-normal tracking-tight mb-4">
-          A Little Art in Your Inbox
+        <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-[#2B2623] tracking-tight mb-3">
+          Join My Art Family 🌸
         </h2>
 
-        <p className="font-sans text-sm sm:text-base text-[#6E685F] max-w-xl mx-auto mb-8 leading-relaxed">
-          Discover new collections, featured artists, and inspiration for your walls.
+        <p className="text-sm sm:text-base text-[#5C5248] max-w-lg mx-auto mb-8 leading-relaxed font-medium">
+          Subscribe for a front-row seat in my studio, featuring satisfying process videos, painting tutorials, and early access to new canvas drops.
         </p>
 
         {isSubmitted ? (
-          <div className="p-6 bg-[#F3EFE6] border border-[#DDD5C5] max-w-md mx-auto animate-fade-in flex items-center justify-center gap-3">
-            <CheckCircle2 className="w-5 h-5 text-[#4A6B5D] shrink-0" />
+          <div className="p-6 bg-white rounded-3xl border-2 border-[#FFD13B] max-w-md mx-auto flex items-center justify-center gap-3 shadow-sm">
+            <CheckCircle2 className="w-6 h-6 text-[#1E7E34] shrink-0" />
             <div className="text-left">
-              <p className="font-serif text-base text-[#191817] font-medium">You are on the Guest List</p>
-              <p className="text-xs text-[#736E65]">
-                Curator dispatches sent monthly. No promotional clutter.
+              <p className="font-heading font-bold text-base text-[#2B2623]">You're on the list! 🎉</p>
+              <p className="text-xs text-[#7A6F66]">
+                Look out for colorful studio updates from Renuka.
               </p>
             </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-3">
-            <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex flex-col sm:flex-row gap-2.5">
               <input
                 type="email"
                 value={email}
@@ -61,23 +61,23 @@ export const Newsletter: React.FC = () => {
                   if (errorMessage) setErrorMessage('');
                 }}
                 placeholder="Enter your email address..."
-                className="flex-1 px-4 py-3.5 bg-white border border-[#DDD5C5] text-sm text-[#191817] placeholder-[#9E978B] focus:outline-none focus:border-[#191817] transition-colors"
+                className="flex-1 px-5 py-3.5 bg-white rounded-full border-2 border-[#EAE0D4] text-sm text-[#2B2623] placeholder-[#9E9085] focus:outline-none focus:border-[#FF6161] shadow-xs"
               />
               <button
                 type="submit"
-                className="px-6 py-3.5 bg-[#191817] text-[#FAF8F5] text-xs uppercase tracking-widest font-medium hover:bg-[#C5A059] transition-colors flex items-center justify-center gap-2 shrink-0 cursor-pointer"
+                className="btn-coral px-7 py-3.5 text-sm font-bold shrink-0 cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>Subscribe</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
 
             {errorMessage && (
-              <p className="text-xs text-[#B33939] text-left">{errorMessage}</p>
+              <p className="text-xs text-[#FF6161] text-left font-bold">{errorMessage}</p>
             )}
 
-            <p className="text-[11px] text-[#8C8578] font-sans">
-              We respect your privacy. Unsubscribe at any time with a single click.
+            <p className="text-xs text-[#8C8075]">
+              No spam ever. Only colorful art and warm studio vibes! ✨
             </p>
           </form>
         )}

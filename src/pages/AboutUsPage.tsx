@@ -1,139 +1,126 @@
 import React from 'react';
 import { useGallery } from '../context/GalleryContext';
-import { Sparkles, Shield, Palette, Eye, HeartHandshake, ArrowRight } from 'lucide-react';
+import { Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
 
 export const AboutUsPage: React.FC = () => {
   const { navigateToExplore } = useGallery();
 
   return (
     <div className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Editorial Hero Header */}
+      {/* Editorial Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#C5A059] font-medium mb-3">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Our Curatorial Mission</span>
+        <div className="inline-flex items-center gap-2 text-xs font-bold px-3.5 py-1.5 rounded-full bg-[#FFF4D2] text-[#8C6D00] mb-3 shadow-xs">
+          <Sparkles className="w-3.5 h-3.5 text-[#FF6161]" />
+          <span>The Artist & Studio</span>
         </div>
-        <h1 className="font-serif text-4xl sm:text-6xl text-[#191817] font-normal tracking-tight mb-6">
-          The Story of renus_palette
+        <h1 className="font-heading text-4xl sm:text-6xl font-extrabold text-[#2B2623] tracking-tight mb-4">
+          About Renuka & renus_palette
         </h1>
-        <p className="font-serif text-lg sm:text-xl italic text-[#6E685F] leading-relaxed">
-          “To connect collectors with original paintings that transcend decorative trends, celebrating individuality, creative courage, and tactile emotion.”
+        <p className="text-lg text-[#5C5248] leading-relaxed max-w-2xl mx-auto font-medium">
+          “Welcome to my colorful world! I am Renuka, a painter specializing in vibrant acrylics and dreamy watercolor art focused on beautiful portraits and nature landscapes.”
         </p>
       </div>
 
-      {/* Two-Column Editorial Story */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-24">
+      {/* Main Two-Column Story */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20">
         <div className="lg:col-span-6 relative">
-          <div className="p-3 sm:p-5 bg-white border border-[#DDD5C5] shadow-xl">
+          <div className="p-3 sm:p-4 bg-white border-2 border-[#F0E6D8] rounded-3xl shadow-sm overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80"
-              alt="Curator inspecting artwork"
-              className="w-full aspect-4/5 object-cover"
+              alt="Renuka painting in studio"
+              className="w-full aspect-4/5 object-cover rounded-2xl"
             />
           </div>
-          <div className="absolute -bottom-6 -right-6 p-6 bg-[#191817] text-white max-w-xs shadow-2xl border border-[#3E3A34] hidden sm:block">
-            <p className="text-[11px] font-mono uppercase tracking-widest text-[#C5A059]">
-              Santiniketan & Mumbai Roots
-            </p>
-            <p className="font-serif text-xs italic mt-1 text-[#DDD5C5]">
-              Championing contemporary studio masters and traditional pigment arts since 2018.
+          <div className="absolute -bottom-5 -right-5 p-5 bg-[#FFD13B] text-[#2B2623] rounded-2xl shadow-md border-2 border-white hidden sm:block max-w-xs">
+            <p className="text-xs font-bold">🎨 Renuka's Art Studio</p>
+            <p className="text-[11px] font-medium text-[#453D37] mt-1">
+              Handcrafted original paintings, custom commission pieces, and creative studio vlogs.
             </p>
           </div>
         </div>
 
         <div className="lg:col-span-6 space-y-6">
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#191817] leading-snug">
-            Celebrating Creativity, Individuality, and Original Art
+          <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#2B2623] leading-tight">
+            Art that Brings Joy & Color to Your Life 🌸
           </h2>
 
-          <div className="space-y-4 text-sm sm:text-base text-[#6E685F] leading-relaxed font-sans">
+          <div className="space-y-4 text-sm sm:text-base text-[#5C5248] leading-relaxed">
             <p>
-              In a digital age saturated with mass-produced reproductions, digital canvas prints, and disposable décor, <strong className="text-[#191817] font-medium">renus_palette</strong> was born out of an ardent love for genuine materiality—the scent of cold wax, the tactile impasto of marble dust, and the luminous radiance of hand-beaten gold leaf.
+              Hi there! I started <strong className="text-[#2B2623]">renus_palette</strong> with a simple dream: to bring warmth, wonder, and vibrant color into everyday living spaces through original hand-painted artwork.
             </p>
             <p>
-              Founded by art historian and curator Renu Sengupta, the gallery bridges the gap between emerging and established Indian studio painters and discerning private collectors worldwide. We believe that living with original art shifts the energy of an architectural space, providing everyday sanctuary and contemplative pause.
+              Every brushstroke is infused with curiosity and love. From layered palette-knife acrylic textures that dance in natural room light, to ethereal translucent watercolor washes of misty nature horizons and intimate emotional portraits.
             </p>
-            <p>
-              Every artwork in our gallery is individually assessed, photographed in natural gallery lighting, and certified with airtight provenance directly from the artist’s easel.
-            </p>
+            <div className="p-4 rounded-2xl bg-[#FFEAE8] border border-[#FFCCD0] text-[#2B2623] space-y-1">
+              <strong className="text-[#FF6161] font-bold block">🎨 Want Custom Art?</strong>
+              <p className="text-xs sm:text-sm">
+                I love creating unique, personalized portrait and nature pieces tailored just for you! Message me to discuss colors, sizes, or to book a custom commission.
+              </p>
+            </div>
           </div>
 
-          <div className="pt-4">
+          <div className="flex flex-wrap items-center gap-3 pt-2">
             <button
               onClick={() => navigateToExplore()}
-              className="px-8 py-3.5 bg-[#191817] text-white text-xs uppercase tracking-widest font-medium hover:bg-[#C5A059] transition-colors flex items-center gap-2"
+              className="btn-sunshine px-7 py-3.5 text-sm font-bold flex items-center gap-2 cursor-pointer"
             >
-              <span>Explore Our Portfolio</span>
+              <span>Explore My Paintings</span>
               <ArrowRight className="w-4 h-4" />
             </button>
+
+            <a
+              href="https://wa.me/919096932011?text=Hi%20Renuka,%20I%20would%20love%20to%20discuss%20a%20custom%20painting%20commission!"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-coral px-6 py-3.5 text-sm font-bold flex items-center gap-2"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Book on WhatsApp</span>
+            </a>
           </div>
         </div>
       </div>
 
-      {/* The Four Core Pillars */}
-      <div className="bg-[#F5F1E8] border border-[#E8E2D5] p-8 sm:p-14 mb-24">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h3 className="font-serif text-3xl text-[#191817] mb-2">Our Curatorial Commitments</h3>
-          <p className="text-xs text-[#736E65]">The standards that elevate renus_palette as a trusted fine art marketplace</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="p-6 bg-white border border-[#E2D9C8] space-y-3">
-            <Shield className="w-6 h-6 text-[#C5A059]" />
-            <h4 className="font-serif text-lg text-[#191817] font-medium">100% Guaranteed Originals</h4>
-            <p className="text-xs text-[#6E685F] leading-relaxed">
-              We never sell prints or mass reproductions. Every canvas is a unique, one-of-a-kind original signed by the artist.
-            </p>
-          </div>
-
-          <div className="p-6 bg-white border border-[#E2D9C8] space-y-3">
-            <Palette className="w-6 h-6 text-[#C5A059]" />
-            <h4 className="font-serif text-lg text-[#191817] font-medium">Museum-Grade Framing</h4>
-            <p className="text-xs text-[#6E685F] leading-relaxed">
-              Optional bespoke framing using sustainably harvested oak, archival mats, and UV museum glazing.
-            </p>
-          </div>
-
-          <div className="p-6 bg-white border border-[#E2D9C8] space-y-3">
-            <Eye className="w-6 h-6 text-[#C5A059]" />
-            <h4 className="font-serif text-lg text-[#191817] font-medium">Art Advisory Concierge</h4>
-            <p className="text-xs text-[#6E685F] leading-relaxed">
-              Complimentary consultation for architectural staging, lighting harmony, and corporate collection advisory.
-            </p>
-          </div>
-
-          <div className="p-6 bg-white border border-[#E2D9C8] space-y-3">
-            <HeartHandshake className="w-6 h-6 text-[#C5A059]" />
-            <h4 className="font-serif text-lg text-[#191817] font-medium">Ethical Artist Patronage</h4>
-            <p className="text-xs text-[#6E685F] leading-relaxed">
-              We believe in fair compensation. Majority shares go directly to the living artists to support their ongoing studio practice.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Letter from Founder */}
-      <div className="bg-white border border-[#E2D9C8] p-8 sm:p-14 max-w-4xl mx-auto shadow-xs">
-        <div className="space-y-4">
-          <span className="text-xs uppercase tracking-widest text-[#C5A059] font-mono">
-            A Note from Renu
-          </span>
-          <h3 className="font-serif text-2xl sm:text-3xl text-[#191817]">
-            “Art does not ask for permission to move you.”
+      {/* 4 Pillars of Renuka's Studio */}
+      <div className="bg-[#FFF4D2]/50 border-2 border-[#F0E6D8] rounded-3xl p-8 sm:p-12 mb-16">
+        <div className="text-center max-w-xl mx-auto mb-10">
+          <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#2B2623] mb-2">
+            Why Patrons Love renus_palette
           </h3>
-          <div className="text-sm text-[#6E685F] leading-relaxed space-y-3 font-sans">
-            <p>
-              When I started renus_palette, my wish was to strip away the intimidating pretension of high-end galleries while retaining the exquisite quality of museum curation. Art should be accessible to those whose hearts beat faster in front of a rich impasto or a subtle wash of terracotta.
-            </p>
-            <p>
-              Whether you are acquiring your very first original canvas or expanding an established private collection, we welcome you to our palette.
+          <p className="text-xs text-[#7A6F66]">The values behind every single painting leaving my studio</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="p-5 bg-white rounded-2xl border border-[#F0E6D8] shadow-xs space-y-2">
+            <span className="text-2xl">✨</span>
+            <h4 className="font-heading font-bold text-base text-[#2B2623]">100% Hand-Painted</h4>
+            <p className="text-xs text-[#7A6F66]">
+              Never digital prints or reproductions. Every single canvas is a genuine original painted by Renuka.
             </p>
           </div>
-          <div className="pt-4 border-t border-[#EFEBE1] flex items-center justify-between">
-            <div>
-              <p className="font-serif text-base text-[#191817] font-medium">Renu Sengupta</p>
-              <p className="text-xs text-[#8C8578]">Founder & Principal Curator, renus_palette</p>
-            </div>
+
+          <div className="p-5 bg-white rounded-2xl border border-[#F0E6D8] shadow-xs space-y-2">
+            <span className="text-2xl">🎨</span>
+            <h4 className="font-heading font-bold text-base text-[#2B2623]">Custom Commissions</h4>
+            <p className="text-xs text-[#7A6F66]">
+              Personalized portraits and custom landscape pieces tailored to your exact preferences and wall dimensions.
+            </p>
+          </div>
+
+          <div className="p-5 bg-white rounded-2xl border border-[#F0E6D8] shadow-xs space-y-2">
+            <span className="text-2xl">📦</span>
+            <h4 className="font-heading font-bold text-base text-[#2B2623]">Packed with Love</h4>
+            <p className="text-xs text-[#7A6F66]">
+              Multi-layer protective packing with corner guards and insured transit to anywhere in India.
+            </p>
+          </div>
+
+          <div className="p-5 bg-white rounded-2xl border border-[#F0E6D8] shadow-xs space-y-2">
+            <span className="text-2xl">📺</span>
+            <h4 className="font-heading font-bold text-base text-[#2B2623]">Process & Tutorials</h4>
+            <p className="text-xs text-[#7A6F66]">
+              Follow behind-the-scenes vlogs, satisfying painting reels, and creative tutorials on YouTube & Instagram.
+            </p>
           </div>
         </div>
       </div>

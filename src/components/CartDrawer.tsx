@@ -44,19 +44,21 @@ export const CartDrawer: React.FC = () => {
         <div className="absolute inset-0" onClick={() => setIsCartOpen(false)} />
 
         <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-          <div className="w-screen max-w-md bg-[#FAF8F5] border-l border-[#E2D9C8] shadow-2xl flex flex-col animate-fade-in">
+          <div className="w-screen max-w-md bg-[#FFFDF9] border-l-2 border-[#F0E6D8] shadow-2xl flex flex-col animate-fade-in">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-[#E8E2D5] bg-[#FAF8F5]">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-[#F0E6D8] bg-[#FFFDF9]">
               <div className="flex items-center gap-2.5">
-                <ShoppingBag className="w-5 h-5 text-[#C5A059]" />
-                <h3 className="font-serif text-xl tracking-wide text-[#191817]">Your Art Bag</h3>
-                <span className="text-xs font-mono bg-[#EFE8DA] text-[#6E685F] px-2 py-0.5 rounded-full">
+                <div className="w-8 h-8 rounded-full bg-[#FFD13B] flex items-center justify-center font-bold text-sm">
+                  🛍️
+                </div>
+                <h3 className="font-heading font-extrabold text-xl text-[#2B2623]">Your Art Bag</h3>
+                <span className="text-xs font-bold bg-[#FFEAE8] text-[#FF6161] px-2.5 py-0.5 rounded-full">
                   {cart.length}
                 </span>
               </div>
               <button
                 onClick={() => setIsCartOpen(false)}
-                className="p-1.5 text-[#736E65] hover:text-[#191817] transition-colors"
+                className="p-1.5 text-[#7A6F66] hover:text-[#2B2623] transition-colors"
                 aria-label="Close cart"
               >
                 <X className="w-5 h-5" />
@@ -215,14 +217,14 @@ export const CartDrawer: React.FC = () => {
 
                 <button
                   onClick={() => setIsCheckoutOpen(true)}
-                  className="w-full py-3.5 bg-[#191817] text-[#FAF8F5] text-xs uppercase tracking-widest font-medium hover:bg-[#C5A059] transition-all flex items-center justify-center gap-2 shadow-lg"
+                  className="btn-coral w-full py-4 text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md"
                 >
-                  <span>Proceed to Collector Checkout</span>
+                  <span>Proceed to Checkout 🌸</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <p className="text-[10px] text-center text-[#8C8578]">
-                  Fully insured against transit damage • 7-Day Curatorial Return Policy
+                <p className="text-[11px] text-center text-[#7A6F66]">
+                  💛 Hand-packed with care • Fully insured transit across India
                 </p>
               </div>
             )}

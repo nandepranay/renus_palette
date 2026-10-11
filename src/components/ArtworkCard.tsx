@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGallery } from '../context/GalleryContext';
 import type { Artwork } from '../types';
-import { Heart, Eye, Maximize2, ShoppingBag } from 'lucide-react';
+import { Heart, ShoppingBag, Eye, Maximize2 } from 'lucide-react';
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -11,7 +11,6 @@ interface ArtworkCardProps {
 export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'standard' }) => {
   const {
     navigateToArtwork,
-    navigateToArtist,
     toggleWishlist,
     isInWishlist,
     addToCart,
@@ -22,64 +21,59 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
   const isFavorited = isInWishlist(artwork.id);
 
   return (
-    <div className="group art-card bg-white border border-[#E2D9C8] flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:border-[#C5A059]">
+    <div className="group bg-white rounded-3xl border-2 border-[#F0E6D8] hover:border-[#FF6161] shadow-xs hover-pop p-3.5 sm:p-4 flex flex-col justify-between transition-all duration-300">
       {/* Artwork Image Frame */}
-      <div className="relative overflow-hidden bg-[#F3EFE6] aspect-4/5 flex items-center justify-center p-3 sm:p-4">
-        {/* Museum Matting effect */}
-        <div
+      <div className="relative overflow-hidden rounded-2xl bg-[#FAF5ED] aspect-4/5 mb-3.5 flex items-center justify-center">
+        <img
+          src={artwork.imageUrl}
+          alt={artwork.title}
+          loading="lazy"
           onClick={() => navigateToArtwork(artwork.id)}
-          className="w-full h-full cursor-pointer overflow-hidden flex items-center justify-center bg-white shadow-xs"
-        >
-          <img
-            src={artwork.imageUrl}
-            alt={artwork.title}
-            loading="lazy"
-            className="w-full h-full object-cover art-card-img"
-          />
-        </div>
+          className="w-full h-full object-cover cursor-pointer group-hover:scale-106 transition-transform duration-500"
+        />
 
         {/* Labels: Original / Limited Edition */}
-        <div className="absolute top-5 left-5 flex flex-col gap-1 pointer-events-none z-10">
+        <div className="absolute top-3 left-3 flex flex-col gap-1 pointer-events-none z-10">
           {artwork.isOriginal && (
-            <span className="px-2.5 py-0.5 bg-[#191817]/90 text-white text-[10px] uppercase tracking-widest font-mono backdrop-blur-xs">
-              Original Artwork
+            <span className="px-3 py-1 rounded-full bg-white/95 text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs border border-[#F0E6D8]">
+              Original Canvas ✨
             </span>
           )}
           {artwork.isLimitedEdition && (
-            <span className="px-2.5 py-0.5 bg-[#C5A059] text-[#191817] text-[10px] uppercase tracking-widest font-mono font-bold">
-              Limited Edition
+            <span className="px-3 py-1 rounded-full bg-[#FFD13B] text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs">
+              Hand-painted 🌸
             </span>
           )}
         </div>
 
-        {/* Top Right Wishlist Toggle */}
+        {/* Wishlist Heart Button */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             toggleWishlist(artwork.id);
           }}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-xs border border-[#DDD5C5] flex items-center justify-center transition-all duration-200 hover:scale-110 z-10 shadow-sm"
-          title={isFavorited ? 'Remove from wishlist' : 'Add to wishlist'}
-          aria-label={isFavorited ? 'Remove from wishlist' : 'Add to wishlist'}
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-xs flex items-center justify-center transition-all hover:scale-115 z-10 shadow-xs border border-[#F0E6D8]"
+          title={isFavorited ? 'Remove from wishlist' : 'Save to wishlist'}
+          aria-label={isFavorited ? 'Remove from wishlist' : 'Save to wishlist'}
         >
           <Heart
             className={`w-4 h-4 transition-colors ${
-              isFavorited ? 'text-[#C08081] fill-[#C08081]' : 'text-[#6E685F] hover:text-[#191817]'
+              isFavorited ? 'text-[#FF6161] fill-[#FF6161]' : 'text-[#7A6F66] hover:text-[#FF6161]'
             }`}
           />
         </button>
 
-        {/* Hover Action Overlay */}
-        <div className="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none">
+        {/* Hover Quick Actions */}
+        <div className="absolute inset-x-3 bottom-3 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
           <button
             onClick={(e) => {
               e.stopPropagation();
               navigateToArtwork(artwork.id);
             }}
-            className="pointer-events-auto px-3.5 py-2 bg-[#191817] text-white text-[11px] uppercase tracking-widest font-medium hover:bg-[#C5A059] transition-colors flex items-center gap-1.5 shadow-md"
+            className="flex-1 py-2 px-3 bg-[#2B2623] hover:bg-[#FF6161] text-white text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5 shadow-md"
           >
             <Eye className="w-3.5 h-3.5" />
-            <span>View Artwork</span>
+            <span>View</span>
           </button>
 
           <button
@@ -87,76 +81,49 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
               e.stopPropagation();
               openRoomView(artwork);
             }}
-            className="pointer-events-auto p-2 bg-white text-[#191817] hover:text-[#C5A059] border border-[#DDD5C5] transition-colors shadow-md"
-            title="View in a room"
-            aria-label="View in a room"
+            className="p-2 bg-white text-[#2B2623] hover:bg-[#FFF4D2] rounded-xl border border-[#F0E6D8] transition-colors shadow-md"
+            title="Room visualizer"
           >
             <Maximize2 className="w-3.5 h-3.5" />
-          </button>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              addToCart(artwork);
-            }}
-            className="pointer-events-auto p-2 bg-white text-[#191817] hover:text-[#C5A059] border border-[#DDD5C5] transition-colors shadow-md"
-            title="Add to art bag"
-            aria-label="Add to art bag"
-          >
-            <ShoppingBag className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
 
-      {/* Card Information */}
-      <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 bg-white">
+      {/* Card Info */}
+      <div className="flex flex-col justify-between flex-1">
         <div>
-          <div className="flex items-baseline justify-between gap-2 mb-1">
-            <h4
-              onClick={() => navigateToArtwork(artwork.id)}
-              className="font-serif text-lg text-[#191817] hover:text-[#C5A059] cursor-pointer transition-colors truncate font-medium"
-              title={artwork.title}
-            >
-              {artwork.title}
-            </h4>
-          </div>
+          <h4
+            onClick={() => navigateToArtwork(artwork.id)}
+            className="font-heading font-bold text-base text-[#2B2623] hover:text-[#FF6161] cursor-pointer transition-colors truncate mb-1"
+            title={artwork.title}
+          >
+            {artwork.title}
+          </h4>
 
-          <div className="flex items-center justify-between text-xs text-[#6E685F] mb-3">
-            <button
-              onClick={() => navigateToArtist(artwork.artistId)}
-              className="hover:text-[#191817] transition-colors hover:underline text-left truncate"
-            >
-              {artwork.artistName}
-            </button>
-            <span className="shrink-0 text-[11px] text-[#8C8578]">{artwork.dimensions}</span>
+          <div className="flex items-center justify-between text-xs text-[#7A6F66] mb-2 font-medium">
+            <span>By Renuka</span>
+            <span>{artwork.dimensions}</span>
           </div>
 
           {layout === 'standard' && (
-            <p className="text-[11px] text-[#736E65] line-clamp-1 italic mb-3 font-sans">
+            <p className="text-xs text-[#8C8075] line-clamp-1 italic mb-3">
               {artwork.medium}
             </p>
           )}
         </div>
 
-        {/* Price & Action Row */}
-        <div className="pt-3 border-t border-[#F0EBE0] flex items-center justify-between">
-          <div>
-            <span className="font-serif text-base sm:text-lg font-bold text-[#191817]">
-              {formatPrice(artwork.price)}
-            </span>
-            {artwork.originalPrice && (
-              <span className="text-xs text-[#8C8578] line-through ml-2">
-                {formatPrice(artwork.originalPrice)}
-              </span>
-            )}
-          </div>
+        {/* Price & Add to Bag */}
+        <div className="pt-2 border-t border-[#F4EBE0] flex items-center justify-between">
+          <span className="font-heading text-lg font-black text-[#FF6161]">
+            {formatPrice(artwork.price)}
+          </span>
 
           <button
-            onClick={() => navigateToArtwork(artwork.id)}
-            className="text-xs uppercase tracking-wider text-[#191817] hover:text-[#C5A059] font-medium flex items-center gap-1 transition-colors"
+            onClick={() => addToCart(artwork)}
+            className="px-3.5 py-1.5 rounded-full bg-[#FFD13B] hover:bg-[#FFC400] text-[#2B2623] text-xs font-bold transition-all flex items-center gap-1 active:scale-95 shadow-xs"
           >
-            <span>Explore</span>
-            <span aria-hidden="true">→</span>
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>Add</span>
           </button>
         </div>
       </div>

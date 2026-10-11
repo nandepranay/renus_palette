@@ -74,30 +74,30 @@ export const ExploreArtPage: React.FC = () => {
     <div className="py-10 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Page Title & Editorial Header */}
       <div className="mb-10 text-center max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#C5A059] font-medium mb-3">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Complete Gallery Portfolio</span>
+        <div className="inline-flex items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-[#FFF4D2] text-[#8C6D00] mb-3">
+          <Sparkles className="w-3.5 h-3.5 text-[#FF6161]" />
+          <span>Renuka's Studio Portfolio</span>
         </div>
-        <h1 className="font-serif text-4xl sm:text-6xl text-[#191817] font-normal tracking-tight mb-4">
-          Explore All Artworks
+        <h1 className="font-heading text-4xl sm:text-6xl font-extrabold text-[#2B2623] tracking-tight mb-4">
+          Shop Original Paintings 🎨
         </h1>
-        <p className="text-sm sm:text-base text-[#6E685F] font-sans leading-relaxed">
-          Browse our full catalogue of original paintings, fine canvases, and contemporary Indian masterworks. Filter by aesthetic collection, medium, orientation, or price.
+        <p className="text-sm sm:text-base text-[#5C5248] leading-relaxed">
+          Browse all original acrylics, dreamy watercolors, custom portraits, and vibrant nature canvases by Renuka.
         </p>
       </div>
 
       {/* Main Filter & Search Control Bar */}
-      <div className="bg-white border border-[#E2D9C8] p-4 sm:p-5 mb-8 shadow-xs">
+      <div className="bg-white border-2 border-[#F0E6D8] rounded-3xl p-4 sm:p-5 mb-8 shadow-xs">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
           {/* Search Input */}
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-[#8C8578] absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#7A6F66] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={filters.searchQuery}
               onChange={(e) => setFilters((prev) => ({ ...prev, searchQuery: e.target.value }))}
-              placeholder="Search by title, artist, or style..."
-              className="w-full pl-10 pr-4 py-2.5 bg-[#FAF8F5] border border-[#DDD5C5] text-sm text-[#191817] placeholder-[#9E978B] focus:outline-none focus:border-[#C5A059] transition-colors"
+              placeholder="Search by painting title, colors, or style..."
+              className="w-full pl-10 pr-4 py-2.5 bg-[#FFFDF9] border border-[#EAE0D4] rounded-full text-sm text-[#2B2623] placeholder-[#9E9085] focus:outline-none focus:border-[#FF6161] transition-colors"
             />
             {filters.searchQuery && (
               <button

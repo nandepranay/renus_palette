@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useGallery } from '../context/GalleryContext';
 import type { PageType } from '../types';
-import { Search, User, ShoppingBag, Heart, Menu, X, ChevronRight } from 'lucide-react';
+import { Search, User, ShoppingBag, Heart, Menu, X, MessageCircle } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const {
@@ -30,50 +30,54 @@ export const Header: React.FC = () => {
 
   const navLinks: { label: string; page: PageType; action?: () => void }[] = [
     { label: 'Home', page: 'home' },
-    { label: 'Explore Art', page: 'explore' },
-    { label: 'Paintings', page: 'paintings', action: () => navigateToExplore() },
-    { label: 'Artists', page: 'artists' },
-    { label: 'About Us', page: 'about' },
-    { label: 'Contact', page: 'contact' },
+    { label: 'Shop Paintings', page: 'explore' },
+    { label: 'Collections', page: 'paintings', action: () => navigateToExplore() },
+    { label: 'About Renuka', page: 'about' },
+    { label: 'Custom Art 💌', page: 'contact' },
   ];
 
   return (
     <header
       className={`sticky top-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#FAF8F5]/90 backdrop-blur-md border-b border-[#E8E2D5] shadow-xs'
-          : 'bg-[#FAF8F5] border-b border-[#EFEBE1]'
+          ? 'bg-[#FFFDF9]/95 backdrop-blur-md shadow-xs border-b border-[#F0E6D8]'
+          : 'bg-[#FFFDF9] border-b border-[#F4EBE0]'
       }`}
     >
-      {/* Top micro announcement bar */}
-      <div className="bg-[#191817] text-[#FAF8F5] text-[11px] tracking-widest py-1.5 px-4 text-center font-sans uppercase">
-        <span className="opacity-90">Curated Original Artworks</span>
-        <span className="mx-2 text-[#C5A059]">•</span>
-        <span className="hidden sm:inline opacity-80">Complimentary Wooden Crate Delivery Across India</span>
-        <span className="hidden sm:inline mx-2 text-[#C5A059]">•</span>
-        <span className="text-[#DFBA73] font-medium">Authenticity Certified</span>
+      {/* Ru&Chai style joyful top announcement bar */}
+      <div className="bg-[#FFD13B] text-[#2B2623] text-xs font-semibold py-2 px-4 text-center tracking-wide flex items-center justify-center gap-2">
+        <span>💛 Packed with love by Renuka</span>
+        <span className="hidden sm:inline">•</span>
+        <span className="hidden sm:inline">🎨 Custom Art Commissions Open</span>
+        <span className="hidden md:inline">•</span>
+        <span className="hidden md:inline font-bold">📦 Free shipping across India on orders above ₹999!</span>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Left: Brand Logo */}
+          {/* Left: Brand Logo (Ru&Chai style cheerful playful logo) */}
           <div className="flex items-center">
             <button
               onClick={() => setPage('home')}
-              className="text-left group cursor-pointer focus:outline-none"
+              className="text-left group cursor-pointer focus:outline-none flex items-center gap-2.5"
               aria-label="renus_palette Home"
             >
-              <span className="font-serif text-2xl sm:text-3xl tracking-tight text-[#191817] group-hover:text-[#A38038] transition-colors">
-                renus_palette
-              </span>
-              <span className="block text-[9px] uppercase tracking-[0.25em] text-[#8C8578] -mt-1 font-sans">
-                Fine Art Sanctuary
-              </span>
+              <div className="w-10 h-10 rounded-2xl bg-[#FFD13B] text-xl flex items-center justify-center shadow-xs group-hover:rotate-6 transition-transform">
+                🎨
+              </div>
+              <div>
+                <span className="font-heading text-2xl sm:text-3xl font-extrabold text-[#2B2623] tracking-tight group-hover:text-[#FF6161] transition-colors">
+                  renus_palette
+                </span>
+                <span className="block text-[10px] font-bold text-[#FF6161] uppercase tracking-wider -mt-1">
+                  Art Studio by Renuka
+                </span>
+              </div>
             </button>
           </div>
 
           {/* Center: Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-2">
             {navLinks.map((link) => {
               const isActive = page === link.page;
               return (
@@ -86,78 +90,78 @@ export const Header: React.FC = () => {
                       setPage(link.page);
                     }
                   }}
-                  className={`text-[13px] tracking-wider uppercase font-medium transition-all relative py-1 focus:outline-none ${
+                  className={`text-sm font-semibold px-4 py-2 rounded-full transition-all focus:outline-none ${
                     isActive
-                      ? 'text-[#191817] font-semibold'
-                      : 'text-[#6E685F] hover:text-[#191817]'
+                      ? 'bg-[#FF6161] text-white shadow-xs'
+                      : 'text-[#453D37] hover:text-[#2B2623] hover:bg-[#FFF4D2]'
                   }`}
                 >
                   {link.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#191817] animate-fade-in" />
-                  )}
                 </button>
               );
             })}
           </nav>
 
-          {/* Right: Actions (Search, Account, Wishlist, Cart) */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Search Trigger */}
+          {/* Right: Actions (WhatsApp, Search, Wishlist, Cart) */}
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            {/* WhatsApp Quick Chat */}
+            <a
+              href="https://wa.me/919096932011?text=Hi%20Renuka,%20I%20love%20your%20art%20and%20would%20like%20to%20inquire%20about%20a%20painting!"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#E8F8F0] text-[#1E7E34] text-xs font-bold hover:bg-[#D4EDDA] transition-colors"
+              title="Chat with Renuka on WhatsApp"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>WhatsApp</span>
+            </a>
+
+            {/* Search */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="p-2.5 text-[#4A4742] hover:text-[#191817] hover:bg-[#F3EFE6] transition-colors rounded-full focus:outline-none"
-              title="Search gallery"
-              aria-label="Search gallery"
+              className="p-2.5 text-[#453D37] hover:text-[#2B2623] hover:bg-[#FFF4D2] transition-colors rounded-full focus:outline-none"
+              title="Search paintings"
+              aria-label="Search paintings"
             >
-              <Search className="w-5 h-5 stroke-[1.75]" />
+              <Search className="w-5 h-5 stroke-[2]" />
             </button>
 
-            {/* Account Trigger */}
-            <button
-              onClick={() => setIsAccountOpen(true)}
-              className="p-2.5 text-[#4A4742] hover:text-[#191817] hover:bg-[#F3EFE6] transition-colors rounded-full focus:outline-none"
-              title="Collector Account"
-              aria-label="Collector Account"
-            >
-              <User className="w-5 h-5 stroke-[1.75]" />
-            </button>
-
-            {/* Wishlist Trigger */}
+            {/* Wishlist */}
             <button
               onClick={() => setPage('wishlist')}
-              className="p-2.5 text-[#4A4742] hover:text-[#191817] hover:bg-[#F3EFE6] transition-colors rounded-full relative focus:outline-none"
+              className="p-2.5 text-[#453D37] hover:text-[#2B2623] hover:bg-[#FFEAE8] transition-colors rounded-full relative focus:outline-none"
               title="Wishlist"
               aria-label="Wishlist"
             >
-              <Heart className={`w-5 h-5 stroke-[1.75] ${wishlist.length > 0 ? 'text-[#C08081]' : ''}`} />
+              <Heart className={`w-5 h-5 stroke-[2] ${wishlist.length > 0 ? 'text-[#FF6161] fill-[#FF6161]' : ''}`} />
               {wishlist.length > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#C08081] text-white text-[10px] rounded-full flex items-center justify-center font-mono">
+                <span className="absolute top-1 right-1 w-4 h-4 bg-[#FF6161] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                   {wishlist.length}
                 </span>
               )}
             </button>
 
-            {/* Shopping Bag Trigger */}
+            {/* Cart Button */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="p-2.5 text-[#4A4742] hover:text-[#191817] hover:bg-[#F3EFE6] transition-colors rounded-full relative focus:outline-none"
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#FFD13B] hover:bg-[#FFC400] text-[#2B2623] rounded-full font-bold text-xs shadow-xs transition-transform active:scale-95 focus:outline-none"
               title="Shopping Bag"
               aria-label="Shopping Bag"
             >
-              <ShoppingBag className="w-5 h-5 stroke-[1.75]" />
+              <ShoppingBag className="w-4 h-4 stroke-[2.2]" />
+              <span>Bag</span>
               {totalCartCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#191817] text-[#FAF8F5] text-[10px] rounded-full flex items-center justify-center font-mono">
+                <span className="w-5 h-5 bg-[#2B2623] text-white text-[10px] rounded-full flex items-center justify-center font-bold">
                   {totalCartCount}
                 </span>
               )}
             </button>
 
-            {/* Mobile Menu Hamburger */}
+            {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 text-[#4A4742] hover:text-[#191817] focus:outline-none"
-              aria-label="Open mobile navigation menu"
+              className="lg:hidden p-2 text-[#453D37] hover:text-[#2B2623] focus:outline-none"
+              aria-label="Open navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -165,10 +169,10 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#FAF8F5] border-b border-[#E8E2D5] px-6 py-6 space-y-4 animate-fade-in shadow-xl">
-          <nav className="flex flex-col space-y-3">
+        <div className="lg:hidden bg-[#FFFDF9] border-b border-[#F0E6D8] px-6 py-6 space-y-4 shadow-xl">
+          <nav className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <button
                 key={link.label}
@@ -180,36 +184,37 @@ export const Header: React.FC = () => {
                   }
                   setMobileMenuOpen(false);
                 }}
-                className={`flex items-center justify-between text-left text-sm uppercase tracking-wider py-2.5 border-b border-[#EFEBE1] ${
+                className={`text-left text-sm font-bold py-2.5 px-4 rounded-xl ${
                   page === link.page
-                    ? 'text-[#191817] font-semibold'
-                    : 'text-[#6E685F]'
+                    ? 'bg-[#FF6161] text-white'
+                    : 'text-[#453D37] hover:bg-[#FFF4D2]'
                 }`}
               >
-                <span>{link.label}</span>
-                <ChevronRight className="w-4 h-4 text-[#A8987E]" />
+                {link.label}
               </button>
             ))}
           </nav>
 
-          <div className="pt-2 flex items-center justify-between text-xs text-[#8C8578]">
-            <button
-              onClick={() => {
-                setPage('wishlist');
-                setMobileMenuOpen(false);
-              }}
-              className="flex items-center gap-1.5 text-[#191817]"
+          <div className="pt-3 border-t border-[#F0E6D8] flex items-center justify-between text-xs">
+            <a
+              href="https://wa.me/919096932011?text=Hi%20Renuka,%20I%20want%20to%20inquire%20about%20your%20art!"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#1E7E34] font-bold flex items-center gap-1.5"
             >
-              <Heart className="w-4 h-4 text-[#C08081]" /> Saved Works ({wishlist.length})
-            </button>
+              <MessageCircle className="w-4 h-4" />
+              <span>Chat on WhatsApp</span>
+            </a>
+
             <button
               onClick={() => {
                 setIsAccountOpen(true);
                 setMobileMenuOpen(false);
               }}
-              className="flex items-center gap-1.5 text-[#191817]"
+              className="text-[#FF6161] font-bold flex items-center gap-1"
             >
-              <User className="w-4 h-4 text-[#C5A059]" /> Collector Sanctuary
+              <User className="w-4 h-4" />
+              <span>My Account</span>
             </button>
           </div>
         </div>

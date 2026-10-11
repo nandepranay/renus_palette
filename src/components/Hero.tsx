@@ -1,162 +1,179 @@
 import React from 'react';
 import { useGallery } from '../context/GalleryContext';
-import { ArrowRight, Sparkles, Shield, Compass } from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 
 export const Hero: React.FC = () => {
-  const { navigateToExplore, navigateToArtwork } = useGallery();
+  const { navigateToExplore, navigateToArtwork, setPage } = useGallery();
 
-  // Curated artworks positioned harmoniously around the central brand name
-  const surroundingArtworks = [
+  const showcasePaintings = [
     {
       id: 'art-01',
       title: 'Symphony in Ochre & Deep Cobalt',
-      artist: 'Ananya Deshmukh',
-      medium: 'Oil on Belgian Linen',
+      tag: 'Vibrant Acrylics 🎨',
       img: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80',
-      positionClass: 'top-6 left-4 sm:top-10 sm:left-10 lg:left-16 w-32 sm:w-48 lg:w-60 h-40 sm:h-64 lg:h-80 -rotate-3',
-      delay: '0ms'
-    },
-    {
-      id: 'art-02',
-      title: 'Deccan Sunset & Golden Geometry',
-      artist: 'Meera Rathore',
-      medium: '24k Gold Leaf on Canvas',
-      img: 'https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=800&q=80',
-      positionClass: 'top-6 right-4 sm:top-8 sm:right-10 lg:right-16 w-32 sm:w-48 lg:w-64 h-36 sm:h-60 lg:h-76 rotate-2',
-      delay: '150ms'
+      price: '₹68,000'
     },
     {
       id: 'art-03',
       title: 'Whispering Mists of Santiniketan',
-      artist: 'Kabir Sen',
-      medium: 'Tempera & Wasli Paper',
+      tag: 'Dreamy Watercolors 🌿',
       img: 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=800&q=80',
-      positionClass: 'bottom-6 left-4 sm:bottom-12 sm:left-8 lg:left-24 w-36 sm:w-52 lg:w-68 h-32 sm:h-52 lg:h-68 rotate-2',
-      delay: '300ms'
-    },
-    {
-      id: 'art-06',
-      title: 'Metropolis Pulse: Amber & Concrete',
-      artist: 'Tariq Khan',
-      medium: 'Encaustic Wax & Acrylic',
-      img: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80',
-      positionClass: 'bottom-6 right-4 sm:bottom-10 sm:right-10 lg:right-20 w-32 sm:w-48 lg:w-60 h-36 sm:h-56 lg:h-72 -rotate-2',
-      delay: '450ms'
-    },
-    {
-      id: 'art-04',
-      title: 'Silence Between Words',
-      artist: 'Dev Verma',
-      medium: 'Marble Dust Relief',
-      img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=600&q=80',
-      positionClass: 'hidden xl:block top-1/2 -translate-y-1/2 left-2 w-44 h-56 -rotate-1',
-      delay: '200ms'
+      price: '₹52,000'
     },
     {
       id: 'art-05',
-      title: 'The Solitary Reader',
-      artist: 'Radhika Nair',
-      medium: 'Oil Glazes on Linen',
-      img: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=600&q=80',
-      positionClass: 'hidden xl:block top-1/2 -translate-y-1/2 right-2 w-44 h-56 rotate-1',
-      delay: '350ms'
+      title: 'The Solitary Reader (Afternoon Radiance)',
+      tag: 'Expressive Portraits 👩‍🎨',
+      img: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=800&q=80',
+      price: '₹92,000'
     }
   ];
 
   return (
-    <section className="relative min-h-[90vh] lg:min-h-[94vh] flex items-center justify-center overflow-hidden bg-[#FAF8F5] border-b border-[#E8E2D5]">
-      {/* Background Architectural Canvas Grid Lines & Ambient Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(#E8E2D5_1px,transparent_1px)] [background-size:32px_32px] opacity-40 pointer-events-none" />
-      <div className="absolute inset-0 bg-radial from-transparent via-[#FAF8F5]/60 to-[#FAF8F5] pointer-events-none" />
-
-      {/* Surrounding Curated Gallery Collage Arrangement */}
-      <div className="absolute inset-0 max-w-7xl mx-auto pointer-events-none">
-        {surroundingArtworks.map((item) => (
-          <div
-            key={item.id}
-            onClick={() => navigateToArtwork(item.id)}
-            className={`absolute ${item.positionClass} pointer-events-auto cursor-pointer group transition-all duration-700 ease-out hover:z-30 hover:scale-105`}
-            style={{ transitionDelay: item.delay }}
-          >
-            {/* Museum matting frame */}
-            <div className="relative w-full h-full p-2 sm:p-2.5 bg-white border border-[#DDD5C5] shadow-[0_12px_35px_-10px_rgba(30,25,20,0.18)] transition-all duration-500 group-hover:shadow-[0_20px_45px_-10px_rgba(30,25,20,0.3)] group-hover:border-[#C5A059]">
-              <div className="w-full h-full overflow-hidden bg-[#EFE8DA]">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-
-              {/* Floating Museum Placard Badge */}
-              <div className="absolute -bottom-3 inset-x-3 bg-white/95 backdrop-blur-xs border border-[#E2D9C8] py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center shadow-md pointer-events-none">
-                <p className="text-[10px] font-serif font-bold text-[#191817] truncate">{item.title}</p>
-                <p className="text-[9px] text-[#736E65] truncate">{item.artist} • {item.medium}</p>
-              </div>
-            </div>
-          </div>
-        ))}
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#FFF4D2]/40 via-[#FFFDF9] to-[#FFFDF9] py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#F4EBE0]">
+      {/* Playful background doodles & accents */}
+      <div className="absolute top-10 left-8 text-4xl opacity-30 select-none pointer-events-none rotate-12">
+        ✨
+      </div>
+      <div className="absolute top-20 right-12 text-4xl opacity-30 select-none pointer-events-none -rotate-12">
+        🌸
+      </div>
+      <div className="absolute bottom-10 left-16 text-3xl opacity-20 select-none pointer-events-none">
+        🌿
+      </div>
+      <div className="absolute bottom-12 right-20 text-4xl opacity-25 select-none pointer-events-none rotate-6">
+        🎨
       </div>
 
-      {/* Center Hero Focal Sanctum: renus_palette typography & CTA in EXACT center */}
-      <div className="relative z-20 max-w-3xl mx-auto px-6 py-12 text-center animate-fade-in flex flex-col items-center justify-center">
-        {/* Subtle Frosted Ivory Backing to guarantee clear readability over artwork */}
-        <div className="absolute inset-0 -m-6 sm:-m-12 bg-[#FAF8F5]/85 backdrop-blur-md rounded-2xl border border-[#EDE7DA] shadow-[0_20px_60px_-15px_rgba(40,35,30,0.12)] pointer-events-none -z-10" />
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Ru&Chai style warm artist introduction */}
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            {/* Friendly Greeting Pill */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFF4D2] border border-[#FFE082] text-xs font-bold text-[#8C6D00] shadow-xs">
+              <span>🎨 Welcome to Renuka's Art Studio</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6161]" />
+              <span className="text-[#FF6161]">renus_palette</span>
+            </div>
 
-        {/* Micro Curation Tag */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F3EFE6] border border-[#DDD5C5] mb-4 sm:mb-6 shadow-xs">
-          <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-          <span className="text-[11px] font-sans font-medium uppercase tracking-[0.25em] text-[#6E685F]">
-            Curated Fine Art Marketplace
-          </span>
-        </div>
+            {/* Main Headline */}
+            <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#2B2623] tracking-tight leading-[1.08]">
+              Welcome to my <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6161] via-[#FFA000] to-[#FF6161]">
+                colorful world!
+              </span>
+            </h1>
 
-        {/* Central Brand Title: renus_palette */}
-        <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#191817] tracking-tight leading-[0.95] mb-4 sm:mb-6 font-normal drop-shadow-xs select-none">
-          renus_palette
-        </h1>
+            {/* Sub-headline / Bio */}
+            <p className="text-base sm:text-lg text-[#5C5248] leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium">
+              I am <strong className="text-[#2B2623]">Renuka</strong>, a painter specializing in vibrant acrylics and dreamy watercolor art focused on beautiful portraits and nature landscapes.
+            </p>
 
-        {/* Subtitle */}
-        <p className="font-serif text-xl sm:text-2xl md:text-3xl italic text-[#4A463F] max-w-xl mx-auto mb-8 font-normal tracking-wide">
-          “Discover Art. Express Yourself.”
-        </p>
+            {/* Custom Art Callout Box */}
+            <div className="p-4 rounded-2xl bg-[#FFEAE8] border border-[#FFCCD0] text-sm text-[#2B2623] max-w-xl mx-auto lg:mx-0 flex items-start gap-3 text-left">
+              <span className="text-2xl shrink-0 mt-0.5">🎨</span>
+              <div>
+                <strong className="text-[#FF6161] block font-bold">Want custom art?</strong>
+                <span>I love creating unique, personalized portrait and nature pieces tailored just for you! Message me to book a commission.</span>
+              </div>
+            </div>
 
-        {/* Action Button & Explorations */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-          <button
-            onClick={() => navigateToExplore()}
-            className="w-full sm:w-auto px-9 py-4 bg-[#191817] text-[#FAF8F5] text-xs uppercase tracking-[0.22em] font-medium hover:bg-[#C5A059] transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 group cursor-pointer"
-          >
-            <span>Explore Collection</span>
-            <ArrowRight className="w-4 h-4 text-[#DFBA73] group-hover:translate-x-1.5 transition-transform" />
-          </button>
+            {/* Cheerful CTAs */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
+              <button
+                onClick={() => navigateToExplore()}
+                className="btn-sunshine px-7 py-4 text-sm font-bold flex items-center gap-2 cursor-pointer"
+              >
+                <span>Shop Original Paintings</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
 
-          <button
-            onClick={() => {
-              const el = document.getElementById('featured-collections');
-              el?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="w-full sm:w-auto px-7 py-4 bg-transparent border border-[#7D5230]/40 text-[#191817] text-xs uppercase tracking-[0.22em] font-medium hover:bg-[#EFE8DA] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <Compass className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Curated Galleries</span>
-          </button>
-        </div>
+              <button
+                onClick={() => setPage('contact')}
+                className="btn-coral px-6 py-4 text-sm font-bold flex items-center gap-2 cursor-pointer"
+              >
+                <span>Book Custom Art 💌</span>
+              </button>
 
-        {/* Curatorial Trust Highlights below hero */}
-        <div className="mt-10 sm:mt-12 pt-6 border-t border-[#E8E2D5] flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-[11px] uppercase tracking-wider text-[#736E65]">
-          <div className="flex items-center gap-1.5">
-            <Shield className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>100% Certified Originals</span>
+              <a
+                href="https://www.youtube.com/@renus_palette"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-4 rounded-full bg-white border border-[#EAE0D4] text-[#2B2623] hover:border-[#FF0000] hover:text-[#FF0000] text-xs font-bold transition-all shadow-xs flex items-center gap-2"
+              >
+                <div className="w-4 h-4 rounded-full bg-[#FF0000] text-white flex items-center justify-center">
+                  <Play className="w-2.5 h-2.5 fill-current" />
+                </div>
+                <span>Studio Vlogs</span>
+              </a>
+            </div>
+
+            {/* Trust Points */}
+            <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs font-semibold text-[#7A6F66]">
+              <span className="flex items-center gap-1.5">
+                <span className="text-[#FFD13B]">✨</span> 100% Hand-Painted Originals
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1.5">
+                <span className="text-[#FF6161]">💌</span> Custom Art Commissions
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1.5">
+                <span className="text-[#2DD4BF]">📦</span> Safe Pan-India Delivery
+              </span>
+            </div>
           </div>
-          <span className="hidden sm:inline text-[#C5A059]">•</span>
-          <div className="flex items-center gap-1.5">
-            <span className="text-[#191817] font-semibold">₹</span>
-            <span>Artisan Direct Pricing</span>
-          </div>
-          <span className="hidden sm:inline text-[#C5A059]">•</span>
-          <div className="flex items-center gap-1.5">
-            <span>Custom Wooden Crate Shipping</span>
+
+          {/* Right Column: Visual Artwork Collage (Ru&Chai style playful card grid) */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative grid grid-cols-2 gap-4">
+              {showcasePaintings.slice(0, 2).map((item, idx) => (
+                <div
+                  key={item.id}
+                  onClick={() => navigateToArtwork(item.id)}
+                  className={`group cursor-pointer bg-white p-3 rounded-2xl border-2 border-[#F0E6D8] shadow-sm hover-pop ${
+                    idx === 1 ? 'translate-y-6' : ''
+                  }`}
+                >
+                  <div className="relative aspect-4/5 rounded-xl overflow-hidden bg-[#FAF5ED] mb-2.5">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-white/95 text-[10px] font-bold text-[#2B2623] shadow-xs">
+                      {item.tag}
+                    </span>
+                  </div>
+                  <h4 className="font-heading font-bold text-xs text-[#2B2623] truncate group-hover:text-[#FF6161] transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs font-bold text-[#FF6161] mt-0.5">{item.price}</p>
+                </div>
+              ))}
+
+              {/* Floating Instagram & YouTube Badge */}
+              <div className="col-span-2 mt-4 p-4 rounded-2xl bg-[#FFFDF9] border-2 border-[#FFD13B] shadow-sm flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#E1306C] text-white flex items-center justify-center font-bold text-sm shadow-xs">
+                    📸
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-[#2B2623] block">@renus_palette</span>
+                    <span className="text-[11px] text-[#7A6F66]">Process videos & daily art reels</span>
+                  </div>
+                </div>
+
+                <a
+                  href="https://www.instagram.com/renus_palette?mdxt=Z2o0YWZvZjlvNGhj"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-1.5 rounded-full bg-[#FFD13B] text-[#2B2623] text-xs font-bold hover:bg-[#FFC400] transition-colors"
+                >
+                  Follow →
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

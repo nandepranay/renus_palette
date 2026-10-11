@@ -255,27 +255,27 @@ export const ArtworkDetailPage: React.FC = () => {
           <div className="space-y-3 pt-2">
             <button
               onClick={() => addToCart(artwork, framingOption)}
-              className="w-full py-4 bg-[#191817] text-[#FAF8F5] text-xs uppercase tracking-[0.22em] font-medium hover:bg-[#C5A059] transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 cursor-pointer"
+              className="btn-coral w-full py-4 text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-lg"
             >
-              <span>Add to Art Bag — {formatPrice(currentPrice)}</span>
+              <span>Add to Bag — {formatPrice(currentPrice)} 🛍️</span>
             </button>
 
             <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={() => {
-                  addToCart(artwork, framingOption);
-                }}
-                className="py-3 bg-transparent border border-[#191817] text-[#191817] text-xs uppercase tracking-wider font-medium hover:bg-[#191817] hover:text-white transition-colors"
+              <a
+                href={`https://wa.me/919096932011?text=Hi%20Renuka,%20I%20am%20interested%20in%20your%20painting%20"${encodeURIComponent(artwork.title)}"%20(${formatPrice(currentPrice)}).%20Is%20it%20available?`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-3 px-4 rounded-full bg-[#E8F8F0] text-[#1E7E34] hover:bg-[#D4EDDA] text-xs font-bold transition-colors flex items-center justify-center gap-1.5 text-center"
               >
-                Acquire Now
-              </button>
+                <span>Ask on WhatsApp 💬</span>
+              </a>
 
               <button
                 onClick={() => setShowInquiryModal(true)}
-                className="py-3 bg-white border border-[#DDD5C5] text-[#6E685F] hover:text-[#191817] text-xs uppercase tracking-wider font-medium hover:bg-[#F3EFE6] transition-colors flex items-center justify-center gap-1.5"
+                className="py-3 px-4 rounded-full bg-white border border-[#EAE0D4] text-[#2B2623] hover:bg-[#FFF4D2] text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
               >
-                <Mail className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Inquire with Curator</span>
+                <Mail className="w-3.5 h-3.5 text-[#FF6161]" />
+                <span>Message Renuka</span>
               </button>
             </div>
           </div>
