@@ -8,9 +8,9 @@ export const Hero: React.FC = () => {
   const { navigateToExplore, navigateToArtwork, setPage, toggleWishlist, isInWishlist } = useGallery();
 
   // Find signature in-stock paintings for hero showcase
-  const heroPrimary = artworks.find((a) => a.id === 'water-lily-study') || artworks[0];
-  const heroSecondary = artworks.find((a) => a.id === 'tropical-palm-sunset') || artworks[1];
-  const heroTertiary = artworks.find((a) => a.id === 'moonlit-wildflower-meadow') || artworks[2];
+  const heroPrimary = artworks.find((a) => a.id === 'lotus-pond') || artworks[0];
+  const heroSecondary = artworks.find((a) => a.id === 'water-droplet-leaf') || artworks[1];
+  const heroTertiary = artworks.find((a) => a.id === 'tropical-palm-sunset') || artworks[2];
 
   const scrollToPricing = () => {
     const el = document.getElementById('canvas-pricing');
