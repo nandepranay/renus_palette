@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useGallery } from '../context/GalleryContext';
 import { ARTIST_CONFIG, getWhatsAppLink } from '../config/artistConfig';
-import { Mail, Phone, MessageCircle, CheckCircle2, ChevronDown, ChevronUp, Sparkles, Send } from 'lucide-react';
+import { Mail, Phone, MessageCircle, CheckCircle2, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
 import { InstagramIcon, YoutubeIcon } from '../components/SocialIcons';
 
 export const ContactUsPage: React.FC = () => {
@@ -14,16 +14,49 @@ export const ContactUsPage: React.FC = () => {
     canvasSize: 'medium',
     message: ''
   });
+  const [submittedMessage, setSubmittedMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const interestLabels: Record<string, string> = {
+      'custom-landscape': 'Custom Nature & Landscape',
+      'lotus-pond': 'Lotus Pond Original',
+      'spiritual-art': 'Spiritual Art (Buddha / Radha-Krishna)',
+      'floral-botanical': 'Floral & Botanical Art',
+      'gallery-inquiry': 'Inquire About Existing Gallery Piece'
+    };
+
+    const sizeLabels: Record<string, string> = {
+      small: 'Small (12×12 to 18×24")',
+      medium: 'Medium (24×24 to 30×40")',
+      large: 'Large (36×48 to 48×60")'
+    };
+
+    const text = `🎨 *New Artwork Inquiry - renus_palette*
+━━━━━━━━━━━━━━━━━━━━
+👤 *Name:* ${formData.name}
+📧 *Email:* ${formData.email}
+📱 *Phone:* ${formData.phone || 'Not provided'}
+🖼️ *Interest:* ${interestLabels[formData.paintingInterest] || formData.paintingInterest}
+📐 *Canvas Scale:* ${sizeLabels[formData.canvasSize] || formData.canvasSize}
+
+💬 *Message:*
+"${formData.message}"
+━━━━━━━━━━━━━━━━━━━━`;
+
+    setSubmittedMessage(text);
     setIsSubmitted(true);
+
+    const whatsappUrl = `https://wa.me/${ARTIST_CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, '_blank');
+
     addToast({
       type: 'success',
-      title: 'Inquiry Sent to Renuka',
-      description: 'Renuka will get back to you shortly!'
+      title: 'Opening WhatsApp...',
+      description: 'Your inquiry message is ready to send to Renuka!'
     });
   };
 
@@ -68,25 +101,36 @@ export const ContactUsPage: React.FC = () => {
         <div className="lg:col-span-7 bg-white border-2 border-[#F0E6D8] rounded-3xl p-6 sm:p-10 shadow-xs">
           <h2 className="font-heading font-extrabold text-2xl text-[#2B2623] mb-1">Send an Inquiry</h2>
           <p className="text-xs text-[#7A6F66] mb-6">
-            Fill out the form below or chat directly on WhatsApp for faster response.
+            Fill out the form below to chat directly with Renuka on WhatsApp with your inquiry details.
           </p>
 
           {isSubmitted ? (
-            <div className="p-8 bg-[#FFF9F0] border border-[#FFE082] rounded-2xl text-center space-y-3 animate-fade-in">
+            <div className="p-8 bg-[#FFF9F0] border-2 border-[#FFE082] rounded-3xl text-center space-y-4 animate-fade-in">
               <CheckCircle2 className="w-12 h-12 text-[#1E7E34] mx-auto" />
               <h3 className="font-heading font-bold text-2xl text-[#2B2623]">Thank You, {formData.name}!</h3>
               <p className="text-xs text-[#5C5248] max-w-md mx-auto leading-relaxed">
-                Your message has been received. Renuka will contact you via {formData.email || 'WhatsApp'} soon to discuss your painting.
+                WhatsApp is opening with your formatted inquiry message. If it didn't open automatically, click the button below to send it to Renuka.
               </p>
-              <button
-                onClick={() => {
-                  setIsSubmitted(false);
-                  setFormData({ name: '', email: '', phone: '', paintingInterest: 'custom-landscape', canvasSize: 'medium', message: '' });
-                }}
-                className="mt-4 px-6 py-2.5 btn-sunshine text-xs font-bold"
-              >
-                Send Another Message
-              </button>
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a
+                  href={`https://wa.me/${ARTIST_CONFIG.whatsappNumber}?text=${encodeURIComponent(submittedMessage)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#1E7E34] hover:bg-[#166028] text-white text-xs font-bold inline-flex items-center justify-center gap-2 shadow-sm transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4 fill-current" />
+                  <span>Open WhatsApp to Send</span>
+                </a>
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setFormData({ name: '', email: '', phone: '', paintingInterest: 'custom-landscape', canvasSize: 'medium', message: '' });
+                  }}
+                  className="w-full sm:w-auto px-6 py-3 btn-sunshine text-xs font-bold cursor-pointer"
+                >
+                  Send Another Inquiry
+                </button>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 text-xs">
@@ -210,10 +254,10 @@ export const ContactUsPage: React.FC = () => {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="btn-coral w-full py-4 rounded-full text-sm font-bold flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                  className="w-full py-4 rounded-full text-sm font-bold flex items-center justify-center gap-2 shadow-md cursor-pointer bg-[#1E7E34] hover:bg-[#166028] text-white transition-colors"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Submit Inquiry</span>
+                  <MessageCircle className="w-4 h-4 fill-current" />
+                  <span>Send Inquiry via WhatsApp</span>
                 </button>
               </div>
             </form>
