@@ -12,8 +12,8 @@ import { Newsletter } from '../components/Newsletter';
 export const HomePage: React.FC = () => {
   return (
     <main className="w-full">
-      <NewArrivalsSection />
       <Hero />
+      <NewArrivalsSection />
       <FeaturedCollections />
       <CuratedArtGrid />
       <CanvasPricingSection />
