@@ -72,7 +72,7 @@ export const Hero: React.FC = () => {
                   Want Custom Art Tailored for You?
                 </strong>
                 <p className="text-xs sm:text-sm text-[#453D37] leading-relaxed">
-                  I love creating personalized portrait and nature pieces tailored to your exact concept, special memory, and wall size.
+                  I love creating personalized nature landscapes, spiritual art, and floral pieces tailored to your exact concept and wall size.
                 </p>
               </div>
             </div>
@@ -113,7 +113,7 @@ export const Hero: React.FC = () => {
               </span>
               <span>•</span>
               <span className="flex items-center gap-1.5">
-                <span className="text-[#FF6161]">💌</span> Bespoke Portrait & Nature Commissions
+                <span className="text-[#FF6161]">💌</span> Bespoke Nature & Custom Commissions
               </span>
               <span>•</span>
               <span className="flex items-center gap-1.5">

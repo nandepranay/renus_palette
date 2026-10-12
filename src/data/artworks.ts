@@ -42,13 +42,12 @@ export const artworks: Artwork[] = [
   },
   {
     id: 'buddha-portrait',
-    title: 'Buddha Portrait',
+    title: 'Meditative Buddha',
     isOfficialTitle: false,
     artistName: 'Renuka',
     artistBrand: 'renus_palette',
     category: 'Spiritual Art',
     categorySlug: 'spiritual-art',
-    secondaryCategories: ['Portraits'],
     description:
       'A serene, meditative portrayal of Lord Buddha rendered with calming earth tones, contemplative stillness, and ambient brushwork that brings tranquility to living spaces.',
     imageUrl: getArtworkUrl('artworks/buddha-portrait.jpg'),
@@ -58,7 +57,7 @@ export const artworks: Artwork[] = [
     isPriceConfirmed: false,
     price: 0,
     availability: 'Available • Custom Inquiries Open',
-    orientation: 'portrait',
+    orientation: 'vertical',
     featured: true,
     tags: ['Buddha', 'Spiritual', 'Acrylic', 'Meditative', 'Calm', 'Serenity'],
     views: {
@@ -75,7 +74,6 @@ export const artworks: Artwork[] = [
     artistBrand: 'renus_palette',
     category: 'Spiritual Art',
     categorySlug: 'spiritual-art',
-    secondaryCategories: ['Portraits'],
     description:
       'A divine celebration of celestial love, sacred harmony, and devotion portrayed with evocative, fluid acrylic brushstrokes and radiant color harmonies.',
     imageUrl: getArtworkUrl('artworks/radha-krishna.jpg'),
@@ -85,7 +83,7 @@ export const artworks: Artwork[] = [
     isPriceConfirmed: false,
     price: 0,
     availability: 'Available • Custom Inquiries Open',
-    orientation: 'portrait',
+    orientation: 'vertical',
     featured: true,
     tags: ['Radha Krishna', 'Spiritual', 'Devotional', 'Acrylic', 'Indian Heritage'],
     views: {
@@ -173,87 +171,6 @@ export const artworks: Artwork[] = [
     }
   },
   {
-    id: 'child-portrait-oval',
-    title: 'Child Portrait (Oval Canvas)',
-    isOfficialTitle: false,
-    artistName: 'Renuka',
-    artistBrand: 'renus_palette',
-    category: 'Portraits',
-    categorySlug: 'portraits',
-    secondaryCategories: ['Custom Art'],
-    description:
-      'A tender, emotional portrait of a child painted on a distinctive oval canvas, highlighting gentle innocence, radiant gaze, and loving personality.',
-    imageUrl: getArtworkUrl('artworks/child-portrait-oval.jpg'),
-    imageFileName: 'child-portrait-oval.jpg',
-    medium: 'Acrylic on Oval Canvas',
-    priceDisplay: 'Price on request',
-    isPriceConfirmed: false,
-    price: 0,
-    availability: 'Custom Commission Showcase',
-    orientation: 'portrait',
-    featured: true,
-    tags: ['Portrait', 'Child Portrait', 'Oval Canvas', 'Custom Art', 'Commission Showcase'],
-    views: {
-      front: getArtworkUrl('artworks/child-portrait-oval.jpg'),
-      angled: getArtworkUrl('artworks/views/child-portrait-oval-angled.jpg'),
-      detail: getArtworkUrl('artworks/views/child-portrait-oval-detail.jpg')
-    }
-  },
-  {
-    id: 'child-portrait-round',
-    title: 'Child Portrait (Circular Canvas)',
-    isOfficialTitle: false,
-    artistName: 'Renuka',
-    artistBrand: 'renus_palette',
-    category: 'Portraits',
-    categorySlug: 'portraits',
-    secondaryCategories: ['Custom Art'],
-    description:
-      'A warm circular canvas portrait capturing childhood innocence, a gentle smile, and tender expression with soft tonal transitions.',
-    imageUrl: getArtworkUrl('artworks/child-portrait-round.jpg'),
-    imageFileName: 'child-portrait-round.jpg',
-    medium: 'Acrylic on Circular Canvas',
-    priceDisplay: 'Price on request',
-    isPriceConfirmed: false,
-    price: 0,
-    availability: 'Custom Commission Showcase',
-    orientation: 'square',
-    featured: false,
-    tags: ['Portrait', 'Child Portrait', 'Circular Canvas', 'Custom Art', 'Commission Showcase'],
-    views: {
-      front: getArtworkUrl('artworks/child-portrait-round.jpg'),
-      angled: getArtworkUrl('artworks/views/child-portrait-round-angled.jpg'),
-      detail: getArtworkUrl('artworks/views/child-portrait-round-detail.jpg')
-    }
-  },
-  {
-    id: 'family-portrait',
-    title: 'Family Portrait',
-    isOfficialTitle: false,
-    artistName: 'Renuka',
-    artistBrand: 'renus_palette',
-    category: 'Portraits',
-    categorySlug: 'portraits',
-    secondaryCategories: ['Custom Art'],
-    description:
-      'A personalized custom family portrait painting celebrating togetherness, warmth, and cherished bonds in vibrant, enduring acrylic colors.',
-    imageUrl: getArtworkUrl('artworks/family-portrait.jpg'),
-    imageFileName: 'family-portrait.jpg',
-    medium: 'Acrylic on Canvas',
-    priceDisplay: 'Price on request',
-    isPriceConfirmed: false,
-    price: 0,
-    availability: 'Custom Commission Showcase',
-    orientation: 'landscape',
-    featured: true,
-    tags: ['Family Portrait', 'Portraits', 'Custom Art', 'Commission Showcase', 'Heartfelt Keepsake'],
-    views: {
-      front: getArtworkUrl('artworks/family-portrait.jpg'),
-      angled: getArtworkUrl('artworks/views/family-portrait-angled.jpg'),
-      detail: getArtworkUrl('artworks/views/family-portrait-detail.jpg')
-    }
-  },
-  {
     id: 'cottage-landscape',
     title: 'Cottage Landscape',
     isOfficialTitle: false,
@@ -304,33 +221,6 @@ export const artworks: Artwork[] = [
       front: getArtworkUrl('artworks/water-droplet-leaf.jpg'),
       angled: getArtworkUrl('artworks/views/water-droplet-leaf-angled.jpg'),
       detail: getArtworkUrl('artworks/views/water-droplet-leaf-detail.jpg')
-    }
-  },
-  {
-    id: 'dog-portrait',
-    title: 'Dog Portrait',
-    isOfficialTitle: false,
-    artistName: 'Renuka',
-    artistBrand: 'renus_palette',
-    category: 'Portraits',
-    categorySlug: 'portraits',
-    secondaryCategories: ['Custom Art'],
-    description:
-      'A joyful, loving custom pet portrait bringing out character, bright eyes, and loyal spirit with expressive brushwork and rich texture.',
-    imageUrl: getArtworkUrl('artworks/dog-portrait.jpg'),
-    imageFileName: 'dog-portrait.jpg',
-    medium: 'Acrylic on Canvas',
-    priceDisplay: 'Price on request',
-    isPriceConfirmed: false,
-    price: 0,
-    availability: 'Custom Commission Showcase',
-    orientation: 'portrait',
-    featured: false,
-    tags: ['Pet Portrait', 'Dog Portrait', 'Custom Art', 'Animal Art', 'Commission Showcase'],
-    views: {
-      front: getArtworkUrl('artworks/dog-portrait.jpg'),
-      angled: getArtworkUrl('artworks/views/dog-portrait-angled.jpg'),
-      detail: getArtworkUrl('artworks/views/dog-portrait-detail.jpg')
     }
   }
 ];

@@ -24,11 +24,11 @@ export const StudioVlogSection: React.FC = () => {
     },
     {
       id: 'vlog-3',
-      title: 'Behind the Scenes • Custom Portrait Commission',
+      title: 'Behind the Easel • Forest Landscape & Green Shading',
       duration: 'Studio Vlog',
       views: 'Behind The Scenes',
-      img: getArtworkUrl('artworks/child-portrait-oval.jpg'),
-      tag: 'Portraits 👩‍🎨'
+      img: getArtworkUrl('artworks/forest-landscape.jpg'),
+      tag: 'Nature 🌿'
     }
   ];
 

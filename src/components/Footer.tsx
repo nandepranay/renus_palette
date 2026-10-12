@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
                 {ARTIST_CONFIG.about.shortBio}
               </p>
               <p className="text-[#FFD13B] font-semibold">
-                🎨 Want custom art? I love creating unique, personalized portrait and nature pieces tailored just for you! Message me to book a commission.
+                🎨 Want custom art? I love creating unique, personalized nature landscapes, spiritual art, and floral pieces tailored just for you! Message me to book a commission.
               </p>
             </div>
 

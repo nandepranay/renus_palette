@@ -158,7 +158,7 @@ export const AccountModal: React.FC = () => {
               <div className="p-5 bg-[#FFF9E6] border border-[#FFE082] rounded-2xl space-y-2">
                 <h4 className="font-heading font-bold text-base text-[#2B2623]">Custom Painting Commissions</h4>
                 <p className="text-xs text-[#5C5248] leading-relaxed">
-                  Want a customized portrait, family artwork, or dreamy landscape for your space? Renuka personally discusses your concept, canvas dimensions, and provides tailored quotes.
+                  Want a customized scenic landscape, spiritual artwork, or botanical piece for your space? Renuka personally discusses your concept, canvas dimensions, and provides tailored quotes.
                 </p>
                 <div className="pt-2">
                   <a

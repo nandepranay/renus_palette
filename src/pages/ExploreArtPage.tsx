@@ -31,7 +31,6 @@ export const ExploreArtPage: React.FC = () => {
             item.secondaryCategories.some((cat) => {
               if (filters.category === 'custom-art' && cat === 'Custom Art') return true;
               if (filters.category === 'nature-landscapes' && cat === 'Nature & Landscapes') return true;
-              if (filters.category === 'portraits' && cat === 'Portraits') return true;
               return false;
             }));
 

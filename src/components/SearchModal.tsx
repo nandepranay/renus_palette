@@ -58,13 +58,13 @@ export const SearchModal: React.FC = () => {
 
   const popularSearches = [
     'Lotus Pond',
-    'Buddha Portrait',
+    'Meditative Buddha',
     'Radha Krishna',
     'Ocean Sunset',
-    'Family Portrait',
-    'Child Portrait',
     'Forest Landscape',
-    'Floral & Botanical'
+    'Cottage Landscape',
+    'Floral & Botanical',
+    'Water Droplets'
   ];
 
   return (
@@ -128,7 +128,7 @@ export const SearchModal: React.FC = () => {
               <Palette className="w-10 h-10 text-[#C8BCAC] mx-auto mb-3 stroke-[1.5]" />
               <p className="font-heading font-bold text-lg text-[#2B2623]">No paintings found for "{query}"</p>
               <p className="text-xs text-[#7A6F66] mt-1">
-                Try searching for terms like "Lotus", "Sunset", "Portrait", or browse the categories.
+                Try searching for terms like "Lotus", "Sunset", "Forest", or browse the categories.
               </p>
             </div>
           )}

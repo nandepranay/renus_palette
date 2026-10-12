@@ -48,7 +48,7 @@ export const AboutSection: React.FC = () => {
             {/* Core Ideas from PDF */}
             <div className="space-y-4 text-sm sm:text-base text-[#5C5248] leading-relaxed">
               <p>
-                Welcome to my colorful world! I am <strong className="text-[#2B2623] font-bold">Renuka</strong>, a painter specializing in vibrant acrylics and dreamy watercolor art focused on beautiful portraits and nature landscapes.
+                Welcome to my colorful world! I am <strong className="text-[#2B2623] font-bold">Renuka</strong>, a painter specializing in vibrant acrylics and dreamy watercolor art focused on beautiful nature landscapes and spiritual compositions.
               </p>
               <p>
                 My paintings are created to <strong className="text-[#2B2623]">connect personally with people</strong> and to add lasting <strong className="text-[#2B2623]">warmth and meaning to spaces</strong>. Every piece begins with an intention to transform everyday walls into mindful, joyful sanctuaries.

@@ -12,7 +12,6 @@ export const CuratedArtGrid: React.FC = () => {
     { id: 'all', label: 'All Paintings 🎨' },
     { id: 'nature-landscapes', label: 'Nature & Landscapes 🌿' },
     { id: 'spiritual-art', label: 'Spiritual Art ✨' },
-    { id: 'portraits', label: 'Portraits 👩‍🎨' },
     { id: 'floral-botanical', label: 'Floral & Botanical 🌸' },
     { id: 'custom-art', label: 'Custom Art 💌' },
   ];
@@ -27,8 +26,7 @@ export const CuratedArtGrid: React.FC = () => {
               a.secondaryCategories.some(
                 (c) =>
                   (activeTab === 'custom-art' && c === 'Custom Art') ||
-                  (activeTab === 'nature-landscapes' && c === 'Nature & Landscapes') ||
-                  (activeTab === 'portraits' && c === 'Portraits')
+                  (activeTab === 'nature-landscapes' && c === 'Nature & Landscapes')
               ))
         );
 
@@ -45,7 +43,7 @@ export const CuratedArtGrid: React.FC = () => {
             Fresh from the Studio 🎨
           </h2>
           <p className="text-sm text-[#7A6F66] mt-2 max-w-xl">
-            Renuka's authentic acrylics, watercolor landscapes, and custom portraits. All paintings shown are original works from her portfolio.
+            Renuka's authentic acrylics, watercolor landscapes, and spiritual compositions. All paintings shown are original works from her portfolio.
           </p>
         </div>
 
@@ -80,7 +78,7 @@ export const CuratedArtGrid: React.FC = () => {
           onClick={() => navigateToExplore()}
           className="btn-sunshine px-8 py-4 text-sm font-bold inline-flex items-center gap-2 cursor-pointer shadow-md"
         >
-          <span>Explore All 12 Original Paintings</span>
+          <span>Explore All {artworks.length} Original Paintings</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>

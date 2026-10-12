@@ -35,7 +35,7 @@ export const CustomCommissionSection: React.FC = () => {
             </h2>
 
             <p className="text-base text-[#5C5248] leading-relaxed">
-              I love creating unique, personalized portrait and nature pieces tailored just for you! Whether it's a family portrait, a couple's anniversary gift, a beloved pet portrait, or a dreamy landscape of your favorite scenery.
+              I love creating unique, personalized nature, landscape, and spiritual pieces tailored just for you! Whether it's a scenic ocean sunset, a tranquil forest panorama, or a sacred spiritual centerpiece for your home sanctuary.
             </p>
 
             {/* 3 Step Process */}
@@ -87,17 +87,17 @@ export const CustomCommissionSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Visual Showcase Card using Renuka's Real Family Portrait */}
+          {/* Right Column: Visual Showcase Card */}
           <div className="lg:col-span-5">
             <div className="bg-white p-5 sm:p-6 rounded-3xl border-2 border-[#F0E6D8] shadow-md space-y-4">
               <div className="relative aspect-4/3 rounded-2xl overflow-hidden bg-[#FAF5ED] flex items-center justify-center p-1">
                 <img
-                  src={getArtworkUrl('artworks/family-portrait.jpg')}
-                  alt="Custom Family Portrait by Renuka"
+                  src={getArtworkUrl('artworks/ocean-sunset.jpg')}
+                  alt="Custom Ocean Sunset Painting by Renuka"
                   className="w-full h-full object-contain"
                 />
                 <span className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[#FFD13B] text-[#2B2623] text-xs font-bold shadow-xs">
-                  Commission Example 🌸
+                  Commission Example 🌅
                 </span>
               </div>
 

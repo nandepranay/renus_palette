@@ -57,12 +57,12 @@ export const AboutUsPage: React.FC = () => {
               Every artwork I create is <strong className="text-[#2B2623]">intended to connect personally with people</strong>. Paintings shouldn't just be decoration—they should hold quiet conversations, trigger fond memories, and add lasting <strong className="text-[#2B2623]">warmth and meaning to spaces</strong>.
             </p>
             <p>
-              At the easel, the creative process brings together <strong className="text-[#FF6161] font-bold">thought and color, chaos and calm, and the artwork and its viewer</strong>. From intricate botanical studies and sunset tides to deeply personal family and child portraits, each piece is painted with genuine care.
+              At the easel, the creative process brings together <strong className="text-[#FF6161] font-bold">thought and color, chaos and calm, and the artwork and its viewer</strong>. From intricate botanical studies and sunset tides to meditative spiritual compositions, each piece is painted with genuine care.
             </p>
             <div className="p-4 rounded-2xl bg-[#FFEAE8] border border-[#FFCCD0] text-[#2B2623] space-y-1">
               <strong className="text-[#FF6161] font-bold block text-sm">🎨 Want Custom Art?</strong>
               <p className="text-xs sm:text-sm">
-                I love creating unique, personalized portrait and nature pieces tailored just for you! Message me to discuss concepts, colors, canvas sizes, or to book a custom commission.
+                I love creating unique, personalized nature landscapes, spiritual art, and botanical pieces tailored just for you! Message me to discuss concepts, colors, canvas sizes, or to book a custom commission.
               </p>
             </div>
           </div>

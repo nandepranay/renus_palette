@@ -12,7 +12,7 @@ export const collections: Collection[] = [
     curatorNote:
       'Inspired by the changing moods of nature, these landscapes invite a moment of pause and grounding in everyday modern life.',
     imageUrl: getArtworkUrl('artworks/ocean-sunset.jpg'),
-    artworkCount: 5,
+    artworkCount: 4,
     accentColor: '#4A6B5D'
   },
   {
@@ -27,19 +27,6 @@ export const collections: Collection[] = [
     imageUrl: getArtworkUrl('artworks/buddha-portrait.jpg'),
     artworkCount: 2,
     accentColor: '#D4AF37'
-  },
-  {
-    id: 'portraits',
-    title: 'Portraits',
-    slug: 'portraits',
-    subtitle: 'Tender Expressions & Human Spirit',
-    description:
-      'Heartfelt portraits on classic, round, and oval canvases capturing personal innocence, family love, and character.',
-    curatorNote:
-      'Each portrait is an intimate dialogue with the viewer, celebrating life stories and tender expressions in radiant acrylics.',
-    imageUrl: getArtworkUrl('artworks/child-portrait-oval.jpg'),
-    artworkCount: 4,
-    accentColor: '#C08081'
   },
   {
     id: 'floral-botanical',
@@ -58,13 +45,13 @@ export const collections: Collection[] = [
     id: 'custom-art',
     title: 'Custom Art',
     slug: 'custom-art',
-    subtitle: 'Bespoke Family, Child & Pet Commissions',
+    subtitle: 'Bespoke Nature, Landscape & Spiritual Commissions',
     description:
       'Personalized commissioned paintings tailored to your concept, special memory, favorite colors, and chosen canvas size.',
     curatorNote:
       'Renuka works closely with you to transform personal memories into enduring, hand-painted original art.',
-    imageUrl: getArtworkUrl('artworks/family-portrait.jpg'),
-    artworkCount: 4,
+    imageUrl: getArtworkUrl('artworks/forest-landscape.jpg'),
+    artworkCount: 3,
     accentColor: '#FF6161'
   }
 ];

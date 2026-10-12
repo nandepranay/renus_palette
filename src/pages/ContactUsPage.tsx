@@ -10,7 +10,7 @@ export const ContactUsPage: React.FC = () => {
     name: '',
     email: '',
     phone: '',
-    paintingInterest: 'custom-portrait',
+    paintingInterest: 'custom-landscape',
     canvasSize: 'medium',
     message: ''
   });
@@ -30,7 +30,7 @@ export const ContactUsPage: React.FC = () => {
   const faqs = [
     {
       q: 'How does a custom art commission work?',
-      a: 'First, share your idea, reference photo, or desired subject (such as a family portrait, pet portrait, or nature landscape). We will discuss your preferred canvas size and color preferences, after which Renuka provides an individual quote and starts painting your original piece.'
+      a: 'First, share your idea, reference photo, or desired subject (such as a tranquil ocean sunset, lush forest landscape, or sacred spiritual theme). We will discuss your preferred canvas size and color preferences, after which Renuka provides an individual quote and starts painting your original piece.'
     },
     {
       q: 'What canvas sizes are available?',
@@ -41,8 +41,8 @@ export const ContactUsPage: React.FC = () => {
       a: 'Every painting is carefully wrapped with protective acid-free glassine paper, corner guards, bubble cushioning, and rigid outer protective cartons to ensure completely safe delivery across India.'
     },
     {
-      q: 'Can I request a custom portrait from a phone photograph?',
-      a: 'Yes! Clear, well-lit photos work best. You can send your reference photos directly via WhatsApp or email, and Renuka will help guide you on the best composition.'
+      q: 'Can I request a custom landscape from my own travel photograph?',
+      a: 'Yes! Clear, vibrant scenic photos work wonderfully. You can send your favorite travel or nature photos directly via WhatsApp or email, and Renuka will craft a stunning custom painting.'
     }
   ];
 
@@ -58,7 +58,7 @@ export const ContactUsPage: React.FC = () => {
           Contact Renuka & Inquiries 💌
         </h1>
         <p className="text-sm sm:text-base text-[#5C5248] leading-relaxed">
-          Whether you want to inquire about an original painting from the gallery, discuss a custom portrait, or get a personalized quote, message Renuka directly!
+          Whether you want to inquire about an original painting from the gallery, discuss a custom landscape or spiritual piece, or get a personalized quote, message Renuka directly!
         </p>
       </div>
 
@@ -81,7 +81,7 @@ export const ContactUsPage: React.FC = () => {
               <button
                 onClick={() => {
                   setIsSubmitted(false);
-                  setFormData({ name: '', email: '', phone: '', paintingInterest: 'custom-portrait', canvasSize: 'medium', message: '' });
+                  setFormData({ name: '', email: '', phone: '', paintingInterest: 'custom-landscape', canvasSize: 'medium', message: '' });
                 }}
                 className="mt-4 px-6 py-2.5 btn-sunshine text-xs font-bold"
               >
@@ -143,10 +143,10 @@ export const ContactUsPage: React.FC = () => {
                     onChange={(e) => setFormData({ ...formData, paintingInterest: e.target.value })}
                     className="w-full px-4 py-3 bg-[#FFFDF9] border border-[#EAE0D4] rounded-xl text-[#2B2623] focus:outline-none focus:border-[#FF6161]"
                   >
-                    <option value="custom-portrait">Custom Portrait (Family / Child / Pet)</option>
-                    <option value="custom-landscape">Custom Nature / Landscape</option>
+                    <option value="custom-landscape">Custom Nature & Landscape</option>
                     <option value="lotus-pond">Lotus Pond Original</option>
                     <option value="spiritual-art">Spiritual Art (Buddha / Radha-Krishna)</option>
+                    <option value="floral-botanical">Floral & Botanical Art</option>
                     <option value="gallery-inquiry">Inquire About Existing Gallery Piece</option>
                   </select>
                 </div>

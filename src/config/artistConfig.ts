@@ -17,7 +17,7 @@ export const ARTIST_CONFIG = {
   // Core artist profile ideas confirmed from Renuka's PDF
   about: {
     shortBio:
-      'Welcome to my colorful world! I am Renuka, a painter specializing in vibrant acrylics and dreamy watercolor art focused on beautiful portraits and nature landscapes.',
+      'Welcome to my colorful world! I am Renuka, a painter specializing in vibrant acrylics and dreamy watercolor art focused on beautiful nature landscapes and spiritual compositions.',
     leadStatement:
       'Art that connects personally with people and adds lasting warmth and meaning to spaces.',
     philosophy:
@@ -50,7 +50,7 @@ export const ARTIST_CONFIG = {
       name: 'Medium Canvas',
       sizeRange: '24×24 to 30×40 inches',
       priceRange: '₹10,000 – ₹20,000',
-      description: 'Ideal statement scale for living rooms, dining spaces, foyer walls, and couple portraits.',
+      description: 'Ideal statement scale for living rooms, dining spaces, foyer walls, and feature gallery walls.',
       highlights: [
         'Heavy-duty gallery wrap wooden stretchers',
         'Rich impasto texture & radiant color layering',

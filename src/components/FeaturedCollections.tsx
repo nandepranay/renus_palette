@@ -9,7 +9,6 @@ export const FeaturedCollections: React.FC = () => {
   const collectionEmojis: Record<string, string> = {
     'nature-landscapes': '🌿',
     'spiritual-art': '✨',
-    'portraits': '👩‍🎨',
     'floral-botanical': '🌸',
     'custom-art': '💌'
   };
@@ -26,12 +25,12 @@ export const FeaturedCollections: React.FC = () => {
           Explore by Collection 🌸
         </h2>
         <p className="text-sm sm:text-base text-[#6E6359]">
-          Discover original paintings grouped by inspiration—from tranquil landscapes to divine spiritual pieces and personalized portraits.
+          Discover original paintings grouped by inspiration—from tranquil landscapes to divine spiritual pieces and floral botanical art.
         </p>
       </div>
 
       {/* Joyful rounded cards grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {collections.map((col) => (
           <div
             key={col.id}
