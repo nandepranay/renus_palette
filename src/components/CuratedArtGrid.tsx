@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGallery } from '../context/GalleryContext';
-import { artworks } from '../data/artworks';
+import { galleryArtworks, artworks } from '../data/artworks';
 import { ArtworkCard } from './ArtworkCard';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
@@ -18,8 +18,8 @@ export const CuratedArtGrid: React.FC = () => {
 
   const filteredArtworks =
     activeTab === 'all'
-      ? artworks
-      : artworks.filter(
+      ? galleryArtworks
+      : galleryArtworks.filter(
           (a) =>
             a.categorySlug === activeTab ||
             (a.secondaryCategories &&

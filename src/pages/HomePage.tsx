@@ -1,6 +1,7 @@
 import React from 'react';
 import { Hero } from '../components/Hero';
 import { FeaturedCollections } from '../components/FeaturedCollections';
+import { NewArrivalsSection } from '../components/NewArrivalsSection';
 import { CuratedArtGrid } from '../components/CuratedArtGrid';
 import { CanvasPricingSection } from '../components/CanvasPricingSection';
 import { CustomCommissionSection } from '../components/CustomCommissionSection';
@@ -13,6 +14,7 @@ export const HomePage: React.FC = () => {
     <main className="w-full">
       <Hero />
       <FeaturedCollections />
+      <NewArrivalsSection />
       <CuratedArtGrid />
       <CanvasPricingSection />
       <CustomCommissionSection />
