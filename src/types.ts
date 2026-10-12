@@ -14,8 +14,8 @@ export interface Artwork {
   isOfficialTitle?: boolean; // true for "Lotus Pond", false for descriptive titles
   artistName: string;
   artistBrand: string;
-  category: 'Nature & Landscapes' | 'Spiritual Art' | 'Floral & Botanical Art' | 'Custom Art' | 'Portraits';
-  categorySlug: 'nature-landscapes' | 'spiritual-art' | 'floral-botanical' | 'custom-art' | 'portraits';
+  category: 'Nature & Landscapes' | 'Spiritual Art' | 'Floral & Botanical Art' | 'Custom Art';
+  categorySlug: 'nature-landscapes' | 'spiritual-art' | 'floral-botanical' | 'custom-art';
   secondaryCategories?: string[];
   description: string;
   imageUrl: string;
