@@ -20,7 +20,7 @@ export const NewArrivalsSection: React.FC = () => {
             New Arrivals ✨
           </h2>
           <p className="text-sm text-[#7A6F66] mt-2 max-w-xl">
-            Fresh individual hand-painted creations and bespoke canvas commission showcases recently completed by Renuka.
+            Freshly completed framed watercolor studies and original acrylic canvases showcasing lush botanical florals, dreamy landscapes, and tranquil horizons.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export const NewArrivalsSection: React.FC = () => {
       </div>
 
       {/* Grid of New Arrival Individual Paintings */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
         {newArrivalArtworks.map((artwork) => (
           <ArtworkCard key={artwork.id} artwork={artwork} />
         ))}

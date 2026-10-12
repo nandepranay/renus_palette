@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGallery } from '../context/GalleryContext';
-import { galleryArtworks, artworks } from '../data/artworks';
+import { artworks } from '../data/artworks';
 import { ArtworkCard } from './ArtworkCard';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
@@ -13,20 +13,19 @@ export const CuratedArtGrid: React.FC = () => {
     { id: 'nature-landscapes', label: 'Nature & Landscapes 🌿' },
     { id: 'spiritual-art', label: 'Spiritual Art ✨' },
     { id: 'floral-botanical', label: 'Floral & Botanical 🌸' },
-    { id: 'custom-art', label: 'Custom Art 💌' },
   ];
 
   const filteredArtworks =
     activeTab === 'all'
-      ? galleryArtworks
-      : galleryArtworks.filter(
+      ? artworks
+      : artworks.filter(
           (a) =>
             a.categorySlug === activeTab ||
             (a.secondaryCategories &&
               a.secondaryCategories.some(
                 (c) =>
-                  (activeTab === 'custom-art' && c === 'Custom Art') ||
-                  (activeTab === 'nature-landscapes' && c === 'Nature & Landscapes')
+                  (activeTab === 'nature-landscapes' && c === 'Nature & Landscapes') ||
+                  (activeTab === 'floral-botanical' && c === 'Floral & Botanical Art')
               ))
         );
 

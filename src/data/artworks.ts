@@ -226,117 +226,139 @@ export const galleryArtworks: Artwork[] = [
 ];
 
 /**
- * New Arrivals: Unique individual paintings from public/artworks/
- * that are NOT duplicated in the existing gallery.
- * Excludes collage files (01-05).
+ * New Arrivals: 5 new paintings added directly from Renuka's latest studio collection.
+ * Each artwork has high-resolution front views and multi-angle display mockups.
  */
 export const newArrivalArtworks: Artwork[] = [
   {
-    id: 'child-portrait-oval',
-    title: 'Child Portrait (Oval Canvas)',
+    id: 'water-lily-study',
+    title: 'Water Lily Botanical Study',
     isOfficialTitle: false,
     artistName: 'Renuka',
     artistBrand: 'renus_palette',
-    category: 'Custom Art',
-    categorySlug: 'custom-art',
-    secondaryCategories: ['Portraits'],
+    category: 'Floral & Botanical Art',
+    categorySlug: 'floral-botanical',
     description:
-      'A tender, emotional portrait of a child painted on a distinctive oval canvas, highlighting gentle innocence, radiant gaze, and loving personality.',
-    imageUrl: getArtworkUrl('artworks/child-portrait-oval.jpg'),
-    imageFileName: 'child-portrait-oval.jpg',
-    medium: 'Acrylic on Oval Canvas',
+      'Delicate watercolor study of floating water lily pads and emergent lotus buds rendered in gentle turquoise, olive green, and ambient light. Elegantly presented in a gallery white frame.',
+    imageUrl: getArtworkUrl('artworks/views/02_lotus_pond_watercolor_front.jpg'),
+    imageFileName: '02_lotus_pond_watercolor_front.jpg',
+    medium: 'Watercolor on Paper (Framed)',
     priceDisplay: 'Price on request',
     isPriceConfirmed: false,
     price: 0,
-    availability: 'Available • Custom Inquiries Open',
-    orientation: 'vertical',
-    featured: true,
-    tags: ['Portrait', 'Child Portrait', 'Oval Canvas', 'Custom Art', 'New Arrival'],
-    views: {
-      front: getArtworkUrl('artworks/child-portrait-oval.jpg'),
-      angled: getArtworkUrl('artworks/views/child-portrait-oval-angled.jpg'),
-      detail: getArtworkUrl('artworks/views/child-portrait-oval-detail.jpg')
-    }
-  },
-  {
-    id: 'child-portrait-round',
-    title: 'Child Portrait (Circular Canvas)',
-    isOfficialTitle: false,
-    artistName: 'Renuka',
-    artistBrand: 'renus_palette',
-    category: 'Custom Art',
-    categorySlug: 'custom-art',
-    secondaryCategories: ['Portraits'],
-    description:
-      'A warm circular canvas portrait capturing childhood innocence, a gentle smile, and tender expression with soft tonal transitions.',
-    imageUrl: getArtworkUrl('artworks/child-portrait-round.jpg'),
-    imageFileName: 'child-portrait-round.jpg',
-    medium: 'Acrylic on Circular Canvas',
-    priceDisplay: 'Price on request',
-    isPriceConfirmed: false,
-    price: 0,
-    availability: 'Available • Custom Inquiries Open',
+    availability: 'Available • Gallery Framed',
     orientation: 'square',
     featured: true,
-    tags: ['Portrait', 'Child Portrait', 'Circular Canvas', 'Custom Art', 'New Arrival'],
+    tags: ['Water Lily', 'Lotus', 'Botanical', 'Floral', 'Watercolor', 'Framed Artwork', 'New Arrival'],
     views: {
-      front: getArtworkUrl('artworks/child-portrait-round.jpg'),
-      angled: getArtworkUrl('artworks/views/child-portrait-round-angled.jpg'),
-      detail: getArtworkUrl('artworks/views/child-portrait-round-detail.jpg')
+      front: getArtworkUrl('artworks/views/02_lotus_pond_watercolor_front.jpg'),
+      angled: getArtworkUrl('artworks/02_lotus_pond_watercolor_collage.jpg'),
+      detail: getArtworkUrl('artworks/views/02_lotus_pond_watercolor_front.jpg')
     }
   },
   {
-    id: 'family-portrait',
-    title: 'Family Portrait',
+    id: 'tropical-palm-sunset',
+    title: 'Tropical Palm Sunset',
     isOfficialTitle: false,
     artistName: 'Renuka',
     artistBrand: 'renus_palette',
-    category: 'Custom Art',
-    categorySlug: 'custom-art',
-    secondaryCategories: ['Portraits'],
+    category: 'Nature & Landscapes',
+    categorySlug: 'nature-landscapes',
     description:
-      'A personalized custom family portrait painting celebrating togetherness, warmth, and cherished bonds in vibrant, enduring acrylic colors.',
-    imageUrl: getArtworkUrl('artworks/family-portrait.jpg'),
-    imageFileName: 'family-portrait.jpg',
-    medium: 'Acrylic on Canvas',
+      'Sun-drenched coastal watercolor capturing swaying tropical palms, evening shoreline reflections, and radiant sunset gradients in a premium white tabletop frame.',
+    imageUrl: getArtworkUrl('artworks/views/01_tropical_palm_watercolor_front.jpg'),
+    imageFileName: '01_tropical_palm_watercolor_front.jpg',
+    medium: 'Watercolor on Paper (Framed)',
     priceDisplay: 'Price on request',
     isPriceConfirmed: false,
     price: 0,
-    availability: 'Available • Custom Inquiries Open',
-    orientation: 'landscape',
-    featured: true,
-    tags: ['Family Portrait', 'Portraits', 'Custom Art', 'New Arrival', 'Heartfelt Keepsake'],
-    views: {
-      front: getArtworkUrl('artworks/family-portrait.jpg'),
-      angled: getArtworkUrl('artworks/views/family-portrait-angled.jpg'),
-      detail: getArtworkUrl('artworks/views/family-portrait-detail.jpg')
-    }
-  },
-  {
-    id: 'dog-portrait',
-    title: 'Dog Portrait',
-    isOfficialTitle: false,
-    artistName: 'Renuka',
-    artistBrand: 'renus_palette',
-    category: 'Custom Art',
-    categorySlug: 'custom-art',
-    secondaryCategories: ['Portraits'],
-    description:
-      'A joyful, loving custom pet portrait bringing out character, bright eyes, and loyal spirit with expressive brushwork and rich texture.',
-    imageUrl: getArtworkUrl('artworks/dog-portrait.jpg'),
-    imageFileName: 'dog-portrait.jpg',
-    medium: 'Acrylic on Canvas',
-    priceDisplay: 'Price on request',
-    isPriceConfirmed: false,
-    price: 0,
-    availability: 'Available • Custom Inquiries Open',
+    availability: 'Available • Gallery Framed',
     orientation: 'vertical',
     featured: true,
-    tags: ['Pet Portrait', 'Dog Portrait', 'Custom Art', 'New Arrival', 'Animal Art'],
+    tags: ['Tropical Palm', 'Sunset', 'Coastal', 'Watercolor', 'Framed Artwork', 'Beach', 'New Arrival'],
     views: {
-      front: getArtworkUrl('artworks/dog-portrait.jpg'),
-      angled: getArtworkUrl('artworks/views/dog-portrait-angled.jpg'),
-      detail: getArtworkUrl('artworks/views/dog-portrait-detail.jpg')
+      front: getArtworkUrl('artworks/views/01_tropical_palm_watercolor_front.jpg'),
+      angled: getArtworkUrl('artworks/01_tropical_palm_watercolor_collage.jpg'),
+      detail: getArtworkUrl('artworks/views/01_tropical_palm_watercolor_front.jpg')
+    }
+  },
+  {
+    id: 'sunset-river-valley',
+    title: 'Sunset River Valley',
+    isOfficialTitle: false,
+    artistName: 'Renuka',
+    artistBrand: 'renus_palette',
+    category: 'Nature & Landscapes',
+    categorySlug: 'nature-landscapes',
+    description:
+      'Atmospheric watercolor landscape depicting a gentle meandering river illuminated by golden evening skies between verdant valley hills and distant ridges.',
+    imageUrl: getArtworkUrl('artworks/views/03_sunset_river_landscape_front.jpg'),
+    imageFileName: '03_sunset_river_landscape_front.jpg',
+    medium: 'Watercolor on Paper (Framed)',
+    priceDisplay: 'Price on request',
+    isPriceConfirmed: false,
+    price: 0,
+    availability: 'Available • Gallery Framed',
+    orientation: 'square',
+    featured: true,
+    tags: ['River', 'Valley', 'Golden Sunset', 'Watercolor', 'Framed Artwork', 'Landscape', 'New Arrival'],
+    views: {
+      front: getArtworkUrl('artworks/views/03_sunset_river_landscape_front.jpg'),
+      angled: getArtworkUrl('artworks/03_sunset_river_landscape_collage.jpg'),
+      detail: getArtworkUrl('artworks/views/03_sunset_river_landscape_front.jpg')
+    }
+  },
+  {
+    id: 'moonlit-wildflower-meadow',
+    title: 'Moonlit Wildflower Meadow',
+    isOfficialTitle: false,
+    artistName: 'Renuka',
+    artistBrand: 'renus_palette',
+    category: 'Nature & Landscapes',
+    categorySlug: 'nature-landscapes',
+    secondaryCategories: ['Floral & Botanical Art'],
+    description:
+      'Dreamy evening landscape painting featuring a glowing crescent moon, starlit lavender twilight clouds, and a blooming meadow of pink and purple flora on gallery canvas.',
+    imageUrl: getArtworkUrl('artworks/views/05_moonlit_flower_field_canvas_front.jpg'),
+    imageFileName: '05_moonlit_flower_field_canvas_front.jpg',
+    medium: 'Acrylic on Canvas',
+    priceDisplay: 'Price on request',
+    isPriceConfirmed: false,
+    price: 0,
+    availability: 'Available • Display Stand Ready',
+    orientation: 'square',
+    featured: true,
+    tags: ['Moonlit Sky', 'Crescent Moon', 'Wildflower Meadow', 'Acrylic on Canvas', 'Dreamy Night', 'New Arrival'],
+    views: {
+      front: getArtworkUrl('artworks/views/05_moonlit_flower_field_canvas_front.jpg'),
+      angled: getArtworkUrl('artworks/05_moonlit_flower_field_canvas_collage.jpg'),
+      detail: getArtworkUrl('artworks/views/05_moonlit_flower_field_canvas_front.jpg')
+    }
+  },
+  {
+    id: 'seaside-dappled-reflections',
+    title: 'Seaside Dappled Reflections',
+    isOfficialTitle: false,
+    artistName: 'Renuka',
+    artistBrand: 'renus_palette',
+    category: 'Nature & Landscapes',
+    categorySlug: 'nature-landscapes',
+    description:
+      'Vivid acrylic canvas composition capturing feet dipping into cool ocean waters, sunlit azure ripples, and expressive deep shadow reflections.',
+    imageUrl: getArtworkUrl('artworks/views/04_seaside_reflections_canvas_front.jpg'),
+    imageFileName: '04_seaside_reflections_canvas_front.jpg',
+    medium: 'Acrylic on Canvas',
+    priceDisplay: 'Price on request',
+    isPriceConfirmed: false,
+    price: 0,
+    availability: 'Available • Display Stand Ready',
+    orientation: 'vertical',
+    featured: true,
+    tags: ['Ocean Reflections', 'Coastal', 'Acrylic on Canvas', 'Seaside', 'Summer Memories', 'New Arrival'],
+    views: {
+      front: getArtworkUrl('artworks/views/04_seaside_reflections_canvas_front.jpg'),
+      angled: getArtworkUrl('artworks/04_seaside_reflections_canvas_collage.jpg'),
+      detail: getArtworkUrl('artworks/views/04_seaside_reflections_canvas_front.jpg')
     }
   }
 ];
