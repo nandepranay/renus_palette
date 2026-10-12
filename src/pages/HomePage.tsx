@@ -13,8 +13,8 @@ export const HomePage: React.FC = () => {
   return (
     <main className="w-full">
       <Hero />
-      <FeaturedCollections />
       <NewArrivalsSection />
+      <FeaturedCollections />
       <CuratedArtGrid />
       <CanvasPricingSection />
       <CustomCommissionSection />

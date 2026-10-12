@@ -20,12 +20,16 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
   const [imageError, setImageError] = useState(false);
   const isFavorited = isInWishlist(artwork.id);
 
-  const whatsappInquiryUrl = getWhatsAppLink(
-    `Hi Renuka! I am interested in your original painting "${artwork.title}" (${artwork.category}). Could you please share more details and price quote?`
-  );
+  const whatsappInquiryUrl = artwork.isSoldOut
+    ? getWhatsAppLink(
+        `Hi Renuka! I saw that your original painting "${artwork.title}" (${artwork.category}) is marked Sold Out. I love this piece and would like to commission a similar original artwork for my home. Could you please share the commission pricing and details?`
+      )
+    : getWhatsAppLink(
+        `Hi Renuka! I am interested in your original painting "${artwork.title}" (${artwork.category}). Could you please share more details and price quote?`
+      );
 
   return (
-    <div className="group bg-white rounded-3xl border-2 border-[#F0E6D8] hover:border-[#FF6161] shadow-xs hover-pop p-3.5 sm:p-4 flex flex-col justify-between transition-all duration-300">
+    <div className={`group bg-white rounded-3xl border-2 ${artwork.isSoldOut ? 'border-[#EAE2D7]' : 'border-[#F0E6D8] hover:border-[#FF6161]'} shadow-xs hover-pop p-3.5 sm:p-4 flex flex-col justify-between transition-all duration-300 relative`}>
       {/* Artwork Image Frame - Preserves Aspect Ratio */}
       <div className="relative overflow-hidden rounded-2xl bg-[#FAF5ED] aspect-4/5 mb-3.5 flex items-center justify-center p-2">
         {imageError ? (
@@ -45,13 +49,23 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
           />
         )}
 
-        {/* Category & Canvas Badge */}
+        {/* Category & Status Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1 pointer-events-none z-10">
-          <span className="px-2.5 py-0.5 rounded-full bg-white/95 text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs border border-[#F0E6D8]">
+          {artwork.isSoldOut ? (
+            <span className="px-2.5 py-0.5 rounded-full bg-[#E03131] text-white text-[10px] font-black uppercase tracking-wider shadow-md flex items-center gap-1.5 w-fit">
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              Sold Out
+            </span>
+          ) : (
+            <span className="px-2.5 py-0.5 rounded-full bg-[#16A34A] text-white text-[10px] font-extrabold uppercase tracking-wider shadow-sm w-fit">
+              Available ✨
+            </span>
+          )}
+          <span className="px-2.5 py-0.5 rounded-full bg-white/95 text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs border border-[#F0E6D8] w-fit">
             {artwork.category}
           </span>
-          {artwork.isOfficialTitle && (
-            <span className="px-2.5 py-0.5 rounded-full bg-[#FFD13B] text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs">
+          {artwork.isOfficialTitle && !artwork.isSoldOut && (
+            <span className="px-2.5 py-0.5 rounded-full bg-[#FFD13B] text-[#2B2623] text-[10px] font-extrabold uppercase tracking-wider shadow-xs w-fit">
               Signature Work ✨
             </span>
           )}
@@ -126,11 +140,11 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
         {/* Price & Inquire Action */}
         <div className="pt-2.5 border-t border-[#F4EBE0] flex items-center justify-between gap-2">
           <div>
-            <span className="font-heading text-sm sm:text-base font-extrabold text-[#FF6161] block">
+            <span className={`font-heading text-sm sm:text-base font-extrabold block ${artwork.isSoldOut ? 'text-[#8C8075]' : 'text-[#FF6161]'}`}>
               {artwork.priceDisplay}
             </span>
-            <span className="text-[10px] text-[#8C8075] font-medium block">
-              Bespoke quote available
+            <span className={`text-[10px] font-bold block ${artwork.isSoldOut ? 'text-[#DC2626]' : 'text-[#16A34A]'}`}>
+              {artwork.isSoldOut ? 'Sold • Commission Similar' : 'Available • Ready to Ship'}
             </span>
           </div>
 
@@ -138,10 +152,14 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, layout = 'sta
             href={whatsappInquiryUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3.5 py-1.5 rounded-full bg-[#FFF4D2] hover:bg-[#FFD13B] text-[#2B2623] text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95 shadow-xs border border-[#FFE082]"
+            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95 shadow-xs border ${
+              artwork.isSoldOut
+                ? 'bg-[#FEE2E2] hover:bg-[#FCA5A5] text-[#991B1B] border-[#FECACA]'
+                : 'bg-[#FFF4D2] hover:bg-[#FFD13B] text-[#2B2623] border-[#FFE082]'
+            }`}
           >
-            <MessageCircle className="w-3.5 h-3.5 text-[#1E7E34]" />
-            <span>Inquire</span>
+            <MessageCircle className={`w-3.5 h-3.5 ${artwork.isSoldOut ? 'text-[#DC2626]' : 'text-[#1E7E34]'}`} />
+            <span>{artwork.isSoldOut ? 'Commission' : 'Inquire'}</span>
           </a>
         </div>
       </div>

@@ -7,10 +7,10 @@ import { ArrowRight, MessageCircle, Tag, Eye, Heart } from 'lucide-react';
 export const Hero: React.FC = () => {
   const { navigateToExplore, navigateToArtwork, setPage, toggleWishlist, isInWishlist } = useGallery();
 
-  // Find signature actual paintings for hero showcase
-  const heroPrimary = artworks.find((a) => a.id === 'lotus-pond') || artworks[0];
-  const heroSecondary = artworks.find((a) => a.id === 'ocean-sunset') || artworks[1];
-  const heroTertiary = artworks.find((a) => a.id === 'buddha-portrait') || artworks[2];
+  // Find signature in-stock paintings for hero showcase
+  const heroPrimary = artworks.find((a) => a.id === 'water-lily-study') || artworks[0];
+  const heroSecondary = artworks.find((a) => a.id === 'tropical-palm-sunset') || artworks[1];
+  const heroTertiary = artworks.find((a) => a.id === 'moonlit-wildflower-meadow') || artworks[2];
 
   const scrollToPricing = () => {
     const el = document.getElementById('canvas-pricing');
@@ -80,10 +80,17 @@ export const Hero: React.FC = () => {
             {/* Action Buttons: Explore, Pricing, Request Custom Quote */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
               <button
-                onClick={() => navigateToExplore()}
+                onClick={() => {
+                  const el = document.getElementById('new-arrivals');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    navigateToExplore();
+                  }
+                }}
                 className="btn-sunshine px-7 py-3.5 text-sm font-bold flex items-center gap-2 cursor-pointer shadow-md"
               >
-                <span>Explore Paintings</span>
+                <span>Shop New Arrivals ✨</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 

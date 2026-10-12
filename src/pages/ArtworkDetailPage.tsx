@@ -165,9 +165,13 @@ export const ArtworkDetailPage: React.FC = () => {
     });
   };
 
-  const whatsappInquiryUrl = getWhatsAppLink(
-    `Hi Renuka! I am interested in your original painting "${artwork.title}" (${artwork.category}). Could you please share more details and price quote?`
-  );
+  const whatsappInquiryUrl = artwork.isSoldOut
+    ? getWhatsAppLink(
+        `Hi Renuka! I saw on your website that your original painting "${artwork.title}" (${artwork.category}) is marked Sold Out. I love this composition and would like to commission a similar custom painting for my home. Could you share commission details & sizing options?`
+      )
+    : getWhatsAppLink(
+        `Hi Renuka! I am interested in your original painting "${artwork.title}" (${artwork.category}). Could you please share more details and price quote?`
+      );
 
   const scrollToPricing = () => {
     setPage('home');
@@ -464,13 +468,21 @@ export const ArtworkDetailPage: React.FC = () => {
                 </span>
               </div>
 
-              <span className="px-3 py-1 bg-[#E8F8F0] text-[#1E7E34] text-xs font-bold rounded-full">
-                {artwork.availability || 'Available'}
+              <span
+                className={`px-3 py-1 text-xs font-bold rounded-full ${
+                  artwork.isSoldOut
+                    ? 'bg-[#FEE2E2] text-[#DC2626] border border-[#FECACA]'
+                    : 'bg-[#E8F8F0] text-[#1E7E34]'
+                }`}
+              >
+                {artwork.isSoldOut ? 'Original Sold Out' : (artwork.availability || 'Available')}
               </span>
             </div>
 
             <p className="text-xs text-[#5C5248] leading-relaxed">
-              Every original artwork is uniquely valued. You can also commission this concept in your preferred custom canvas dimensions.
+              {artwork.isSoldOut
+                ? 'This original piece has been acquired. You can commission a custom remake or similar inspired original painting in your preferred canvas size with Renuka!'
+                : 'Every original artwork is uniquely valued. You can also commission this concept in your preferred custom canvas dimensions.'}
             </p>
 
             {/* Direct WhatsApp Quote Button */}
@@ -482,7 +494,11 @@ export const ArtworkDetailPage: React.FC = () => {
                 className="w-full py-4 px-6 rounded-full btn-coral text-sm font-bold flex items-center justify-center gap-2 shadow-md"
               >
                 <MessageCircle className="w-5 h-5 fill-current" />
-                <span>Request a Custom Quote on WhatsApp</span>
+                <span>
+                  {artwork.isSoldOut
+                    ? 'Commission Similar Painting on WhatsApp'
+                    : 'Request a Custom Quote on WhatsApp'}
+                </span>
               </a>
 
               <button

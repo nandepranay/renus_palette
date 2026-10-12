@@ -25,7 +25,8 @@ export interface Artwork {
   priceDisplay: string; // 'Price on request'
   isPriceConfirmed?: boolean;
   price?: number; // fallback numeric representation if needed
-  availability?: string; // e.g. 'Available • Custom Inquiries Open'
+  availability?: string; // e.g. 'Available • Custom Inquiries Open' or 'Original Sold'
+  isSoldOut?: boolean;
   orientation: 'horizontal' | 'vertical' | 'square' | 'landscape' | 'portrait';
   featured?: boolean;
   tags: string[];
